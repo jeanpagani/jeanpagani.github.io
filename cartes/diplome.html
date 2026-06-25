@@ -15,7 +15,8 @@
   @keyframes shine { 0%{opacity:0.1;transform:scale(0.5);} 100%{opacity:1;transform:scale(1.5);} }
   .card { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:28px 20px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; animation:fadeUp 1.8s ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-  .ribbon { width:100%; text-align:center; padding:10px 0; border-top:1px solid rgba(200,180,80,0.5); border-bottom:1px solid rgba(200,180,80,0.5); font-size:11px; letter-spacing:3px; color:#e8d060; text-transform:uppercase; }
+  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid rgba(200,180,80,0.5); border-bottom:1px solid rgba(200,180,80,0.5); font-size:24px; letter-spacing:4px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#806010,#e8d060,#fff8c0,#e8d060,#806010); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
   .cap { font-size:64px; text-align:center; animation:bounceIn 1.2s ease forwards 0.2s; opacity:0; }
   @keyframes bounceIn { from{opacity:0;transform:scale(0.3) rotate(-20deg);} to{opacity:1;transform:scale(1) rotate(0deg);} }
   .photo-wrap { position:relative; width:200px; height:200px; animation:bounceIn2 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards 0.5s; opacity:0; }
@@ -52,6 +53,7 @@
   .order-note{text-align:center;font-size:10px;color:rgba(200,180,80,0.22);letter-spacing:0.5px;padding-bottom:4px;}
   audio { display:none; }
 
+  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
   @keyframes photoBreath {
     0%,100% { transform: scale(1) translate(0,0); }
@@ -70,7 +72,7 @@
 <body>
 <div class="bg" id="bg"></div>
 <div class="card">
-  <div class="ribbon">👩‍🎓 Выпускной · Diplôme · Félicitations 👩‍🎓</div>
+  <div class="ribbon">Выпускной <span style="-webkit-text-fill-color:#e8d060;color:#e8d060;">🎓</span> Diplôme</div>
   <div class="cap">🎓</div>
   <div class="photo-wrap">
     <div class="photo-ring">
@@ -145,20 +147,19 @@
   </div>
   <div style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:16px;text-align:center;letter-spacing:3px;background:linear-gradient(90deg,#B8965A,#f0d898,#fff8e7,#f0d898,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">ПоэмБукет · poème · cadeau · amour</div>
 </div>
-</div>
 <script>
 const bg = document.getElementById('bg');
 const colors = ['#e8d060','#ffffff','#60c0ff','#ff6090','#90ff60'];
 for (let i = 0; i < 60; i++) {
   const c = document.createElement('div');
   c.className = 'confetti';
-  c.style.cssText = `left:${Math.random()*100}%;position:fixed;--w:${(Math.random()*6+4).toFixed(0)}px;--h:${(Math.random()*10+4).toFixed(0)}px;--d:${(Math.random()*5+4).toFixed(1)}s;animation-delay:${(Math.random()*8).toFixed(1)}s;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};transform:rotate(${Math.random()*360}deg);`;
+  c.style.cssText = `left:${Math.random()*100}%;position:absolute;--w:${(Math.random()*6+4).toFixed(0)}px;--h:${(Math.random()*10+4).toFixed(0)}px;--d:${(Math.random()*5+4).toFixed(1)}s;animation-delay:${(Math.random()*8).toFixed(1)}s;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};transform:rotate(${Math.random()*360}deg);`;
   bg.appendChild(c);
 }
 for (let i = 0; i < 60; i++) {
   const st = document.createElement('div');
   st.className = 'star-shine';
-  st.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;position:fixed;--s:${(Math.random()*2+1).toFixed(1)}px;--d:${(Math.random()*3+1).toFixed(1)}s;animation-delay:${(Math.random()*4).toFixed(1)}s;background:rgba(255,255,255,0.8);`;
+  st.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;position:absolute;--s:${(Math.random()*2+1).toFixed(1)}px;--d:${(Math.random()*3+1).toFixed(1)}s;animation-delay:${(Math.random()*4).toFixed(1)}s;background:rgba(255,255,255,0.8);`;
   bg.appendChild(st);
 }
 const audio = document.getElementById('poemAudio');
@@ -173,8 +174,8 @@ function fadeVol(from,to,ms,cb){
 }
 function toggleAudio(){
   if(!isPlaying){
-    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play();
-    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play());},5000);
+    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play().catch(()=>{});
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{}));},5000);
   }else{
     isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
     audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';

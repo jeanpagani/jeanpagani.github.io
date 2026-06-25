@@ -62,18 +62,8 @@
   }
 
   /* ── Ruban haut ── */
-  .ribbon {
-    width: 100%;
-    text-align: center;
-    padding: 10px 0 6px;
-    border-top: 2px solid #d4af37;
-    border-bottom: 2px solid #d4af37;
-    letter-spacing: 3px;
-    font-size: 11px;
-    color: #d4af37;
-    text-transform: uppercase;
-    animation: slideDown 1.2s ease forwards;
-  }
+  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid 2px solid #d4af37; border-bottom:1px solid 2px solid #d4af37; font-size:24px; letter-spacing:4px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#6a3a00,#d4af37,#fff8c0,#d4af37,#6a3a00); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
   @keyframes slideDown {
     from { opacity: 0; transform: translateY(-16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -360,6 +350,7 @@
   .order-note{text-align:center;font-size:10px;color:rgba(180,150,80,0.22);letter-spacing:0.5px;padding-bottom:4px;}
   audio { display: none; }
 
+  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
   @keyframes photoBreath {
     0%,100% { transform: scale(1) translate(0,0); }
@@ -395,7 +386,7 @@
     </div>
   </div>
 
-  <div class="ribbon">⭐ Герой · Héros · 1941 — 1945 ⭐</div>
+  <div class="ribbon">Герой · 1941—1945 <span style="-webkit-text-fill-color:#d4af37;color:#d4af37;">⭐</span> Héros</div>
 
   <!-- Étoile rouge + Photo -->
   <span class="red-star">★</span>
@@ -556,8 +547,8 @@ function fadeVol(from,to,ms,cb){
 }
 function toggleAudio(){
   if(!isPlaying){
-    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play();
-    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play());},5000);
+    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play().catch(()=>{});
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{}));},5000);
   }else{
     isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
     audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';
