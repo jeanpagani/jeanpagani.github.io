@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand-mère | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#18082a 0%,#280c40 50%,#18082a 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#f0e8ff; }
+  .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .butterfly { position:absolute; font-size:var(--s); animation:flutter var(--d) ease-in-out infinite; opacity:0; }
+  @keyframes flutter { 0%{transform:translateY(100vh) translateX(0) rotate(-10deg);opacity:0;} 15%{opacity:0.7;} 50%{transform:translateY(50vh) translateX(var(--tx)) rotate(10deg);} 85%{opacity:0.4;} 100%{transform:translateY(-60px) translateX(0) rotate(-5deg);opacity:0;} }
+  .glow { position:absolute; border-radius:50%; animation:glowPulse var(--d) ease-in-out infinite alternate; opacity:0; background:radial-gradient(circle,#d0a0ff 0%,transparent 70%); }
+  @keyframes glowPulse { 0%{opacity:0;transform:scale(0.5);} 100%{opacity:0.3;transform:scale(1.5);} }
+  .card { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:28px 20px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; animation:fadeUp 1.8s ease forwards; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+  .ribbon { width:100%; text-align:center; padding:10px 0; border-top:1px solid rgba(190,140,255,0.5); border-bottom:1px solid rgba(190,140,255,0.5); font-size:11px; letter-spacing:3px; color:#c090ff; text-transform:uppercase; }
+  .photo-wrap { position:relative; width:200px; height:200px; animation:bounceIn 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards 0.4s; opacity:0; }
+  @keyframes bounceIn { from{opacity:0;transform:scale(0.3);} to{opacity:1;transform:scale(1);} }
+  .photo-ring { width:200px; height:200px; border-radius:50%; border:3px solid #c090ff; box-shadow:0 0 40px rgba(190,140,255,0.4),0 0 80px rgba(190,140,255,0.12); background:linear-gradient(135deg,#280c40,#18082a); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .orbit-item { position:absolute; font-size:18px; animation:orbit var(--od) linear infinite; }
+  @keyframes orbit { from{transform:rotate(0deg) translateX(108px) rotate(0deg);} to{transform:rotate(360deg) translateX(108px) rotate(-360deg);} }
+  .client-name { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(16px,4vw,22px); color:#c090ff; text-align:center; text-shadow:0 0 30px rgba(190,140,255,0.6); animation:fadeUp 1.4s ease forwards 0.7s; opacity:0; }
+  .client-sub { font-size:13px; letter-spacing:4px; color:#704090; text-align:center; text-transform:uppercase; animation:fadeUp 1.4s ease forwards 0.9s; opacity:0; }
+  .audio-btn { display:flex; align-items:center; gap:12px; background:rgba(190,140,255,0.08); border:1px solid rgba(190,140,255,0.35); border-radius:50px; padding:10px 22px; cursor:pointer; transition:all 0.3s; animation:fadeUp 1.4s ease forwards 1s; opacity:0; }
+  .audio-btn:hover { background:rgba(190,140,255,0.18); }
+  .play-circle { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#c090ff,#7030b0); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff; flex-shrink:0; box-shadow:0 2px 12px rgba(190,140,255,0.5); animation:softPulse 2.5s ease infinite; }
+  @keyframes softPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+  .audio-label { font-size:14px; color:#c090ff; letter-spacing:1px; }
+  .divider { display:flex; align-items:center; gap:12px; width:100%; animation:fadeUp 1.4s ease forwards 1.1s; opacity:0; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(190,140,255,0.5),transparent); }
+  .divider-icon { color:#c090ff; font-size:16px; }
+  .poem-fr { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(17px,4.5vw,22px); line-height:1.95; text-align:center; color:#f0e8ff; animation:fadeUp 1.6s ease forwards 1.2s; opacity:0; }
+  .poem-ru { font-family:'Cormorant Garamond',serif; font-size:clamp(16px,4.5vw,21px); line-height:1.95; text-align:center; color:rgba(240,220,230,0.88); animation:fadeUp 1.6s ease forwards 1.4s; opacity:0; }
+  .signature { display:flex; flex-direction:column; align-items:center; gap:4px; animation:fadeUp 1.4s ease forwards 1.6s; opacity:0; }
+  .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#c090ff; }
+  .sig-sub { font-size:12px; letter-spacing:2px; color:#502070; text-transform:uppercase; }
+  .footer-brand { font-family:'Playfair Display',serif; font-size:13px; color:#280c40; letter-spacing:2px; text-align:center; margin-top:8px; }
+  .order-section{width:100%;display:flex;flex-direction:column;gap:12px;animation:fadeUp 1.4s ease forwards 1.8s;opacity:0;}
+  .order-title{text-align:center;font-size:10px;letter-spacing:3px;color:rgba(190,140,255,0.3);text-transform:uppercase;margin-top:4px;}
+  .price-grid{display:flex;gap:8px;width:100%;}
+  .price-box{flex:1;background:rgba(190,140,255,0.06);border:1px solid rgba(190,140,255,0.18);border-radius:12px;padding:12px 6px;text-align:center;}
+  .price-box .ps{font-size:9px;letter-spacing:1.5px;color:rgba(190,140,255,0.5);text-transform:uppercase;margin-bottom:6px;}
+  .price-box .pa{font-family:'Playfair Display',serif;font-size:19px;color:#c090ff;margin-bottom:3px;}
+  .price-box .pd{font-size:9px;color:rgba(190,140,255,0.4);letter-spacing:0.5px;}
+  .btn-tg{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(190,140,255,0.07);border:1.5px solid rgba(190,140,255,0.28);border-radius:14px;color:#c090ff;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;text-decoration:none;transition:all 0.3s;cursor:pointer;}
+  .btn-tg:hover{background:rgba(190,140,255,0.15);}
+  .btn-boosty{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:linear-gradient(135deg,#f7601e,#e04010);border-radius:14px;color:#fff;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px;text-decoration:none;box-shadow:0 4px 16px rgba(247,96,30,0.35);}
+  .order-note{text-align:center;font-size:10px;color:rgba(190,140,255,0.22);letter-spacing:0.5px;padding-bottom:4px;}
+  audio { display:none; }
+
+  @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
+  @keyframes photoBreath {
+    0%,100% { transform: scale(1) translate(0,0); }
+    25%      { transform: scale(1.07) translate(2px,-3px); }
+    75%      { transform: scale(1.05) translate(-2px,2px); }
+  }
+  .photo-ring img { animation: photoBreath 8s ease-in-out infinite; transform-origin: center; }
+</style>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeanpagani.github.io/cartes/grand-mere.html">
+  <meta property="og:title" content="ПоэмБукет · Бабушке">
+  <meta property="og:description" content="Стихотворение бабушке на французском · Louis Yvon">
+  <meta property="og:image" content="https://jeanpagani.github.io/photo-poete.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="card">
+  <div class="ribbon">👵 Бабушке · Grand-mère · Pour Mamie 👵</div>
+  <div class="photo-wrap">
+    <div class="photo-ring">
+      <img src="https://images.unsplash.com/photo-1446161543652-83eaa65fddab?w=400&h=400&fit=crop&crop=face&auto=format" alt="Grand-mère" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+    </div>
+    <span class="orbit-item" style="--od:9s;animation-delay:0s">🦋</span>
+    <span class="orbit-item" style="--od:9s;animation-delay:-3s">🌸</span>
+    <span class="orbit-item" style="--od:9s;animation-delay:-6s">💜</span>
+  </div>
+  <div class="client-name" id="clientName">Мой голос · ваш подарок<br><span style="font-size:0.7em;letter-spacing:4px;-webkit-text-fill-color:#c090ff;color:#c090ff;font-style:normal;">— Louis Yvon —</span></div>
+  <div class="audio-btn" onclick="toggleAudio()">
+    <div class="play-circle" id="playIcon">▶</div>
+    <div>
+      <div class="audio-label">🎙️ Голос живой — voix du poète</div>
+      <div style="font-size:10px;color:#502070;margin-top:2px;">Нажмите · Appuyez pour écouter</div>
+    </div>
+  </div>
+  <audio id="poemAudio" src="poeme-grand-mere.mp3"></audio>
+  <audio id="bgMusic" src="musique-grand-mere.mp3" loop></audio>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">🦋</div><div class="divider-line"></div></div>
+  <div class="poem-fr">
+    Mamie, tes mains qui ont tricoté l'amour,<br>
+    Qui ont bercé des nuits et des aurores,<br>
+    Ces mains qui guident encore chaque jour<br>
+    Sont les plus belles de tous les trésors.<br><br>
+    Tu portes la douceur d'un autre temps,<br>
+    Les recettes, les secrets, les chansons,<br>
+    Et dans chaque regard bienveillant<br>
+    Tu es notre étoile, notre maison.
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">🦋</div><div class="divider-line"></div></div>
+  <div class="poem-ru">
+    Бабуля, твои руки, что вязали любовь,<br>
+    Качавшие ночи и рассветы нежно,<br>
+    Эти руки ведут нас всегда вновь —<br>
+    Прекраснее всех сокровищ безмежных.<br><br>
+    Ты несёшь нежность ушедшего времени,<br>
+    Рецепты, секреты и песни родные,<br>
+    И в каждом взгляде без бремени —<br>
+    Ты наша звезда и дом неродные.
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">🦋</div><div class="divider-line"></div></div>
+  <div class="signature"><div class="sig-name">— Louis Yvon, poète français</div></div>
+  <svg id="orderCta" width="100%" height="34" style="display:block;margin:20px 0 14px;overflow:visible;animation:goldPulse 2.4s ease-in-out infinite;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#B8965A"/>
+        <stop offset="30%" stop-color="#f0d898"/>
+        <stop offset="50%" stop-color="#fff8e0"/>
+        <stop offset="70%" stop-color="#f0d898"/>
+        <stop offset="100%" stop-color="#B8965A"/>
+      </linearGradient>
+    </defs>
+    <text x="0" y="26" textLength="100%" lengthAdjust="spacingAndGlyphs" font-family="Cormorant Garamond, serif" font-style="italic" font-size="22" fill="url(#goldGrad)">Закажите своё стихотворение у вашего поэта</text>
+  </svg>
+  <div class="price-grid" style="margin-top:0;">
+    <a href="../commande.html?tarif=standard" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Стандарт</div>
+      <div class="pa">490₽</div>
+      <div class="pd">до 24 ч</div>
+    </a>
+    <a href="../commande.html?tarif=express" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Экспресс</div>
+      <div class="pa">790₽</div>
+      <div class="pd">за 2 ч</div>
+    </a>
+    <a href="../commande.html?tarif=flash" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Флэш ⚡</div>
+      <div class="pa">1290₽</div>
+      <div class="pd">30 мин</div>
+    </a>
+  </div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:16px;text-align:center;letter-spacing:3px;background:linear-gradient(90deg,#B8965A,#f0d898,#fff8e7,#f0d898,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">ПоэмБукет · poème · cadeau · amour</div>
+</div>
+</div>
+<script>
+const bg = document.getElementById('bg');
+const items = ['🦋','🌸','💜','✨','🌷'];
+for (let i = 0; i < 16; i++) {
+  const b = document.createElement('div');
+  b.className = 'butterfly';
+  b.textContent = items[Math.floor(Math.random()*items.length)];
+  const tx = (Math.random()*60-30).toFixed(0);
+  b.style.cssText = `left:${Math.random()*100}%;position:fixed;--s:${(Math.random()*10+12).toFixed(0)}px;--d:${(Math.random()*5+7).toFixed(1)}s;--tx:${tx}px;animation-delay:${(Math.random()*8).toFixed(1)}s;`;
+  bg.appendChild(b);
+}
+for (let i = 0; i < 12; i++) {
+  const g = document.createElement('div');
+  g.className = 'glow';
+  g.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;position:fixed;width:${(Math.random()*60+40).toFixed(0)}px;height:${(Math.random()*60+40).toFixed(0)}px;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:${(Math.random()*4).toFixed(1)}s;`;
+  bg.appendChild(g);
+}
+const audio = document.getElementById('poemAudio');
+const bgMusic = document.getElementById('bgMusic');
+const playIcon = document.getElementById('playIcon');
+const BASE_VOL=0.15, LOW_VOL=0.04;
+let voiceTimer,endTimer,fadeIv,isPlaying=false;
+function fadeVol(from,to,ms,cb){
+  clearInterval(fadeIv);
+  const steps=40,delay=ms/steps;let i=0;bgMusic.volume=from;
+  fadeIv=setInterval(()=>{i++;bgMusic.volume=Math.max(0,Math.min(BASE_VOL,from+(to-from)*i/steps));if(i>=steps){clearInterval(fadeIv);bgMusic.volume=to;if(cb)cb();}},delay);
+}
+function toggleAudio(){
+  if(!isPlaying){
+    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play();
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play());},5000);
+  }else{
+    isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
+    audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';
+  }
+}
+audio.onended=()=>{isPlaying=false;playIcon.textContent='▶';endTimer=setTimeout(()=>{fadeVol(LOW_VOL,0,3000,()=>{bgMusic.pause();bgMusic.volume=BASE_VOL;bgMusic.currentTime=0;});},3000);};
+
+
+</script>
+</body>
+</html>

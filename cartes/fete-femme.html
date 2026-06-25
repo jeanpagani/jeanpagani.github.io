@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fête de la Femme | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #1a0520 0%, #2d0a35 40%, #1a0a1a 100%);
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    color: #f8e8f0;
+  }
+
+  /* ── Pétales animés ── */
+  .petals { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .petal {
+    position: absolute;
+    font-size: var(--s);
+    animation: fallPetal var(--d) ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes fallPetal {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    20%  { opacity: 0.7; }
+    80%  { opacity: 0.4; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── Particules lumineuses ── */
+  .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #ff9ec4;
+    animation: sparkleAnim var(--d) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+  @keyframes sparkleAnim {
+    0%   { opacity: 0; transform: scale(0.5); }
+    50%  { opacity: 0.8; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(0.3); }
+  }
+
+  /* ── Carte ── */
+  .card {
+    position: relative; z-index: 10;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    animation: fadeUp 1.8s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Ruban ── */
+  .ribbon {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,150,200,0.5);
+    border-bottom: 1px solid rgba(255,150,200,0.5);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #ff9ec4;
+    text-transform: uppercase;
+    animation: fadeUp 1s ease forwards;
+  }
+
+  /* ── Photo ── */
+  .photo-wrap {
+    position: relative;
+    width: 190px; height: 190px;
+    animation: zoomIn 1.4s ease forwards 0.4s; opacity: 0;
+  }
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .photo-ring {
+    width: 190px; height: 190px;
+    border-radius: 50%;
+    border: 3px solid #ff9ec4;
+    box-shadow: 0 0 30px rgba(255,100,180,0.5), 0 0 80px rgba(255,100,180,0.15);
+    background: #2d1030;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 70px;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+
+  /* Roses décoratives autour */
+  .rose-deco {
+    position: absolute;
+    font-size: 22px;
+    animation: rotateDeco 8s linear infinite;
+  }
+  @keyframes rotateDeco {
+    from { transform: rotate(0deg) translateX(105px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(105px) rotate(-360deg); }
+  }
+  .rose-deco:nth-child(2) { animation-delay: -2s; }
+  .rose-deco:nth-child(3) { animation-delay: -4s; }
+  .rose-deco:nth-child(4) { animation-delay: -6s; }
+
+  /* ── Nom ── */
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px,4vw,22px);
+    color: #ff9ec4;
+    text-align: center;
+    text-shadow: 0 0 30px rgba(255,100,180,0.6);
+    animation: fadeUp 1.4s ease forwards 0.7s; opacity: 0;
+  }
+  .hero-sub {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #a06080;
+    text-align: center;
+    text-transform: uppercase;
+    animation: fadeUp 1.4s ease forwards 0.9s; opacity: 0;
+  }
+
+  /* ── Audio ── */
+  .audio-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,100,180,0.08);
+    border: 1px solid rgba(255,150,200,0.35);
+    border-radius: 50px;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: fadeUp 1.4s ease forwards 1s; opacity: 0;
+  }
+  .audio-btn:hover { background: rgba(255,100,180,0.18); }
+  .play-circle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6eb4, #c04080);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(255,100,180,0.5);
+  }
+  .audio-label { font-size: 12px; color: #ff9ec4; letter-spacing: 1px; }
+
+  /* ── Séparateur ── */
+  .divider {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    animation: fadeUp 1.4s ease forwards 1.1s; opacity: 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,150,200,0.5), transparent); }
+  .divider-rose { color: #ff9ec4; font-size: 16px; }
+
+  /* ── Poèmes ── */
+  .poem-fr {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 19px);
+    line-height: 1.9;
+    text-align: center;
+    color: #f8e8f0;
+    animation: fadeUp 1.6s ease forwards 1.2s; opacity: 0;
+  }
+  .poem-ru {
+    font-family: 'Cormorant Garamond', serif;
+    font-size:clamp(16px,4.5vw,21px);
+    line-height: 1.9;
+    text-align: center;
+    color:rgba(240,220,230,0.88);
+    animation: fadeUp 1.6s ease forwards 1.4s; opacity: 0;
+  }
+
+  /* ── Signature ── */
+  .signature {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    animation: fadeUp 1.4s ease forwards 1.6s; opacity: 0;
+  }
+  .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#ff9ec4; }
+  .sig-sub { font-size:12px; letter-spacing:2px; color:#664455; text-transform:uppercase; }
+
+  .footer-brand { font-family:'Playfair Display',serif; font-size:13px; color:#442233; letter-spacing:2px; text-align:center; margin-top:8px; }
+
+  .order-section{width:100%;display:flex;flex-direction:column;gap:12px;animation:fadeUp 1.4s ease forwards 1.8s;opacity:0;}
+  .order-title{text-align:center;font-size:10px;letter-spacing:3px;color:rgba(255,150,196,0.3);text-transform:uppercase;margin-top:4px;}
+  .price-grid{display:flex;gap:8px;width:100%;}
+  .price-box{flex:1;background:rgba(255,100,180,0.07);border:1px solid rgba(255,150,200,0.2);border-radius:12px;padding:12px 6px;text-align:center;}
+  .price-box .ps{font-size:9px;letter-spacing:1.5px;color:rgba(255,150,200,0.5);text-transform:uppercase;margin-bottom:6px;}
+  .price-box .pa{font-family:'Playfair Display',serif;font-size:19px;color:#ff9ec4;margin-bottom:3px;}
+  .price-box .pd{font-size:9px;color:rgba(255,150,200,0.4);letter-spacing:0.5px;}
+  .btn-tg{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(255,100,180,0.08);border:1.5px solid rgba(255,150,200,0.3);border-radius:14px;color:#ff9ec4;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;text-decoration:none;transition:all 0.3s;cursor:pointer;}
+  .btn-tg:hover{background:rgba(255,100,180,0.16);}
+  .btn-boosty{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:linear-gradient(135deg,#f7601e,#e04010);border-radius:14px;color:#fff;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px;text-decoration:none;box-shadow:0 4px 16px rgba(247,96,30,0.35);}
+  .order-note{text-align:center;font-size:10px;color:rgba(255,150,200,0.25);letter-spacing:0.5px;padding-bottom:4px;}
+  audio { display: none; }
+
+  @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
+  @keyframes photoBreath {
+    0%,100% { transform: scale(1) translate(0,0); }
+    25%      { transform: scale(1.07) translate(2px,-3px); }
+    75%      { transform: scale(1.05) translate(-2px,2px); }
+  }
+  .photo-ring img { animation: photoBreath 8s ease-in-out infinite; transform-origin: center; }
+</style>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeanpagani.github.io/cartes/fete-femme.html">
+  <meta property="og:title" content="ПоэмБукет · 8 Марта · Fête de la Femme">
+  <meta property="og:description" content="Стихотворение на 8 Марта на французском · Louis Yvon">
+  <meta property="og:image" content="https://jeanpagani.github.io/photo-poete.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<div class="card">
+
+  <div class="ribbon">🌸 День женщины · Journée de la Femme · 8 марта 🌸</div>
+
+  <!-- Photo -->
+  <div class="photo-wrap">
+    <div class="photo-ring" id="photoFrame">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop&crop=face&auto=format" alt="Femme" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+    </div>
+    <span class="rose-deco" style="animation-delay:0s">🌸</span>
+    <span class="rose-deco" style="animation-delay:-2s">🌹</span>
+    <span class="rose-deco" style="animation-delay:-4s">🌸</span>
+    <span class="rose-deco" style="animation-delay:-6s">🌷</span>
+  </div>
+
+  <!-- Nom -->
+  <div class="hero-name" id="clientName">Мой голос · ваш подарок<br><span style="font-size:0.7em;letter-spacing:4px;-webkit-text-fill-color:#ff9fdb;color:#ff9fdb;font-style:normal;">— Louis Yvon —</span></div>
+  <div class="hero-sub">Женщина · Femme · 8 Марта</div>
+
+  <!-- Audio -->
+  <div class="audio-btn" onclick="toggleAudio()">
+    <div class="play-circle" id="playIcon">▶</div>
+    <div>
+      <div class="audio-label">🎙️ Голос живой — voix du poète</div>
+      <div style="font-size:10px;color:#664455;margin-top:2px;">Нажмите · Appuyez pour écouter</div>
+    </div>
+  </div>
+  <audio id="poemAudio" src="../poeme.mp3"></audio>
+  <audio id="bgMusic" src="musique-femme.mp3.mp3" loop></audio>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-rose">🌸</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Poème français -->
+  <div class="poem-fr">
+    Tu es la rose qui ne plie jamais,<br>
+    La lumière douce au cœur des maisons,<br>
+    Dans tes yeux vit l'éclat d'un printemps vrai,<br>
+    Et chaque jour porte ta belle saison.<br><br>
+    Nous t'offrons ces mots comme un bouquet rare,<br>
+    Tissé de tendresse, de joie et d'amour,<br>
+    Car les femmes comme toi sont des phares<br>
+    Qui guident nos nuits et nos plus beaux jours.
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-rose">🌸</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Poème russe -->
+  <div class="poem-ru">
+    Ты — роза, что никогда не сгибается,<br>
+    Мягкий свет в сердце каждого дома,<br>
+    В твоих глазах настоящая весна отражается,<br>
+    И каждый день — твоя прекрасная нота.<br><br>
+    Мы дарим тебе слова как редкий букет,<br>
+    Сотканный из нежности, радости, любви,<br>
+    Ведь женщины, подобные тебе — это свет,<br>
+    Что освещает ночи и лучшие дни.
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-rose">🌸</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="signature">
+    <div class="sig-name">— Louis Yvon, poète français</div>
+  </div>
+
+  <svg id="orderCta" width="100%" height="34" style="display:block;margin:20px 0 14px;overflow:visible;animation:goldPulse 2.4s ease-in-out infinite;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#B8965A"/>
+        <stop offset="30%" stop-color="#f0d898"/>
+        <stop offset="50%" stop-color="#fff8e0"/>
+        <stop offset="70%" stop-color="#f0d898"/>
+        <stop offset="100%" stop-color="#B8965A"/>
+      </linearGradient>
+    </defs>
+    <text x="0" y="26" textLength="100%" lengthAdjust="spacingAndGlyphs" font-family="Cormorant Garamond, serif" font-style="italic" font-size="22" fill="url(#goldGrad)">Закажите своё стихотворение у вашего поэта</text>
+  </svg>
+  <div class="price-grid" style="margin-top:0;">
+    <a href="../commande.html?tarif=standard" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Стандарт</div>
+      <div class="pa">490₽</div>
+      <div class="pd">до 24 ч</div>
+    </a>
+    <a href="../commande.html?tarif=express" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Экспресс</div>
+      <div class="pa">790₽</div>
+      <div class="pd">за 2 ч</div>
+    </a>
+    <a href="../commande.html?tarif=flash" class="price-box" style="text-decoration:none;cursor:pointer;">
+      <div class="ps">Флэш ⚡</div>
+      <div class="pa">1290₽</div>
+      <div class="pd">30 мин</div>
+    </a>
+  </div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:16px;text-align:center;letter-spacing:3px;background:linear-gradient(90deg,#B8965A,#f0d898,#fff8e7,#f0d898,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">ПоэмБукет · poème · cadeau · amour</div>
+</div>
+
+<script>
+// ── Pétales ──
+const petalsEl = document.getElementById('petals');
+const petalIcons = ['🌸','🌹','🌷','✿','❀','🌺'];
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = petalIcons[Math.floor(Math.random() * petalIcons.length)];
+  const size = (Math.random() * 16 + 14).toFixed(0);
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    --s:${size}px;
+    --d:${(Math.random()*6+5).toFixed(1)}s;
+    animation-delay:${(Math.random()*8).toFixed(1)}s;
+  `;
+  petalsEl.appendChild(p);
+}
+
+// ── Particules ──
+for (let i = 0; i < 30; i++) {
+  const sp = document.createElement('div');
+  sp.className = 'sparkle';
+  sp.style.cssText = `
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    position:fixed;
+    --d:${(Math.random()*3+1.5).toFixed(1)}s;
+    animation-delay:${(Math.random()*4).toFixed(1)}s;
+    background:${Math.random()>0.5?'#ff9ec4':'#ffffff'};
+  `;
+  petalsEl.appendChild(sp);
+}
+
+// ── Audio poème + musique ensemble ──
+const audio = document.getElementById('poemAudio');
+const bgMusic = document.getElementById('bgMusic');
+const playIcon = document.getElementById('playIcon');
+const BASE_VOL=0.15, LOW_VOL=0.04;
+let voiceTimer,endTimer,fadeIv,isPlaying=false;
+function fadeVol(from,to,ms,cb){
+  clearInterval(fadeIv);
+  const steps=40,delay=ms/steps;let i=0;bgMusic.volume=from;
+  fadeIv=setInterval(()=>{i++;bgMusic.volume=Math.max(0,Math.min(BASE_VOL,from+(to-from)*i/steps));if(i>=steps){clearInterval(fadeIv);bgMusic.volume=to;if(cb)cb();}},delay);
+}
+function toggleAudio(){
+  if(!isPlaying){
+    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play();
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play());},5000);
+  }else{
+    isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
+    audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';
+  }
+}
+audio.onended=()=>{isPlaying=false;playIcon.textContent='▶';endTimer=setTimeout(()=>{fadeVol(LOW_VOL,0,3000,()=>{bgMusic.pause();bgMusic.volume=BASE_VOL;bgMusic.currentTime=0;});},3000);};
+
+
+</script>
+</body>
+</html>

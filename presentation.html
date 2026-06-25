@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louis Yvon · Poète Français · ПоэмБукет</title>
+<meta name="description" content="Poète français — commandez votre poème sur mesure en français pour toutes occasions. Livraison en 30 min à 24h.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:#06030d;
+  color:#f0ebe0;
+  font-family:'Raleway',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ── PARTICULES DE FOND ── */
+.bg-canvas {
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.bg-orb {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.18;
+  animation:orbFloat var(--d,12s) ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@keyframes orbFloat {
+  from { transform:translate(0,0) scale(1); }
+  to   { transform:translate(var(--tx,20px),var(--ty,-30px)) scale(1.1); }
+}
+.star { position:fixed; border-radius:50%; background:#fff; animation:twinkle var(--d) ease-in-out infinite alternate; }
+@keyframes twinkle { 0%{opacity:0.05;} 100%{opacity:0.6;} }
+
+/* ── WRAPPER ── */
+.wrap {
+  position:relative;
+  z-index:10;
+  max-width:520px;
+  margin:0 auto;
+  padding:0 20px 60px;
+}
+
+/* ── HEADER NAV ── */
+.top-nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0 10px;
+  border-bottom:1px solid rgba(184,150,90,0.12);
+  margin-bottom:40px;
+}
+.brand {
+  font-family:'Playfair Display',serif;
+  font-size:15px;
+  color:#B8965A;
+  letter-spacing:2px;
+}
+.nav-link {
+  font-size:11px;
+  letter-spacing:2px;
+  color:rgba(240,235,224,0.45);
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:color 0.3s;
+}
+.nav-link:hover { color:#B8965A; }
+
+/* ── HERO PORTRAIT ── */
+.hero {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:24px;
+  padding:10px 0 36px;
+}
+
+/* Cadre photo */
+.portrait-wrap {
+  position:relative;
+  width:180px;
+  height:180px;
+  animation:fadeScale 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  opacity:0;
+}
+@keyframes fadeScale {
+  from { opacity:0; transform:scale(0.7); }
+  to   { opacity:1; transform:scale(1); }
+}
+.portrait-ring {
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(135deg,#1a0c20,#0a0310);
+  box-shadow:0 0 60px rgba(184,150,90,0.25), 0 0 120px rgba(197,89,106,0.1);
+}
+.portrait-ring::before {
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:50%;
+  background:conic-gradient(#B8965A 0deg, #C5596A 90deg, #B8965A 180deg, #C5596A 270deg, #B8965A 360deg);
+  z-index:0;
+  animation:spinRing 12s linear infinite;
+}
+@keyframes spinRing { to { transform:rotate(360deg); } }
+.portrait-ring::after {
+  content:'';
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#1a0c20,#0a0310);
+  z-index:1;
+}
+.portrait-inner {
+  position:absolute;
+  inset:5px;
+  border-radius:50%;
+  overflow:hidden;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.portrait-inner img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+/* Monogramme placeholder si pas de photo */
+.portrait-monogram {
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;
+  font-style:italic;
+  color:#B8965A;
+  text-shadow:0 0 30px rgba(184,150,90,0.5);
+  user-select:none;
+}
+
+/* Orbite décorative */
+.orbit-item {
+  position:absolute;
+  font-size:16px;
+  animation:orbit var(--od,10s) linear infinite;
+  z-index:3;
+}
+@keyframes orbit {
+  from { transform:rotate(0deg) translateX(100px) rotate(0deg); }
+  to   { transform:rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+/* ── NOM & TITRE ── */
+.hero-name {
+  text-align:center;
+  animation:fadeUp 1.2s ease forwards 0.5s;
+  opacity:0;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.name-main {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,6vw,34px);
+  font-style:italic;
+  color:#f0ebe0;
+  line-height:1.25;
+  text-shadow:0 0 40px rgba(184,150,90,0.3);
+}
+.name-sub {
+  font-size:11px;
+  letter-spacing:4px;
+  color:#B8965A;
+  text-transform:uppercase;
+  margin-top:8px;
+}
+.name-tagline {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:16px;
+  color:rgba(240,235,224,0.5);
+  margin-top:10px;
+  line-height:1.6;
+}
+
+/* ── PLAYER VOIX ── */
+.voice-player {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:rgba(184,150,90,0.06);
+  border:1px solid rgba(184,150,90,0.22);
+  border-radius:50px;
+  padding:11px 20px;
+  cursor:pointer;
+  transition:background 0.3s;
+  animation:fadeUp 1.2s ease forwards 0.8s;
+  opacity:0;
+  user-select:none;
+}
+.voice-player:hover { background:rgba(184,150,90,0.12); }
+.play-btn-v {
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#B8965A,#8a6c38);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  color:#fff;
+  flex-shrink:0;
+  box-shadow:0 0 16px rgba(184,150,90,0.4);
+  animation:goldPulse 2.5s ease infinite;
+}
+@keyframes goldPulse {
+  0%,100%{box-shadow:0 0 16px rgba(184,150,90,0.4);}
+  50%{box-shadow:0 0 28px rgba(184,150,90,0.7);}
+}
+.voice-info { flex:1; }
+.voice-label { font-size:12px; color:#B8965A; letter-spacing:1.5px; }
+.voice-sub { font-size:10px; color:rgba(240,235,224,0.35); letter-spacing:1px; margin-top:2px; }
+.audio-bars {
+  display:flex;
+  align-items:center;
+  gap:3px;
+  height:22px;
+}
+.audio-bars span {
+  display:block;
+  width:3px;
+  background:#B8965A;
+  border-radius:2px;
+  opacity:0.35;
+  animation:none;
+}
+.audio-bars.playing span { opacity:0.85; animation:barAnim 0.7s ease-in-out infinite alternate; }
+.audio-bars span:nth-child(1){height:8px;animation-delay:0s;}
+.audio-bars span:nth-child(2){height:16px;animation-delay:0.1s;}
+.audio-bars span:nth-child(3){height:12px;animation-delay:0.2s;}
+.audio-bars span:nth-child(4){height:20px;animation-delay:0.05s;}
+.audio-bars span:nth-child(5){height:10px;animation-delay:0.15s;}
+.audio-bars span:nth-child(6){height:18px;animation-delay:0.25s;}
+.audio-bars span:nth-child(7){height:8px;animation-delay:0.3s;}
+@keyframes barAnim { from{transform:scaleY(0.4);} to{transform:scaleY(1.2);} }
+
+/* ── SÉPARATEUR ── */
+.sep {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  margin:6px 0;
+  opacity:0;
+  animation:fadeUp 1s ease forwards var(--d,1s);
+}
+.sep-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(184,150,90,0.35),transparent); }
+.sep-icon { color:#B8965A; font-size:14px; }
+
+/* ── BIOGRAPHIE ── */
+.bio-section {
+  width:100%;
+  animation:fadeUp 1.2s ease forwards 1.1s;
+  opacity:0;
+  background:rgba(184,150,90,0.05);
+  border:1px solid rgba(184,150,90,0.18);
+  border-radius:18px;
+  padding:28px 22px;
+}
+.bio-title {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:22px;
+  background:linear-gradient(90deg,#B8965A,#e8c87a,#B8965A,#e8c87a,#B8965A);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 5s linear infinite;
+  letter-spacing:2px;
+  margin-bottom:18px;
+  text-align:center;
+  display:block;
+}
+.bio-title-sub {
+  font-size:10px;
+  letter-spacing:4px;
+  color:rgba(184,150,90,0.5);
+  text-transform:uppercase;
+  text-align:center;
+  display:block;
+  margin-top:4px;
+  margin-bottom:20px;
+}
+.bio-text-fr {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:17px;
+  line-height:1.9;
+  color:#f0ebe0;
+  margin-bottom:14px;
+}
+.bio-text-ru {
+  font-size:14px;
+  line-height:1.85;
+  color:rgba(240,235,224,0.78);
+}
+.bio-accent { color:#C5596A; font-weight:600; }
+.bio-gold { color:#B8965A; }
+
+/* Stats badges */
+.bio-stats {
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+  justify-content:center;
+}
+.stat-badge {
+  flex:1;
+  background:rgba(184,150,90,0.06);
+  border:1px solid rgba(184,150,90,0.18);
+  border-radius:12px;
+  padding:12px 8px;
+  text-align:center;
+}
+.stat-n {
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  color:#B8965A;
+  line-height:1;
+}
+.stat-l {
+  font-size:9px;
+  letter-spacing:1.5px;
+  color:rgba(240,235,224,0.35);
+  text-transform:uppercase;
+  margin-top:5px;
+}
+
+/* ── CTA COMMANDE ── */
+.cta-section {
+  width:100%;
+  animation:fadeUp 1.2s ease forwards 1.4s;
+  opacity:0;
+}
+.cta-headline {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,5.5vw,28px);
+  font-style:italic;
+  color:#f0ebe0;
+  text-align:center;
+  line-height:1.4;
+  margin-bottom:6px;
+}
+.cta-sub {
+  font-size:11px;
+  letter-spacing:3px;
+  color:rgba(184,150,90,0.55);
+  text-align:center;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+.price-grid {
+  display:flex;
+  gap:8px;
+  width:100%;
+  margin-bottom:14px;
+}
+.price-box {
+  flex:1;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(184,150,90,0.15);
+  border-radius:14px;
+  padding:14px 6px;
+  text-align:center;
+  transition:all 0.3s;
+  cursor:default;
+}
+.price-box:hover {
+  background:rgba(184,150,90,0.07);
+  border-color:rgba(184,150,90,0.35);
+  transform:translateY(-2px);
+}
+.price-box.featured {
+  background:rgba(197,89,106,0.08);
+  border-color:rgba(197,89,106,0.3);
+}
+.pb-label { font-size:9px; letter-spacing:1.5px; color:rgba(240,235,224,0.35); text-transform:uppercase; margin-bottom:7px; }
+.pb-price { font-family:'Playfair Display',serif; font-size:21px; color:#f0ebe0; margin-bottom:3px; }
+.pb-price.rose { color:#C5596A; }
+.pb-delay { font-size:9px; color:rgba(240,235,224,0.3); letter-spacing:0.5px; }
+.pb-badge {
+  display:inline-block;
+  background:rgba(197,89,106,0.2);
+  color:#C5596A;
+  font-size:8px;
+  letter-spacing:1px;
+  padding:2px 7px;
+  border-radius:10px;
+  margin-bottom:6px;
+  text-transform:uppercase;
+}
+
+.btn-tg {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:16px 20px;
+  background:rgba(255,255,255,0.04);
+  border:1.5px solid rgba(184,150,90,0.3);
+  border-radius:16px;
+  color:#f0ebe0;
+  font-family:'Raleway',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:0.5px;
+  text-decoration:none;
+  cursor:pointer;
+  transition:all 0.3s;
+  margin-bottom:10px;
+}
+.btn-tg:hover {
+  background:rgba(184,150,90,0.1);
+  border-color:rgba(184,150,90,0.5);
+  transform:translateY(-1px);
+}
+.btn-boosty {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:15px 20px;
+  background:linear-gradient(135deg,#f7601e,#e04010);
+  border-radius:16px;
+  color:#fff;
+  font-family:'Raleway',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(247,96,30,0.3);
+  transition:all 0.3s;
+  margin-bottom:10px;
+}
+.btn-boosty:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(247,96,30,0.45); }
+.order-note {
+  text-align:center;
+  font-size:10px;
+  color:rgba(240,235,224,0.2);
+  letter-spacing:0.5px;
+}
+
+/* ── OCCASIONS GRID ── */
+.occasions-section {
+  width:100%;
+  animation:fadeUp 1.2s ease forwards 1.7s;
+  opacity:0;
+}
+.occ-title {
+  font-size:11px;
+  letter-spacing:4px;
+  color:rgba(184,150,90,0.5);
+  text-transform:uppercase;
+  margin-bottom:16px;
+  text-align:center;
+}
+.occ-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.occ-card {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:12px;
+  padding:12px 8px;
+  text-align:center;
+  text-decoration:none;
+  color:#f0ebe0;
+  transition:all 0.25s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+}
+.occ-card:hover {
+  background:rgba(184,150,90,0.08);
+  border-color:rgba(184,150,90,0.3);
+  transform:translateY(-2px);
+}
+.occ-emoji { font-size:26px; }
+.occ-name { font-size:11px; letter-spacing:0.5px; color:rgba(240,235,224,0.85); text-transform:none; font-family:'Raleway',sans-serif; }
+
+/* ── FOOTER ── */
+.site-footer {
+  margin-top:50px;
+  padding-top:24px;
+  border-top:1px solid rgba(184,150,90,0.1);
+  text-align:center;
+  animation:fadeUp 1.2s ease forwards 2s;
+  opacity:0;
+}
+.footer-brand {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:22px;
+  font-weight:300;
+  letter-spacing:6px;
+  margin-bottom:8px;
+  background:linear-gradient(90deg,#B8965A,#f0d898,#e8c87a,#f0d898,#B8965A);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:brandglow 3s ease-in-out infinite;
+}
+.footer-sub {
+  font-size:11px;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#B8965A,#fff8e7,#f0d898,#fff8e7,#B8965A);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 3s linear infinite;
+}
+
+/* ── AUDIO ── */
+audio { display:none; }
+
+</style>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeanpagani.github.io/">
+  <meta property="og:title" content="ПоэмБукет · Стихи на французском от Louis Yvon">
+  <meta property="og:description" content="Закажите уникальное стихотворение на французском языке. Любовь, день рождения, свадьба — от 490₽, готово за 1–24 часа.">
+  <meta property="og:image" content="https://jeanpagani.github.io/photo-poete.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<!-- Fond animé -->
+<div class="bg-canvas" id="bg"></div>
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="top-nav" style="justify-content:center;border-bottom:none;margin-bottom:28px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;">
+        <span style="font-size:22px;color:#B8965A;opacity:0.7;animation:brandglow 3s ease-in-out infinite;">⚜</span>
+        <div class="brand" style="font-size:42px;letter-spacing:8px;background:linear-gradient(90deg,#B8965A,#f0d898,#e8c87a,#f0d898,#B8965A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.1;">ПоэмБукет</div>
+        <span style="font-size:22px;color:#B8965A;opacity:0.7;animation:brandglow 3s ease-in-out infinite;">⚜</span>
+      </div>
+      <div style="font-family:'Raleway',sans-serif;font-size:12px;letter-spacing:6px;text-transform:uppercase;text-align:center;background:linear-gradient(90deg,#B8965A,#fff8e7,#f0d898,#fff8e7,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">poème · cadeau · amour</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="portrait-wrap">
+      <div class="portrait-ring">
+        <div class="portrait-inner" id="portraitInner">
+          <img id="poetPhoto" src="photo-poete.jpg" alt="Louis Yvon, poète"
+               onerror="this.style.display='none';document.getElementById('monogram').style.display='flex';">
+          <div id="monogram" class="portrait-monogram" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">L·Y</div>
+        </div>
+      </div>
+      <span class="orbit-item" style="--od:11s;animation-delay:0s;">✦</span>
+      <span class="orbit-item" style="--od:11s;animation-delay:-3.7s;">🌹</span>
+      <span class="orbit-item" style="--od:11s;animation-delay:-7.3s;">✦</span>
+    </div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,235,224,0.5);letter-spacing:2px;margin-top:10px;text-align:center;">— Louis Yvon · Poète Français</div>
+
+    <div class="hero-name">
+      <div class="name-main" style="font-family:'Cormorant Garamond',serif;font-style:italic;">Закажите стихотворение<br>на французском языке</div>
+      <div class="name-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:2px;font-size:14px;text-transform:none;">На любой случай</div>
+    </div>
+
+    <div class="voice-player" onclick="toggleVoice()">
+      <div class="play-btn-v" id="playBtn">▶</div>
+      <div class="voice-info">
+        <div class="voice-label">🎙 Голос живой — ma voix</div>
+        <div class="voice-sub">Écoutez le poète · Послушайте</div>
+      </div>
+      <div class="audio-bars" id="audioBars">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <audio id="voiceAudio" src="poeme.mp3"></audio>
+
+  </section>
+
+  <!-- SÉPARATEUR -->
+  <div class="sep" style="--d:0.9s;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
+
+  <!-- BIOGRAPHIE -->
+  <section class="bio-section">
+
+    <span class="bio-title">О поэте · L'auteur</span>
+    <span class="bio-title-sub">Louis Yvon · Poète Français</span>
+
+    <p class="bio-text-fr">
+      Я влюблён в два мира — в красоту <span class="bio-gold">французской поэзии</span> и в глубину <span class="bio-accent">русской культуры</span>. Более пятнадцати лет я пишу стихи на французском языке: каждое слово живое, каждая строфа — единственная в своём роде.
+    </p>
+
+    <p class="bio-text-fr" style="margin-top:14px;">
+      Моя мечта проста: подарить ценителям французской культуры, которые не говорят по-французски, возможность получить <span class="bio-gold">настоящее стихотворение</span> — не шаблон из интернета, а живое произведение, созданное <span class="bio-accent">вместе с автором</span> специально для вас и вашего близкого.
+    </p>
+
+    <p class="bio-text-ru" style="margin-top:16px;">
+      Луи Ивон пишет для вас — на любое торжество, на любой случай жизни. День рождения, свадьба, Новый год, признание в любви, прощание, юбилей… Каждый поэм — это соавторство: вы рассказываете историю, он облекает её в слова, достойные французской классики.
+    </p>
+
+  </section>
+
+  <!-- SÉPARATEUR -->
+  <div class="sep" style="--d:1.2s;margin-top:36px;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
+
+  <!-- OCCASIONS + CTA -->
+  <section class="occasions-section">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#f0ebe0;line-height:1.5;margin-bottom:8px;">Закажите стихотворение на французском —<br>на любой особый момент вашей жизни</div>
+      <div style="font-size:11px;letter-spacing:2px;color:rgba(184,150,90,0.6);text-transform:uppercase;margin-bottom:18px;">Выберите повод · choisissez l'occasion</div>
+    </div>
+    <div class="occ-grid">
+      <a href="cartes/amour.html" target="_blank" class="occ-card"><span class="occ-emoji">💕</span><span class="occ-name">Любовь</span></a>
+      <a href="cartes/anniversaire.html" target="_blank" class="occ-card"><span class="occ-emoji">🎂</span><span class="occ-name">День рождения</span></a>
+      <a href="cartes/nouvel-an.html" target="_blank" class="occ-card"><span class="occ-emoji">🎄</span><span class="occ-name">Новый год</span></a>
+      <a href="cartes/fete-meres.html" target="_blank" class="occ-card"><span class="occ-emoji">👩</span><span class="occ-name">День матери</span></a>
+      <a href="cartes/mariage.html" target="_blank" class="occ-card"><span class="occ-emoji">💍</span><span class="occ-name">Свадьба</span></a>
+      <a href="cartes/naissance.html" target="_blank" class="occ-card"><span class="occ-emoji">👶</span><span class="occ-name">Рождение</span></a>
+      <a href="cartes/grand-pere.html" target="_blank" class="occ-card"><span class="occ-emoji">👴</span><span class="occ-name">Дедушке</span></a>
+      <a href="cartes/grand-mere.html" target="_blank" class="occ-card"><span class="occ-emoji">👵</span><span class="occ-name">Бабушке</span></a>
+      <a href="cartes/diplome.html" target="_blank" class="occ-card"><span class="occ-emoji">🎓</span><span class="occ-name">Диплом</span></a>
+      <a href="cartes/guerison.html" target="_blank" class="occ-card"><span class="occ-emoji">🏥</span><span class="occ-name">Выздоровление</span></a>
+      <a href="cartes/fete-femme.html" target="_blank" class="occ-card"><span class="occ-emoji">🌸</span><span class="occ-name">8 Марта</span></a>
+      <a href="cartes/collegue.html" target="_blank" class="occ-card"><span class="occ-emoji">💼</span><span class="occ-name">Коллеге</span></a>
+    </div>
+  </section>
+
+  <!-- SÉPARATEUR -->
+  <div class="sep" style="--d:1.8s;margin-top:36px;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
+
+  <!-- TÉMOIGNAGES -->
+  <section style="width:100%;animation:fadeUp 1.2s ease forwards 1.9s;opacity:0;">
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="font-size:11px;letter-spacing:4px;color:rgba(184,150,90,0.55);text-transform:uppercase;">Отзывы · Témoignages</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <div style="background:rgba(184,150,90,0.05);border:1px solid rgba(184,150,90,0.15);border-radius:16px;padding:18px 20px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#f0ebe0;line-height:1.75;margin-bottom:12px;">«Заказала стихотворение на годовщину свадьбы. Муж был растроган до слёз — он говорит по-французски, и получить такой личный подарок на его родном языке было для него невероятно.»</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:rgba(197,89,106,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C5596A;font-family:'Cormorant Garamond',serif;font-style:italic;">Н</div>
+          <div>
+            <div style="font-size:12px;color:#B8965A;letter-spacing:1px;">Наташа М.</div>
+            <div style="font-size:10px;color:rgba(240,235,224,0.3);letter-spacing:1px;">Москва · 💍 Свадьба</div
