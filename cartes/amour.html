@@ -10,7 +10,7 @@
   body { min-height:100vh; background:linear-gradient(160deg,#1a0010 0%,#3a0520 50%,#1a0010 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#fce8f0; }
 
   .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
-  .heart { position:absolute; font-size:var(--s); animation:floatHeart var(--d) ease-in-out infinite; opacity:0; }
+  .heart { position:absolute; font-size:var(--s); z-index:1; animation:floatHeart var(--d) ease-in-out infinite; opacity:0; }
   @keyframes floatHeart {
     0%   { transform:translateY(100vh) scale(0.8) rotate(-10deg); opacity:0; }
     15%  { opacity:0.6; }
@@ -23,14 +23,15 @@
   .card { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:28px 20px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; animation:fadeUp 1.8s ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
 
-  .ribbon { width:100%; text-align:center; padding:10px 0; border-top:1px solid rgba(255,100,150,0.5); border-bottom:1px solid rgba(255,100,150,0.5); font-size:11px; letter-spacing:3px; color:#ff6b9d; text-transform:uppercase; }
+  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid rgba(255,100,150,0.5); border-bottom:1px solid rgba(255,100,150,0.5); font-size:24px; letter-spacing:4px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#a02040,#ff6b9d,#ffe0ea,#ff9bb5,#ff6b9d,#a02040); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
 
-  .photo-wrap { position:relative; width:200px; height:200px; animation:bounceIn 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards 0.4s; opacity:0; }
+  .photo-wrap { position:relative; width:180px; height:180px; animation:bounceIn 1.4s cubic-bezier(0.34,1.56,0.64,1) forwards 0.4s; opacity:0; }
   @keyframes bounceIn { from{opacity:0;transform:scale(0.3);} to{opacity:1;transform:scale(1);} }
-  .photo-ring { width:200px; height:200px; border-radius:50%; border:3px solid #ff6b9d; box-shadow:0 0 30px rgba(255,100,150,0.5),0 0 80px rgba(255,100,150,0.15); background:linear-gradient(135deg,#3a0520,#1a0010); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .photo-ring { width:180px; height:180px; border-radius:50%; border:3px solid #ff6b9d; box-shadow:0 0 30px rgba(255,100,150,0.5),0 0 80px rgba(255,100,150,0.15); background:linear-gradient(135deg,#3a0520,#1a0010); display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .photo-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
   .orbit-heart { position:absolute; font-size:16px; animation:orbitH var(--od) linear infinite; }
-  @keyframes orbitH { from{transform:rotate(0deg) translateX(108px) rotate(0deg);} to{transform:rotate(360deg) translateX(108px) rotate(-360deg);} }
+  @keyframes orbitH { from{transform:rotate(0deg) translateX(98px) rotate(0deg);} to{transform:rotate(360deg) translateX(98px) rotate(-360deg);} }
 
   .client-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(16px,4vw,22px); text-align:center; background:linear-gradient(90deg,#e8a0b0,#fff0f5,#e8a0b0,#fff0f5,#e8a0b0);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp 1.4s ease forwards 0.7s, shimmerPink 4s linear infinite; opacity:0; letter-spacing:1.5px; line-height:1.4; }
   @keyframes shimmerPink { 0%{background-position:200% center} 100%{background-position:-200% center} }
@@ -50,7 +51,7 @@
   .poem-ru { font-family:'Cormorant Garamond',serif; font-size:clamp(16px,4.5vw,21px); line-height:1.95; text-align:center; color:rgba(240,220,230,0.88); animation:fadeUp 1.6s ease forwards 1.4s; opacity:0; }
 
   .signature { display:flex; flex-direction:column; align-items:center; gap:4px; animation:fadeUp 1.4s ease forwards 1.6s; opacity:0; }
-  .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#ff6b9d; }
+  .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:#ff6b9d; }
   .sig-sub { font-size:12px; letter-spacing:2px; color:#80304a; text-transform:uppercase; }
   .footer-brand { font-family:'Playfair Display',serif; font-size:13px; color:#40101a; letter-spacing:2px; text-align:center; margin-top:8px; }
   .order-section{width:100%;display:flex;flex-direction:column;gap:12px;animation:fadeUp 1.4s ease forwards 1.8s;opacity:0;}
@@ -66,6 +67,7 @@
   .order-note{text-align:center;font-size:10px;color:rgba(255,255,255,0.18);letter-spacing:0.5px;padding-bottom:4px;}
   audio { display:none; }
 
+  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
   @keyframes photoBreath {
     0%,100% { transform: scale(1) translate(0,0); }
@@ -130,11 +132,11 @@
   <svg id="orderCta" width="100%" height="34" style="display:block;margin:20px 0 14px;overflow:visible;animation:goldPulse 2.4s ease-in-out infinite;" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#B8965A"/>
-        <stop offset="30%" stop-color="#f0d898"/>
-        <stop offset="50%" stop-color="#fff8e0"/>
-        <stop offset="70%" stop-color="#f0d898"/>
-        <stop offset="100%" stop-color="#B8965A"/>
+        <stop offset="0%" stop-color="#a02040"/>
+        <stop offset="30%" stop-color="#ff6b9d"/>
+        <stop offset="50%" stop-color="#ffe0ea"/>
+        <stop offset="70%" stop-color="#ff6b9d"/>
+        <stop offset="100%" stop-color="#a02040"/>
       </linearGradient>
     </defs>
     <text x="0" y="26" textLength="100%" lengthAdjust="spacingAndGlyphs" font-family="Cormorant Garamond, serif" font-style="italic" font-size="22" fill="url(#goldGrad)">Закажите своё стихотворение у вашего поэта</text>
@@ -156,17 +158,16 @@
       <div class="pd">30 мин</div>
     </a>
   </div>
-  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:16px;text-align:center;letter-spacing:3px;background:linear-gradient(90deg,#B8965A,#f0d898,#fff8e7,#f0d898,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">ПоэмБукет · poème · cadeau · amour</div>
-</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;margin-top:16px;text-align:center;letter-spacing:3px;background:linear-gradient(90deg,#a02040,#ff6b9d,#ffe0ea,#ff6b9d,#a02040);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">ПоэмБукет · poème · cadeau · amour</div>
 </div>
 <script>
 const bg = document.getElementById('bg');
-const hearts = ['💕','🌹','❤️','🌸','💖'];
-for (let i = 0; i < 18; i++) {
+const hearts = ['💕','🌸','🌷','💗','✿'];
+for (let i = 0; i < 10; i++) {
   const h = document.createElement('div');
   h.className = 'heart';
   h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
-  const s = (Math.random()*16+12).toFixed(0);
+  const s = (Math.random()*10+10).toFixed(0);
   h.style.cssText = `left:${Math.random()*100}%;--s:${s}px;--d:${(Math.random()*6+6).toFixed(1)}s;animation-delay:${(Math.random()*8).toFixed(1)}s;position:fixed;`;
   bg.appendChild(h);
 }
@@ -188,8 +189,8 @@ function fadeVol(from,to,ms,cb){
 }
 function toggleAudio(){
   if(!isPlaying){
-    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play();
-    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play());},5000);
+    isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play().catch(()=>{});
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{}));},5000);
   }else{
     isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
     audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';
