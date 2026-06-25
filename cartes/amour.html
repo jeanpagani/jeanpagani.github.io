@@ -10,12 +10,12 @@
   body { min-height:100vh; background:linear-gradient(160deg,#1a0010 0%,#3a0520 50%,#1a0010 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#fce8f0; }
 
   .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
-  .heart { position:absolute; bottom:-40px; font-size:var(--s); z-index:1; animation:floatHeart var(--d) linear infinite; opacity:0; }
+  .heart { position:absolute; font-size:var(--s); z-index:2; animation:floatHeart var(--d) linear infinite; }
   @keyframes floatHeart {
-    0%   { transform:translateY(0) scale(0.8) rotate(-10deg); opacity:0; }
-    10%  { opacity:0.8; }
-    80%  { opacity:0.5; }
-    100% { transform:translateY(-95vh) scale(1.2) rotate(10deg); opacity:0; }
+    0%   { opacity:0; transform:scale(0.8) rotate(-10deg); }
+    10%  { opacity:0.85; }
+    85%  { opacity:0.5; }
+    100% { opacity:0; transform:scale(1.1) rotate(10deg); }
   }
   .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#ff6b9d; animation:sparkAnim var(--d) ease-in-out infinite alternate; opacity:0; }
   @keyframes sparkAnim { 0%{opacity:0;transform:scale(0.5);} 50%{opacity:0.9;transform:scale(1.8);} 100%{opacity:0;transform:scale(0.3);} }
@@ -171,7 +171,8 @@ for (let i = 0; i < 18; i++) {
   h.className = 'heart';
   h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
   const s = (Math.random()*14+18).toFixed(0);
-  h.style.cssText = `left:${Math.random()*100}%;bottom:${Math.random()*30-40}px;--s:${s}px;--d:${(Math.random()*8+7).toFixed(1)}s;animation-delay:${(Math.random()*12).toFixed(1)}s;`;
+  const dur = (Math.random()*8+6).toFixed(1);
+  h.style.cssText = `left:${Math.random()*90+5}%;top:${100+Math.random()*20}%;--s:${s}px;--d:${dur}s;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(1)}s;transform:translateY(-${Math.floor(Math.random()*90+5)}vh);`;
   bg.appendChild(h);
 }
 for (let i = 0; i < 25; i++) {
