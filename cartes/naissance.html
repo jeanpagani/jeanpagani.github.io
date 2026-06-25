@@ -59,7 +59,10 @@
   }
 
   /* ── Ruban ── */
-  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid rgba(180,140,220,0.4); border-bottom:1px solid rgba(180,140,220,0.4); font-size:clamp(16px,4.5vw,22px); letter-spacing:2px; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#5020a0,#b080e0,#e8d0ff,#b080e0,#5020a0); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(160,100,220,0.4); border-bottom:1px solid rgba(160,100,220,0.4); line-height:1.7; }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(18px,5vw,24px); letter-spacing:3px; background:linear-gradient(90deg,#3a1868,#b080e0,#dcc0ff,#b080e0,#3a1868); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:12px; letter-spacing:8px; color:rgba(255,255,255,0.2); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(13px,3.5vw,15px); letter-spacing:6px; color:rgba(255,255,255,0.3); }
   @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
 
   /* ── Nuage photo ── */
@@ -214,7 +217,7 @@
 
 <div class="card">
 
-  <div class="ribbon">Рождение <span style="-webkit-text-fill-color:#b080e0;color:#b080e0;">✨</span> Naissance</div>
+  <div class="ribbon"><span class="ribbon-ru">Рождение</span><span class="ribbon-sep">✦ · ✦</span><span class="ribbon-fr">Naissance</span></div>
 
   <!-- Photo -->
   <div class="photo-wrap">

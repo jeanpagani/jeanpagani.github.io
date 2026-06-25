@@ -15,7 +15,10 @@
   @keyframes twinkle { 0%{opacity:0.1;} 100%{opacity:0.9;} }
   .card { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:28px 20px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; animation:fadeUp 1.8s ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid rgba(220,190,120,0.5); border-bottom:1px solid rgba(220,190,120,0.5); font-size:clamp(16px,4.5vw,22px); letter-spacing:2px; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#806010,#d4b870,#fff8e0,#d4b870,#806010); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(210,180,80,0.4); border-bottom:1px solid rgba(210,180,80,0.4); line-height:1.7; }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(18px,5vw,24px); letter-spacing:3px; background:linear-gradient(90deg,#5a4010,#d4b870,#f8ecc0,#d4b870,#5a4010); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:12px; letter-spacing:8px; color:rgba(255,255,255,0.2); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(13px,3.5vw,15px); letter-spacing:6px; color:rgba(255,255,255,0.3); }
   @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
   .rings { display:flex; align-items:center; justify-content:center; gap:-10px; font-size:32px; animation:bounceIn 1.2s ease forwards 0.3s; opacity:0; }
   @keyframes bounceIn { from{opacity:0;transform:scale(0.3);} to{opacity:1;transform:scale(1);} }
@@ -72,7 +75,7 @@
 <body>
 <div class="bg" id="bg"></div>
 <div class="card">
-  <div class="ribbon">Свадьба <span style="-webkit-text-fill-color:#d4b870;color:#d4b870;">💍</span> Mariage</div>
+  <div class="ribbon"><span class="ribbon-ru">Свадьба</span><span class="ribbon-sep">✦ · ✦</span><span class="ribbon-fr">Mariage</span></div>
   <div class="rings">💍&nbsp;🤍&nbsp;💍</div>
   <div class="photo-wrap">
     <div class="photo-ring">

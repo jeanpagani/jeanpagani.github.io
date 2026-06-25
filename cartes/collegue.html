@@ -15,7 +15,10 @@
   @keyframes gridPulse { 0%{opacity:0.2;} 100%{opacity:0.6;} }
   .card { position:relative; z-index:10; max-width:480px; margin:0 auto; padding:28px 20px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; animation:fadeUp 1.8s ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
-  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid rgba(100,150,240,0.5); border-bottom:1px solid rgba(100,150,240,0.5); font-size:clamp(16px,4.5vw,22px); letter-spacing:2px; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#1030a0,#7090e0,#c0d0ff,#7090e0,#1030a0); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(100,130,220,0.4); border-bottom:1px solid rgba(100,130,220,0.4); line-height:1.7; }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:clamp(18px,5vw,24px); letter-spacing:3px; background:linear-gradient(90deg,#2a3a70,#7090e0,#d0dcff,#7090e0,#2a3a70); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:12px; letter-spacing:8px; color:rgba(255,255,255,0.2); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(13px,3.5vw,15px); letter-spacing:6px; color:rgba(255,255,255,0.3); }
   @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
   .photo-wrap { position:relative; width:200px; height:200px; animation:slideIn 1.4s ease forwards 0.4s; opacity:0; }
   @keyframes slideIn { from{opacity:0;transform:translateX(-30px);} to{opacity:1;transform:translateX(0);} }
@@ -70,7 +73,7 @@
 <body>
 <div class="bg" id="bg"></div>
 <div class="card">
-  <div class="ribbon">Коллеге <span style="-webkit-text-fill-color:#7090e0;color:#7090e0;">💼</span> Collègue</div>
+  <div class="ribbon"><span class="ribbon-ru">Коллеге</span><span class="ribbon-sep">✦ · ✦</span><span class="ribbon-fr">Collègue</span></div>
   <div class="photo-wrap">
     <div class="photo-ring">
       <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=400&fit=crop&auto=format" alt="Collègue" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
