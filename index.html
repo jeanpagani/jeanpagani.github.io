@@ -753,4 +753,15 @@ function toggleVoice(){
     voiceAudio.pause();
     playBtn.textContent = '▶';
     audioBars.classList.remove('playing');
-    playing = f
+    playing = false;
+  }
+}
+voiceAudio.onended = () => {
+  playBtn.textContent = '▶';
+  audioBars.classList.remove('playing');
+  playing = false;
+};
+
+</script>
+</body>
+</html>
