@@ -151,7 +151,7 @@ const colors = ['#ff6060','#ffd060','#60ffb0','#60b0ff','#ff60c0','#c060ff'];
 for (let i = 0; i < 30; i++) {
   const c = document.createElement('div');
   c.className = 'confetti';
-  c.style.cssText = `left:${Math.random()*100}%;position:fixed;--d:${(Math.random()*5+4).toFixed(1)}s;animation-delay:${(Math.random()*6).toFixed(1)}s;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};transform:rotate(${Math.random()*360}deg);`;
+  c.style.cssText = `left:${Math.random()*100}%;position:absolute;--d:${(Math.random()*5+4).toFixed(1)}s;animation-delay:${(Math.random()*6).toFixed(1)}s;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};transform:rotate(${Math.random()*360}deg);`;
   bg.appendChild(c);
 }
 const balloons = ['🎈','🎊','🎉','⭐'];
@@ -159,7 +159,7 @@ for (let i = 0; i < 8; i++) {
   const b = document.createElement('div');
   b.className = 'balloon';
   b.textContent = balloons[Math.floor(Math.random()*balloons.length)];
-  b.style.cssText = `left:${Math.random()*100}%;position:fixed;--s:${(Math.random()*10+14).toFixed(0)}px;--d:${(Math.random()*5+6).toFixed(1)}s;animation-delay:${(Math.random()*7).toFixed(1)}s;`;
+  b.style.cssText = `left:${Math.random()*100}%;position:absolute;--s:${(Math.random()*10+14).toFixed(0)}px;--d:${(Math.random()*5+6).toFixed(1)}s;animation-delay:${(Math.random()*7).toFixed(1)}s;`;
   bg.appendChild(b);
 }
 const audio = document.getElementById('poemAudio');
@@ -187,3 +187,4 @@ audio.onended=()=>{isPlaying=false;playIcon.textContent='▶';endTimer=setTimeou
 </script>
 </body>
 </html>
+                  
