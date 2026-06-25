@@ -62,7 +62,7 @@
   }
 
   /* ── Ruban haut ── */
-  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid 2px solid #d4af37; border-bottom:1px solid 2px solid #d4af37; font-size:24px; letter-spacing:4px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#6a3a00,#d4af37,#fff8c0,#d4af37,#6a3a00); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
+  .ribbon { width:100%; text-align:center; padding:14px 0; border-top:1px solid 2px solid #d4af37; border-bottom:1px solid 2px solid #d4af37; font-size:clamp(16px,4.5vw,22px); letter-spacing:2px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; background:linear-gradient(90deg,#6a3a00,#d4af37,#fff8c0,#d4af37,#6a3a00); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmerRibbon 5s linear infinite; }
   @keyframes shimmerRibbon { 0%{background-position:200% center} 100%{background-position:-200% center} }
   @keyframes slideDown {
     from { opacity: 0; transform: translateY(-16px); }
