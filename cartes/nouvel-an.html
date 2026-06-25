@@ -21,10 +21,7 @@
   .photo-ring { width:200px; height:200px; border-radius:50%; border:3px solid #7ab4ff; box-shadow:0 0 40px rgba(100,160,255,0.5),0 0 80px rgba(100,160,255,0.15); background:linear-gradient(135deg,#0a1535,#050d28); display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .orbit-star { position:absolute; font-size:18px; animation:orbit var(--od) linear infinite; }
   @keyframes orbit { from{transform:rotate(0deg) translateX(108px) rotate(0deg);} to{transform:rotate(360deg) translateX(108px) rotate(-360deg);} }
-  .firework { position:absolute; width:6px; height:6px; border-radius:50%; animation:burst var(--d) ease-out infinite; opacity:0; }
-  @keyframes burst { 0%{transform:translate(0,0) scale(1);opacity:1;} 100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0;} }
   .client-name { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(16px,4vw,22px); color:#7ab4ff; text-align:center; text-shadow:0 0 30px rgba(100,160,255,0.7); animation:fadeUp 1.4s ease forwards 0.7s; opacity:0; }
-  .client-sub { font-size:13px; letter-spacing:4px; color:#3060a0; text-align:center; text-transform:uppercase; animation:fadeUp 1.4s ease forwards 0.9s; opacity:0; }
   .audio-btn { display:flex; align-items:center; gap:12px; background:rgba(100,160,255,0.08); border:1px solid rgba(100,160,255,0.35); border-radius:50px; padding:10px 22px; cursor:pointer; transition:all 0.3s; animation:fadeUp 1.4s ease forwards 1s; opacity:0; }
   .audio-btn:hover { background:rgba(100,160,255,0.18); }
   .play-circle { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#5090e8,#2050a0); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff; flex-shrink:0; box-shadow:0 2px 12px rgba(80,144,232,0.6); animation:glow 2s ease infinite; }
@@ -37,21 +34,13 @@
   .poem-ru { font-family:'Cormorant Garamond',serif; font-size:clamp(16px,4.5vw,21px); line-height:1.95; text-align:center; color:rgba(240,220,230,0.88); animation:fadeUp 1.6s ease forwards 1.4s; opacity:0; }
   .signature { display:flex; flex-direction:column; align-items:center; gap:4px; animation:fadeUp 1.4s ease forwards 1.6s; opacity:0; }
   .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#7ab4ff; }
-  .sig-sub { font-size:12px; letter-spacing:2px; color:#304870; text-transform:uppercase; }
-  .footer-brand { font-family:'Playfair Display',serif; font-size:13px; color:#0a1535; letter-spacing:2px; text-align:center; margin-top:8px; }
-  .order-section{width:100%;display:flex;flex-direction:column;gap:12px;animation:fadeUp 1.4s ease forwards 1.8s;opacity:0;}
-  .order-title{text-align:center;font-size:10px;letter-spacing:3px;color:rgba(100,160,255,0.3);text-transform:uppercase;margin-top:4px;}
   .price-grid{display:flex;gap:8px;width:100%;}
   .price-box{flex:1;background:rgba(100,160,255,0.06);border:1px solid rgba(100,160,255,0.18);border-radius:12px;padding:12px 6px;text-align:center;}
   .price-box .ps{font-size:9px;letter-spacing:1.5px;color:rgba(100,160,255,0.5);text-transform:uppercase;margin-bottom:6px;}
   .price-box .pa{font-family:'Playfair Display',serif;font-size:19px;color:#7ab4ff;margin-bottom:3px;}
   .price-box .pd{font-size:9px;color:rgba(100,160,255,0.4);letter-spacing:0.5px;}
-  .btn-tg{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(100,160,255,0.08);border:1.5px solid rgba(100,160,255,0.28);border-radius:14px;color:#7ab4ff;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;text-decoration:none;transition:all 0.3s;cursor:pointer;}
-  .btn-tg:hover{background:rgba(100,160,255,0.16);}
-  .btn-boosty{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:linear-gradient(135deg,#f7601e,#e04010);border-radius:14px;color:#fff;font-family:'Raleway',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px;text-decoration:none;box-shadow:0 4px 16px rgba(247,96,30,0.35);}
-  .order-note{text-align:center;font-size:10px;color:rgba(100,160,255,0.22);letter-spacing:0.5px;padding-bottom:4px;}
   audio { display:none; }
-
+  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   @keyframes goldPulse{0%,100%{opacity:0.7;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
   @keyframes photoBreath {
     0%,100% { transform: scale(1) translate(0,0); }
@@ -60,12 +49,12 @@
   }
   .photo-ring img { animation: photoBreath 8s ease-in-out infinite; transform-origin: center; }
 </style>
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jeanpagani.github.io/cartes/nouvel-an.html">
-  <meta property="og:title" content="ПоэмБукет · Новый год · Nouvel An">
-  <meta property="og:description" content="Новогоднее стихотворение на французском · Louis Yvon">
-  <meta property="og:image" content="https://jeanpagani.github.io/photo-poete.jpg">
-  <meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jeanpagani.github.io/cartes/nouvel-an.html">
+<meta property="og:title" content="ПоэмБукет · Новый год · Nouvel An">
+<meta property="og:description" content="Новогоднее стихотворение на французском · Louis Yvon">
+<meta property="og:image" content="https://jeanpagani.github.io/photo-poete.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <div class="bg" id="bg"></div>
@@ -73,7 +62,7 @@
   <div class="ribbon">🎄 Новый год · Nouvel An · Bonne Année 🎄</div>
   <div class="photo-wrap">
     <div class="photo-ring">
-      <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?w=400&h=400&fit=crop&crop=center&auto=format" alt="Sapin de Noël" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+      <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=400&h=400&fit=crop&crop=center&auto=format" alt="Sapin de Noël" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
     </div>
     <span class="orbit-star" style="--od:8s;animation-delay:0s">⭐</span>
     <span class="orbit-star" style="--od:8s;animation-delay:-2.7s">❄️</span>
@@ -96,4 +85,31 @@
     Que chaque mois soit une belle prière<br>
     Et chaque jour un nouveau souvenir.<br><br>
     Je te souhaite des étoiles plein les mains,<br>
-    La san
+    La santé, la joie et l'amour sans fin,<br>
+    Un chemin de bonheur pour demain —<br>
+    Bonne année, bonne vie, bonne destin.
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">❄️</div><div class="divider-line"></div></div>
+  <div class="poem-ru">
+    Пусть этот новый год будет светлым,<br>
+    Полным мечтаний, которые сбудутся,<br>
+    Пусть каждый месяц станет заветным,<br>
+    И добрые воспоминания не забудутся.<br><br>
+    Желаю тебе звёзд полные горсти,<br>
+    Здоровья, радости и любви без конца,<br>
+    Пусть счастье войдёт в твой дом в гости —<br>
+    С Новым годом от всего сердца!
+  </div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">❄️</div><div class="divider-line"></div></div>
+  <div class="signature"><div class="sig-name">— Louis Yvon, poète français</div></div>
+  <svg id="orderCta" width="100%" height="34" style="display:block;margin:20px 0 14px;overflow:visible;animation:goldPulse 2.4s ease-in-out infinite;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#B8965A"/>
+        <stop offset="30%" stop-color="#f0d898"/>
+        <stop offset="50%" stop-color="#fff8e0"/>
+        <stop offset="70%" stop-color="#f0d898"/>
+        <stop offset="100%" stop-color="#B8965A"/>
+      </linearGradient>
+    </defs>
+    <text x="0" y="26" textLength=
