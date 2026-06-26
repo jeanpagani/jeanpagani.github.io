@@ -806,24 +806,20 @@ function fadeVol(from, to, ms, cb){
   }, delay);
 }
 
-function lancerAudio(){
-  bgMusic.volume = BG_VOL;
-  bgMusic.play().catch(()=>{});
-  setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
-}
+let voiceTimer = null;
 
 function toggleVoice(){
   if(!playing){
+    playing = true;
     playBtn.textContent = '⏸';
     audioBars.classList.add('playing');
-    playing = true;
-    if(bgMusic.readyState >= 3){
-      lancerAudio();
-    } else {
-      bgMusic.addEventListener('canplay', lancerAudio, {once:true});
-      bgMusic.load();
-    }
+    bgMusic.volume = BG_VOL;
+    bgMusic.play().catch(()=>{});
+    voiceTimer = setTimeout(()=>{
+      fadeVol(BG_VOL, 0.06, 2000, ()=>{ voiceAudio.play().catch(()=>{}); });
+    }, 5000);
   } else {
+    clearTimeout(voiceTimer);
     voiceAudio.pause();
     fadeVol(BG_VOL, 0, 1500, ()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
     playBtn.textContent = '▶';
