@@ -490,10 +490,10 @@ body {
   gap:8px;
 }
 .occ-card {
-  background:rgba(255,255,255,0.03);
+  position:relative;
   border:1px solid rgba(255,255,255,0.07);
   border-radius:12px;
-  padding:12px 8px;
+  overflow:hidden;
   text-align:center;
   text-decoration:none;
   color:#f0ebe0;
@@ -501,15 +501,19 @@ body {
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:5px;
+  justify-content:flex-end;
+  aspect-ratio:1;
+  background:#0d0520;
 }
 .occ-card:hover {
-  background:rgba(184,150,90,0.08);
-  border-color:rgba(184,150,90,0.3);
-  transform:translateY(-2px);
+  border-color:rgba(184,150,90,0.45);
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(184,150,90,0.15);
 }
-.occ-emoji { font-size:26px; }
-.occ-name { font-size:11px; letter-spacing:0.5px; color:rgba(240,235,224,0.85); text-transform:none; font-family:'Raleway',sans-serif; }
+.occ-card:hover .occ-overlay { background:linear-gradient(to bottom,rgba(6,3,13,0.1),rgba(6,3,13,0.72)); }
+.occ-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.85; }
+.occ-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(6,3,13,0.05),rgba(6,3,13,0.78)); transition:background 0.25s; }
+.occ-name { position:relative; z-index:2; font-size:12px; letter-spacing:0.5px; color:#fff; font-family:'Raleway',sans-serif; font-weight:500; padding:0 4px 10px; text-shadow:0 1px 4px rgba(0,0,0,0.8); }
 
 /* ── FOOTER ── */
 .site-footer {
@@ -643,18 +647,18 @@ audio { display:none; }
       <div style="font-size:11px;letter-spacing:2px;color:rgba(184,150,90,0.6);text-transform:uppercase;margin-bottom:18px;">Выберите повод · choisissez l'occasion</div>
     </div>
     <div class="occ-grid">
-      <a href="cartes/amour.html" target="_blank" class="occ-card"><span class="occ-emoji">💕</span><span class="occ-name">Любовь</span></a>
-      <a href="cartes/anniversaire.html" target="_blank" class="occ-card"><span class="occ-emoji">🎂</span><span class="occ-name">День рождения</span></a>
-      <a href="cartes/nouvel-an.html" target="_blank" class="occ-card"><span class="occ-emoji">🎄</span><span class="occ-name">Новый год</span></a>
-      <a href="cartes/fete-meres.html" target="_blank" class="occ-card"><span class="occ-emoji">👩</span><span class="occ-name">День матери</span></a>
-      <a href="cartes/mariage.html" target="_blank" class="occ-card"><span class="occ-emoji">💍</span><span class="occ-name">Свадьба</span></a>
-      <a href="cartes/naissance.html" target="_blank" class="occ-card"><span class="occ-emoji">👶</span><span class="occ-name">Рождение</span></a>
-      <a href="cartes/grand-pere.html" target="_blank" class="occ-card"><span class="occ-emoji">👴</span><span class="occ-name">Дедушке</span></a>
-      <a href="cartes/grand-mere.html" target="_blank" class="occ-card"><span class="occ-emoji">👵</span><span class="occ-name">Бабушке</span></a>
-      <a href="cartes/diplome.html" target="_blank" class="occ-card"><span class="occ-emoji">🎓</span><span class="occ-name">Диплом</span></a>
-      <a href="cartes/guerison.html" target="_blank" class="occ-card"><span class="occ-emoji">🏥</span><span class="occ-name">Выздоровление</span></a>
-      <a href="cartes/fete-femme.html" target="_blank" class="occ-card"><span class="occ-emoji">🌸</span><span class="occ-name">8 Марта</span></a>
-      <a href="cartes/collegue.html" target="_blank" class="occ-card"><span class="occ-emoji">💼</span><span class="occ-name">Коллеге</span></a>
+      <a href="cartes/amour.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=220&h=220&fit=crop&auto=format" alt="Любовь" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Любовь</span></a>
+      <a href="cartes/anniversaire.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=220&h=220&fit=crop&auto=format" alt="День рождения" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">День рождения</span></a>
+      <a href="cartes/nouvel-an.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=220&h=220&fit=crop&auto=format" alt="Новый год" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Новый год</span></a>
+      <a href="cartes/fete-meres.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1490698900541-76d9b74bdcac?w=220&h=220&fit=crop&auto=format" alt="День матери" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">День матери</span></a>
+      <a href="cartes/mariage.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=220&h=220&fit=crop&auto=format" alt="Свадьба" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Свадьба</span></a>
+      <a href="cartes/naissance.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=220&h=220&fit=crop&auto=format" alt="Рождение" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Рождение</span></a>
+      <a href="cartes/grand-pere.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=220&h=220&fit=crop&auto=format" alt="Дедушке" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Дедушке</span></a>
+      <a href="cartes/grand-mere.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1556228720-da4b1c2b6f52?w=220&h=220&fit=crop&auto=format" alt="Бабушке" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Бабушке</span></a>
+      <a href="cartes/diplome.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=220&h=220&fit=crop&auto=format" alt="Диплом" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Диплом</span></a>
+      <a href="cartes/guerison.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1490750967868-88df5691cc9e?w=220&h=220&fit=crop&auto=format" alt="Выздоровление" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Выздоровление</span></a>
+      <a href="cartes/fete-femme.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=220&h=220&fit=crop&auto=format" alt="8 Марта" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">8 Марта</span></a>
+      <a href="cartes/collegue.html" target="_blank" class="occ-card"><img class="occ-img" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=220&h=220&fit=crop&auto=format" alt="Коллеге" loading="lazy"><div class="occ-overlay"></div><span class="occ-name">Коллеге</span></a>
     </div>
   </section>
 
