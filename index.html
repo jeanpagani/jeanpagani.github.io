@@ -607,7 +607,7 @@ audio { display:none; }
       </div>
     </div>
     <audio id="voiceAudio" src="presentation-louis-yvon.mp3" preload="auto"></audio>
-    <audio id="bgMusic" src="musique-bg.mp3" loop preload="auto"></audio>
+    <audio id="bgMusic" src="musique-bg.mp3" loop preload="auto" data-v="2"></audio>
 
   </section>
 
@@ -828,4 +828,12 @@ function toggleVoice(){
   }
 }
 voiceAudio.onended = () => {
-  playBtn.te
+  playBtn.textContent = '▶';
+  audioBars.classList.remove('playing');
+  playing = false;
+  fadeVol(BG_VOL, 0, 3000, ()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
+};
+
+</script>
+</body>
+</html>
