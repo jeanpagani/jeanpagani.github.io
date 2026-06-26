@@ -809,9 +809,12 @@ function fadeVol(from, to, ms, cb){
 function toggleVoice(){
   if(!playing){
     bgMusic.volume = 0;
+    bgMusic.onplaying = function(){
+      bgMusic.onplaying = null;
+      fadeVol(0, BG_VOL, 1500);
+      setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
+    };
     bgMusic.play().catch(()=>{});
-    fadeVol(0, BG_VOL, 1500);
-    setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
     playBtn.textContent = '⏸';
     audioBars.classList.add('playing');
     playing = true;
