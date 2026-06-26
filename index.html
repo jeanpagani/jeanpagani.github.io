@@ -794,7 +794,7 @@ const bgMusic    = document.getElementById('bgMusic');
 const playBtn    = document.getElementById('playBtn');
 const audioBars  = document.getElementById('audioBars');
 let playing = false;
-const BG_VOL = 0.12;
+const BG_VOL = 0.28;
 
 function fadeVol(from, to, ms, cb){
   const steps=40, delay=ms/steps; let i=0;
@@ -810,8 +810,8 @@ function toggleVoice(){
   if(!playing){
     bgMusic.volume = 0;
     bgMusic.play().catch(()=>{});
-    fadeVol(0, BG_VOL, 2000);
-    voiceAudio.play().catch(()=>{});
+    fadeVol(0, BG_VOL, 1500);
+    setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
     playBtn.textContent = '⏸';
     audioBars.classList.add('playing');
     playing = true;
