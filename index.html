@@ -606,8 +606,8 @@ audio { display:none; }
         <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
     </div>
-    <audio id="voiceAudio" src="presentation-louis-yvon.mp3"></audio>
-    <audio id="bgMusic" src="musique-accueil.mp3" loop></audio>
+    <audio id="voiceAudio" src="presentation-louis-yvon.mp3" preload="auto"></audio>
+    <audio id="bgMusic" src="musique-accueil.mp3" loop preload="auto"></audio>
 
   </section>
 
@@ -808,13 +808,9 @@ function fadeVol(from, to, ms, cb){
 
 function toggleVoice(){
   if(!playing){
-    bgMusic.volume = 0;
-    bgMusic.onplaying = function(){
-      bgMusic.onplaying = null;
-      fadeVol(0, BG_VOL, 1500);
-      setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
-    };
+    bgMusic.volume = BG_VOL;
     bgMusic.play().catch(()=>{});
+    setTimeout(()=>{ voiceAudio.play().catch(()=>{}); }, 3000);
     playBtn.textContent = '⏸';
     audioBars.classList.add('playing');
     playing = true;
