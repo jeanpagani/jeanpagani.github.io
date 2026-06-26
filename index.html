@@ -607,6 +607,7 @@ audio { display:none; }
       </div>
     </div>
     <audio id="voiceAudio" src="presentation-louis-yvon.mp3"></audio>
+    <audio id="bgMusic" src="musique-accueil.mp3" loop></audio>
 
   </section>
 
@@ -789,18 +790,34 @@ for (let i=0;i<60;i++){
 
 // ── PLAYER VOIX ──
 const voiceAudio = document.getElementById('voiceAudio');
+const bgMusic    = document.getElementById('bgMusic');
 const playBtn    = document.getElementById('playBtn');
 const audioBars  = document.getElementById('audioBars');
 let playing = false;
+const BG_VOL = 0.12;
+
+function fadeVol(from, to, ms, cb){
+  const steps=40, delay=ms/steps; let i=0;
+  bgMusic.volume = from;
+  const iv = setInterval(()=>{
+    i++;
+    bgMusic.volume = Math.max(0, Math.min(1, from+(to-from)*i/steps));
+    if(i>=steps){ clearInterval(iv); bgMusic.volume=to; if(cb)cb(); }
+  }, delay);
+}
 
 function toggleVoice(){
   if(!playing){
+    bgMusic.volume = 0;
+    bgMusic.play().catch(()=>{});
+    fadeVol(0, BG_VOL, 2000);
     voiceAudio.play().catch(()=>{});
     playBtn.textContent = '⏸';
     audioBars.classList.add('playing');
     playing = true;
   } else {
     voiceAudio.pause();
+    fadeVol(BG_VOL, 0, 1500, ()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
     playBtn.textContent = '▶';
     audioBars.classList.remove('playing');
     playing = false;
@@ -810,6 +827,7 @@ voiceAudio.onended = () => {
   playBtn.textContent = '▶';
   audioBars.classList.remove('playing');
   playing = false;
+  fadeVol(BG_VOL, 0, 3000, ()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
 };
 
 </script>
