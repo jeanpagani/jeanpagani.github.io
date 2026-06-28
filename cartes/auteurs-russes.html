@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grands auteurs russes | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#0a0010 0%,#180020 50%,#0a0010 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#f0eaff; }
+  .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .snow { position:absolute; z-index:2; opacity:0; animation:floatSnow var(--d) linear infinite; }
+  @keyframes floatSnow { 0%{transform:translateY(0) rotate(0deg);opacity:0;} 10%{opacity:0.7;} 85%{opacity:0.2;} 100%{transform:translateY(-110vh) rotate(30deg);opacity:0;} }
+  .wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:28px 20px 60px; display:flex; flex-direction:column; align-items:center; gap:20px; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(180,120,255,0.4); border-bottom:1px solid rgba(180,120,255,0.4); }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(20px,5.5vw,28px); letter-spacing:3px; background:linear-gradient(90deg,#5010a0,#b478ff,#e8d0ff,#b478ff,#5010a0); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:11px; letter-spacing:8px; color:rgba(255,255,255,0.18); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,3.5vw,16px); letter-spacing:5px; color:rgba(232,208,255,0.35); }
+  @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+  .intro { text-align:center; font-size:13px; color:rgba(240,234,255,0.55); line-height:1.75; }
+  .intro strong { color:#b478ff; }
+  .catalog-title { font-size:10px; letter-spacing:4px; color:rgba(180,120,255,0.5); text-transform:uppercase; text-align:center; }
+  .catalog { display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; }
+  .author-card {
+    background:rgba(180,120,255,0.05);
+    border:1px solid rgba(180,120,255,0.15);
+    border-radius:16px;
+    padding:16px 10px 14px;
+    cursor:pointer;
+    transition:all 0.3s;
+    display:flex; flex-direction:column; align-items:center; gap:7px; text-align:center;
+  }
+  .author-card:hover { background:rgba(180,120,255,0.12); border-color:rgba(180,120,255,0.4); transform:translateY(-3px); box-shadow:0 8px 24px rgba(180,120,255,0.1); }
+  .author-card.selected { background:rgba(180,120,255,0.18); border-color:#b478ff; box-shadow:0 0 24px rgba(180,120,255,0.25); }
+  .card-img { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid rgba(180,120,255,0.3); transition:border-color 0.3s; background:#180020; filter:sepia(15%); }
+  .author-card.selected .card-img { border-color:#b478ff; }
+  .author-card:hover .card-img { border-color:rgba(180,120,255,0.6); }
+  .author-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#f0eaff; line-height:1.3; }
+  .author-name-fr { font-size:9px; color:rgba(232,208,255,0.4); letter-spacing:0.5px; }
+  .author-dates { font-size:9px; color:rgba(232,208,255,0.28); }
+  .author-style { font-size:9px; color:rgba(180,120,255,0.65); font-style:italic; }
+  .selection-box { width:100%; background:rgba(180,120,255,0.07); border:1px solid rgba(180,120,255,0.3); border-radius:16px; padding:18px 20px; text-align:center; display:none; animation:fadeIn 0.4s ease; }
+  .selection-box.visible { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+  .sel-label { font-size:10px; letter-spacing:3px; color:rgba(180,120,255,0.5); text-transform:uppercase; margin-bottom:8px; }
+  .sel-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#b478ff; margin-bottom:12px; }
+  .divider { display:flex; align-items:center; gap:12px; width:100%; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(180,120,255,0.3),transparent); }
+  .divider-icon { color:#b478ff; font-size:13px; }
+  .btn-tg { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px 20px; background:rgba(255,255,255,0.04); border:1.5px solid rgba(180,120,255,0.3); border-radius:14px; color:#f0eaff; font-family:'Raleway',sans-serif; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.3s; }
+  .btn-tg:hover { background:rgba(180,120,255,0.12); border-color:rgba(180,120,255,0.5); transform:translateY(-1px); }
+  .price-grid { display:flex; gap:8px; width:100%; }
+  .price-box { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(180,120,255,0.15); border-radius:12px; padding:12px 6px; text-align:center; text-decoration:none; transition:all 0.3s; }
+  .price-box:hover { background:rgba(180,120,255,0.08); border-color:rgba(180,120,255,0.35); transform:translateY(-1px); }
+  .ps { font-size:9px; letter-spacing:1.5px; color:rgba(240,234,255,0.35); text-transform:uppercase; margin-bottom:6px; }
+  .pa { font-family:'Playfair Display',serif; font-size:19px; color:#f0eaff; margin-bottom:3px; }
+  .pd { font-size:9px; color:rgba(240,234,255,0.3); }
+  .footer { font-family:'Cormorant Garamond',serif; font-size:15px; text-align:center; letter-spacing:3px; background:linear-gradient(90deg,#5010a0,#b478ff,#e8d0ff,#b478ff,#5010a0); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+  <div class="ribbon">
+    <span class="ribbon-ru">📚 Grands auteurs russes</span>
+    <span class="ribbon-sep">✦ · ✦</span>
+    <span class="ribbon-fr">L'âme russe en français</span>
+  </div>
+
+  <p class="intro">L'âme russe traduite en vers français — Pouchkine, Dostoïevski, Akhmatova...<br><strong>Выберите автора ↓</strong></p>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div class="catalog-title">Выберите автора · Choisissez l'auteur</div>
+
+  <div class="catalog">
+    <div class="author-card" onclick="select(this,'Пушкин','Pouchkine','1799–1837','Лирика · Классика')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Pushkin_by_Kiprensky.jpg/200px-Pushkin_by_Kiprensky.jpg" alt="Пушкин" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=П'">
+      <span class="author-name">Пушкин</span>
+      <span class="author-name-fr">Pouchkine</span>
+      <span class="author-dates">1799–1837</span>
+      <span class="author-style">Лирика · Классика</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Толстой','Tolstoï','1828–1910','Эпос · Мудрость')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/L.N.Tolstoy_Prokudin-Gorsky.jpg/200px-L.N.Tolstoy_Prokudin-Gorsky.jpg" alt="Толстой" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Т'">
+      <span class="author-name">Толстой</span>
+      <span class="author-name-fr">Tolstoï</span>
+      <span class="author-dates">1828–1910</span>
+      <span class="author-style">Эпос · Мудрость</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Достоевский','Dostoïevski','1821–1881','Душа · Страсть')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg/200px-Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg" alt="Достоевский" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Д'">
+      <span class="author-name">Достоевский</span>
+      <span class="author-name-fr">Dostoïevski</span>
+      <span class="author-dates">1821–1881</span>
+      <span class="author-style">Душа · Страсть</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Чехов','Tchekhov','1860–1904','Нежность · Меланхолия')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Chekhov_2.jpg/200px-Chekhov_2.jpg" alt="Чехов" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Ч'">
+      <span class="author-name">Чехов</span>
+      <span class="author-name-fr">Tchekhov</span>
+      <span class="author-dates">1860–1904</span>
+      <span class="author-style">Нежность · Меланхолия</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Ахматова','Akhmatova','1889–1966','Любовь · Боль')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Akhmatova.jpg/200px-Akhmatova.jpg" alt="Ахматова" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=А'">
+      <span class="author-name">Ахматова</span>
+      <span class="author-name-fr">Akhmatova</span>
+      <span class="author-dates">1889–1966</span>
+      <span class="author-style">Любовь · Боль</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Лермонтов','Lermontov','1814–1841','Одиночество · Бунт')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lermontov_by_Zabolotsky_1837.jpg/200px-Lermontov_by_Zabolotsky_1837.jpg" alt="Лермонтов" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Л'">
+      <span class="author-name">Лермонтов</span>
+      <span class="author-name-fr">Lermontov</span>
+      <span class="author-dates">1814–1841</span>
+      <span class="author-style">Одиночество · Бунт</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Тургенев','Tourgueniev','1818–1883','Природа · Тоска')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Turgenev_by_Repin.jpg/200px-Turgenev_by_Repin.jpg" alt="Тургенев" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Т'">
+      <span class="author-name">Тургенев</span>
+      <span class="author-name-fr">Tourgueniev</span>
+      <span class="author-dates">1818–1883</span>
+      <span class="author-style">Природа · Тоска</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Пастернак','Pasternak','1890–1960','Зима · Судьба')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Boris_Pasternak_1910s.jpg/200px-Boris_Pasternak_1910s.jpg" alt="Пастернак" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=П'">
+      <span class="author-name">Пастернак</span>
+      <span class="author-name-fr">Pasternak</span>
+      <span class="author-dates">1890–1960</span>
+      <span class="author-style">Зима · Судьба</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Булгаков','Boulgakov','1891–1940','Магия · Абсурд')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Bulgakov_en_1928.jpg/200px-Bulgakov_en_1928.jpg" alt="Булгаков" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Б'">
+      <span class="author-name">Булгаков</span>
+      <span class="author-name-fr">Boulgakov</span>
+      <span class="author-dates">1891–1940</span>
+      <span class="author-style">Магия · Абсурд</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Цветаева','Tsvetaïeva','1892–1941','Страсть · Разлука')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Marina_Tsvetaeva.jpg/200px-Marina_Tsvetaeva.jpg" alt="Цветаева" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Ц'">
+      <span class="author-name">Цветаева</span>
+      <span class="author-name-fr">Tsvetaïeva</span>
+      <span class="author-dates">1892–1941</span>
+      <span class="author-style">Страсть · Разлука</span>
+    </div>
+  </div>
+
+  <div class="selection-box" id="selBox">
+    <div class="sel-label">Вы выбрали · Vous avez choisi</div>
+    <div class="sel-name" id="selName">—</div>
+    <div style="font-size:12px;color:rgba(240,234,255,0.5);margin-bottom:16px;">Louis Yvon écrira votre poème en français dans l'esprit et l'âme de cet auteur</div>
+    <a id="tgLink" href="https://t.me/LouisYvonPoete" class="btn-tg" target="_blank">📩 Заказать в Telegram</a>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div style="text-align:center;font-size:10px;letter-spacing:3px;color:rgba(180,120,255,0.45);text-transform:uppercase;margin-bottom:4px;">Тарифы · Tarifs</div>
+  <div class="price-grid">
+    <a href="../commande.html?tarif=standard" class="price-box"><div class="ps">Стандарт</div><div class="pa">490₽</div><div class="pd">до 24 ч</div></a>
+    <a href="../commande.html?tarif=express" class="price-box"><div class="ps">Экспресс</div><div class="pa">790₽</div><div class="pd">за 2 ч</div></a>
+    <a href="../commande.html?tarif=flash" class="price-box"><div class="ps">Флэш ⚡</div><div class="pa">1290₽</div><div class="pd">30 мин</div></a>
+  </div>
+  <div class="footer">ПоэмБукет · poème · cadeau · âme russe</div>
+</div>
+<script>
+const bg=document.getElementById('bg');
+const items=['❄️','⭐','✦','🌟'];
+for(let i=0;i<20;i++){const s=document.createElement('div');s.className='snow';const sz=(Math.random()*12+10).toFixed(0);const dur=(Math.random()*9+7).toFixed(1);s.textContent=items[Math.floor(Math.random()*items.length)];s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-60px;--d:${dur}s;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(2)}s;font-size:${sz}px;`;bg.appendChild(s);}
+function select(el,nameRu,nameFr,dates,style){
+  document.querySelectorAll('.author-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selName').textContent=nameRu+' · '+nameFr+' ('+dates+')';
+  const box=document.getElementById('selBox');
+  box.classList.add('visible');
+  document.getElementById('tgLink').href='https://t.me/LouisYvonPoete?text='+encodeURIComponent('Bonjour Louis Yvon ! Je voudrais un poème en français dans l\'esprit de '+nameFr+' ('+nameRu+'). 📚');
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

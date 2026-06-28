@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grands auteurs français | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#0d0a00 0%,#1f1800 50%,#0d0a00 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#f0ebe0; }
+  .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .feather { position:absolute; z-index:2; opacity:0; animation:floatFeather var(--d) linear infinite; }
+  @keyframes floatFeather { 0%{transform:translateY(0) rotate(0deg);opacity:0;} 10%{opacity:0.6;} 85%{opacity:0.2;} 100%{transform:translateY(-110vh) rotate(20deg);opacity:0;} }
+  .wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:28px 20px 60px; display:flex; flex-direction:column; align-items:center; gap:20px; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(184,150,90,0.4); border-bottom:1px solid rgba(184,150,90,0.4); }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(20px,5.5vw,28px); letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:11px; letter-spacing:8px; color:rgba(255,255,255,0.18); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,3.5vw,16px); letter-spacing:5px; color:rgba(240,216,152,0.35); }
+  @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+  .intro { text-align:center; font-size:13px; color:rgba(240,235,224,0.55); line-height:1.75; }
+  .intro strong { color:#B8965A; }
+  .catalog-title { font-size:10px; letter-spacing:4px; color:rgba(184,150,90,0.5); text-transform:uppercase; text-align:center; }
+  .catalog { display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; }
+  .author-card {
+    background:rgba(184,150,90,0.05);
+    border:1px solid rgba(184,150,90,0.15);
+    border-radius:16px;
+    padding:16px 10px 14px;
+    cursor:pointer;
+    transition:all 0.3s;
+    display:flex; flex-direction:column; align-items:center; gap:7px; text-align:center;
+  }
+  .author-card:hover { background:rgba(184,150,90,0.12); border-color:rgba(184,150,90,0.4); transform:translateY(-3px); box-shadow:0 8px 24px rgba(184,150,90,0.1); }
+  .author-card.selected { background:rgba(184,150,90,0.18); border-color:#B8965A; box-shadow:0 0 24px rgba(184,150,90,0.25); }
+  .card-img { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid rgba(184,150,90,0.3); transition:border-color 0.3s; background:#1a1200; filter:sepia(20%); }
+  .author-card.selected .card-img { border-color:#B8965A; }
+  .author-card:hover .card-img { border-color:rgba(184,150,90,0.6); }
+  .author-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#f0ebe0; line-height:1.3; }
+  .author-dates { font-size:9px; color:rgba(240,216,152,0.35); letter-spacing:0.5px; }
+  .author-style { font-size:9px; color:rgba(184,150,90,0.6); letter-spacing:0.5px; font-style:italic; }
+  .selection-box { width:100%; background:rgba(184,150,90,0.07); border:1px solid rgba(184,150,90,0.3); border-radius:16px; padding:18px 20px; text-align:center; display:none; animation:fadeIn 0.4s ease; }
+  .selection-box.visible { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+  .sel-label { font-size:10px; letter-spacing:3px; color:rgba(184,150,90,0.5); text-transform:uppercase; margin-bottom:8px; }
+  .sel-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#B8965A; margin-bottom:12px; }
+  .divider { display:flex; align-items:center; gap:12px; width:100%; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(184,150,90,0.3),transparent); }
+  .divider-icon { color:#B8965A; font-size:13px; }
+  .btn-tg { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px 20px; background:rgba(255,255,255,0.04); border:1.5px solid rgba(184,150,90,0.3); border-radius:14px; color:#f0ebe0; font-family:'Raleway',sans-serif; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.3s; }
+  .btn-tg:hover { background:rgba(184,150,90,0.1); border-color:rgba(184,150,90,0.5); transform:translateY(-1px); }
+  .price-grid { display:flex; gap:8px; width:100%; }
+  .price-box { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(184,150,90,0.15); border-radius:12px; padding:12px 6px; text-align:center; text-decoration:none; transition:all 0.3s; }
+  .price-box:hover { background:rgba(184,150,90,0.08); border-color:rgba(184,150,90,0.35); transform:translateY(-1px); }
+  .ps { font-size:9px; letter-spacing:1.5px; color:rgba(240,235,224,0.35); text-transform:uppercase; margin-bottom:6px; }
+  .pa { font-family:'Playfair Display',serif; font-size:19px; color:#f0ebe0; margin-bottom:3px; }
+  .pd { font-size:9px; color:rgba(240,235,224,0.3); }
+  .footer { font-family:'Cormorant Garamond',serif; font-size:15px; text-align:center; letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+  <div class="ribbon">
+    <span class="ribbon-ru">🖋 Grands auteurs français</span>
+    <span class="ribbon-sep">✦ · ✦</span>
+    <span class="ribbon-fr">Dans le style des maîtres</span>
+  </div>
+
+  <p class="intro">Un poème dans le souffle des grands maîtres — Hugo, Baudelaire, Verlaine...<br><strong>Choisissez votre auteur ↓</strong></p>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div class="catalog-title">Выберите автора · Choisissez l'auteur</div>
+
+  <div class="catalog">
+    <div class="author-card" onclick="select(this,'Victor Hugo','1802–1885','Épique · Romantique')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg/200px-Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg" alt="Victor Hugo" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=VH'">
+      <span class="author-name">Victor Hugo</span>
+      <span class="author-dates">1802–1885</span>
+      <span class="author-style">Épique · Romantique</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Charles Baudelaire','1821–1867','Mélancolie · Sensuel')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Baudelaire_photographié_par_Nadar.jpg/200px-Baudelaire_photographié_par_Nadar.jpg" alt="Baudelaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=CB'">
+      <span class="author-name">Charles Baudelaire</span>
+      <span class="author-dates">1821–1867</span>
+      <span class="author-style">Mélancolie · Sensuel</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Paul Verlaine','1844–1896','Musical · Symboliste')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Paul_Verlaine_1866.jpg/200px-Paul_Verlaine_1866.jpg" alt="Verlaine" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=PV'">
+      <span class="author-name">Paul Verlaine</span>
+      <span class="author-dates">1844–1896</span>
+      <span class="author-style">Musical · Symboliste</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Arthur Rimbaud','1854–1891','Visionnaire · Rebelle')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Arthur_Rimbaud.jpg/200px-Arthur_Rimbaud.jpg" alt="Rimbaud" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=AR'">
+      <span class="author-name">Arthur Rimbaud</span>
+      <span class="author-dates">1854–1891</span>
+      <span class="author-style">Visionnaire · Rebelle</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Molière','1622–1673','Théâtral · Satirique')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Molière.jpg/200px-Molière.jpg" alt="Molière" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=M'">
+      <span class="author-name">Molière</span>
+      <span class="author-dates">1622–1673</span>
+      <span class="author-style">Théâtral · Satirique</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Voltaire','1694–1778','Esprit · Philosophique')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Nicolas_de_Largillière%2C_François-Marie_Arouet_dit_Voltaire_%28vers_1718-1720%29_-_Château_de_Versailles.jpg/200px-Nicolas_de_Largillière%2C_François-Marie_Arouet_dit_Voltaire_%28vers_1718-1720%29_-_Château_de_Versailles.jpg" alt="Voltaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=V'">
+      <span class="author-name">Voltaire</span>
+      <span class="author-dates">1694–1778</span>
+      <span class="author-style">Esprit · Philosophique</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Alfred de Musset','1810–1857','Passion · Douleur')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Alfred_de_Musset.jpg/200px-Alfred_de_Musset.jpg" alt="Musset" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=AM'">
+      <span class="author-name">Alfred de Musset</span>
+      <span class="author-dates">1810–1857</span>
+      <span class="author-style">Passion · Douleur</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Lamartine','1790–1869','Nature · Nostalgie')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Alphonse_de_Lamartine.jpg/200px-Alphonse_de_Lamartine.jpg" alt="Lamartine" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=L'">
+      <span class="author-name">Lamartine</span>
+      <span class="author-dates">1790–1869</span>
+      <span class="author-style">Nature · Nostalgie</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Stéphane Mallarmé','1842–1898','Hermétique · Rare')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Stéphane_Mallarmé_par_Nadar.jpg/200px-Stéphane_Mallarmé_par_Nadar.jpg" alt="Mallarmé" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=SM'">
+      <span class="author-name">Mallarmé</span>
+      <span class="author-dates">1842–1898</span>
+      <span class="author-style">Hermétique · Rare</span>
+    </div>
+    <div class="author-card" onclick="select(this,'Guillaume Apollinaire','1880–1918','Moderne · Lyrique')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Guillaume_Apollinaire.jpg/200px-Guillaume_Apollinaire.jpg" alt="Apollinaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=GA'">
+      <span class="author-name">Apollinaire</span>
+      <span class="author-dates">1880–1918</span>
+      <span class="author-style">Moderne · Lyrique</span>
+    </div>
+  </div>
+
+  <div class="selection-box" id="selBox">
+    <div class="sel-label">Вы выбрали · Vous avez choisi</div>
+    <div class="sel-name" id="selName">—</div>
+    <div style="font-size:12px;color:rgba(240,235,224,0.5);margin-bottom:16px;">Louis Yvon écrira votre poème dans le souffle et le style de cet auteur</div>
+    <a id="tgLink" href="https://t.me/LouisYvonPoete" class="btn-tg" target="_blank">📩 Заказать в Telegram</a>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div style="text-align:center;font-size:10px;letter-spacing:3px;color:rgba(184,150,90,0.45);text-transform:uppercase;margin-bottom:4px;">Тарифы · Tarifs</div>
+  <div class="price-grid">
+    <a href="../commande.html?tarif=standard" class="price-box"><div class="ps">Стандарт</div><div class="pa">490₽</div><div class="pd">до 24 ч</div></a>
+    <a href="../commande.html?tarif=express" class="price-box"><div class="ps">Экспресс</div><div class="pa">790₽</div><div class="pd">за 2 ч</div></a>
+    <a href="../commande.html?tarif=flash" class="price-box"><div class="ps">Флэш ⚡</div><div class="pa">1290₽</div><div class="pd">30 мин</div></a>
+  </div>
+  <div class="footer">ПоэмБукет · poème · cadeau · littérature</div>
+</div>
+<script>
+const bg=document.getElementById('bg');
+const items=['🖋','✒️','📜','⚜'];
+for(let i=0;i<18;i++){const f=document.createElement('div');f.className='feather';const sz=(Math.random()*12+10).toFixed(0);const dur=(Math.random()*9+7).toFixed(1);f.textContent=items[Math.floor(Math.random()*items.length)];f.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-60px;--d:${dur}s;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(2)}s;font-size:${sz}px;`;bg.appendChild(f);}
+function select(el,name,dates,style){
+  document.querySelectorAll('.author-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selName').textContent=name+' ('+dates+')';
+  const box=document.getElementById('selBox');
+  box.classList.add('visible');
+  document.getElementById('tgLink').href='https://t.me/LouisYvonPoete?text='+encodeURIComponent('Bonjour Louis Yvon ! Je voudrais un poème dans le style de '+name+'. 🖋');
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

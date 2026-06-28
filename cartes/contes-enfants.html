@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сказки детям | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#060d1a 0%,#0d1f3a 50%,#060d1a 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#e8f0ff; }
+  .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .star-float { position:absolute; z-index:2; opacity:0; animation:floatStar var(--d) linear infinite; }
+  @keyframes floatStar { 0%{transform:translateY(0) rotate(0deg);opacity:0;} 10%{opacity:0.8;} 85%{opacity:0.3;} 100%{transform:translateY(-110vh) rotate(360deg);opacity:0;} }
+  .wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:28px 20px 60px; display:flex; flex-direction:column; align-items:center; gap:20px; }
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(100,180,255,0.4); border-bottom:1px solid rgba(100,180,255,0.4); }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(22px,6.5vw,30px); letter-spacing:3px; background:linear-gradient(90deg,#1a5080,#64b4ff,#c8e8ff,#64b4ff,#1a5080); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:11px; letter-spacing:8px; color:rgba(255,255,255,0.18); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,3.5vw,16px); letter-spacing:6px; color:rgba(200,232,255,0.35); }
+  @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+  .intro { text-align:center; font-size:13px; color:rgba(200,232,255,0.55); line-height:1.75; }
+  .intro strong { color:#64b4ff; }
+  .catalog-title { font-size:10px; letter-spacing:4px; color:rgba(100,180,255,0.5); text-transform:uppercase; text-align:center; }
+  .catalog { display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%; }
+  .tale-card {
+    background:rgba(100,180,255,0.05);
+    border:1px solid rgba(100,180,255,0.15);
+    border-radius:16px;
+    padding:16px 10px 14px;
+    cursor:pointer;
+    transition:all 0.3s;
+    display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;
+  }
+  .tale-card:hover { background:rgba(100,180,255,0.12); border-color:rgba(100,180,255,0.4); transform:translateY(-3px); box-shadow:0 8px 24px rgba(100,180,255,0.1); }
+  .tale-card.selected { background:rgba(100,180,255,0.18); border-color:#64b4ff; box-shadow:0 0 24px rgba(100,180,255,0.25); }
+  .card-img {
+    width:72px; height:72px; border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(100,180,255,0.3);
+    transition:border-color 0.3s;
+    background:#0d1f3a;
+  }
+  .tale-card.selected .card-img { border-color:#64b4ff; }
+  .tale-card:hover .card-img { border-color:rgba(100,180,255,0.6); }
+  .tale-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:#e8f0ff; line-height:1.3; }
+  .tale-author { font-size:9px; color:rgba(200,232,255,0.35); letter-spacing:0.5px; }
+  .selection-box { width:100%; background:rgba(100,180,255,0.08); border:1px solid rgba(100,180,255,0.3); border-radius:16px; padding:18px 20px; text-align:center; display:none; animation:fadeIn 0.4s ease; }
+  .selection-box.visible { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+  .sel-label { font-size:10px; letter-spacing:3px; color:rgba(100,180,255,0.5); text-transform:uppercase; margin-bottom:8px; }
+  .sel-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#64b4ff; margin-bottom:12px; }
+  .divider { display:flex; align-items:center; gap:12px; width:100%; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(100,180,255,0.3),transparent); }
+  .divider-icon { color:#64b4ff; font-size:13px; }
+  .btn-tg { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px 20px; background:rgba(255,255,255,0.05); border:1.5px solid rgba(100,180,255,0.3); border-radius:14px; color:#e8f0ff; font-family:'Raleway',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.5px; text-decoration:none; transition:all 0.3s; }
+  .btn-tg:hover { background:rgba(100,180,255,0.12); border-color:rgba(100,180,255,0.5); transform:translateY(-1px); }
+  .price-grid { display:flex; gap:8px; width:100%; }
+  .price-box { flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(100,180,255,0.15); border-radius:12px; padding:12px 6px; text-align:center; text-decoration:none; transition:all 0.3s; }
+  .price-box:hover { background:rgba(100,180,255,0.08); border-color:rgba(100,180,255,0.35); transform:translateY(-1px); }
+  .ps { font-size:9px; letter-spacing:1.5px; color:rgba(200,232,255,0.35); text-transform:uppercase; margin-bottom:6px; }
+  .pa { font-family:'Playfair Display',serif; font-size:19px; color:#e8f0ff; margin-bottom:3px; }
+  .pd { font-size:9px; color:rgba(200,232,255,0.3); }
+  .footer { font-family:'Cormorant Garamond',serif; font-size:15px; text-align:center; letter-spacing:3px; background:linear-gradient(90deg,#1a5080,#64b4ff,#c8e8ff,#64b4ff,#1a5080); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+  <div class="ribbon">
+    <span class="ribbon-ru">📖 Сказки детям</span>
+    <span class="ribbon-sep">✦ · ✦</span>
+    <span class="ribbon-fr">Contes pour enfants</span>
+  </div>
+
+  <p class="intro">Стихотворение на французском, вдохновлённое любимой сказкой вашего ребёнка.<br><strong>Выберите сказку ↓</strong></p>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div class="catalog-title">Выберите сказку · Choisissez un conte</div>
+
+  <div class="catalog">
+    <div class="tale-card" onclick="select(this,'Le Petit Prince','Saint-Exupéry')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Little_prince_and_fox.jpg/400px-Little_prince_and_fox.jpg" alt="Le Petit Prince" onerror="this.style.display='none'">
+      <span class="tale-name">Le Petit Prince</span>
+      <span class="tale-author">Saint-Exupéry</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Cendrillon','Perrault')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Cinderella_and_the_fairy_godmother.png/400px-Cinderella_and_the_fairy_godmother.png" alt="Cendrillon" onerror="this.style.display='none'">
+      <span class="tale-name">Cendrillon</span>
+      <span class="tale-author">Perrault</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Le Petit Chaperon Rouge','Perrault')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Carl_Larsson_-_Little_Red_Riding_Hood.jpg/400px-Carl_Larsson_-_Little_Red_Riding_Hood.jpg" alt="Chaperon Rouge" onerror="this.style.display='none'">
+      <span class="tale-name">Le Petit Chaperon Rouge</span>
+      <span class="tale-author">Perrault</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'La Belle et la Bête','Villeneuve')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Beauty_and_the_Beast_-_Project_Gutenberg_eText_17034.jpg/400px-Beauty_and_the_Beast_-_Project_Gutenberg_eText_17034.jpg" alt="Belle et Bête" onerror="this.style.display='none'">
+      <span class="tale-name">La Belle et la Bête</span>
+      <span class="tale-author">Villeneuve</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Poucette','Andersen')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Thumbelina_%281939%29.jpg/400px-Thumbelina_%281939%29.jpg" alt="Poucette" onerror="this.style.display='none'">
+      <span class="tale-name">Poucette</span>
+      <span class="tale-author">Andersen</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Le Vilain Petit Canard','Andersen')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/The_Ugly_Duckling_by_Theo_van_Hoytema_-_Rijksmuseum.jpg/400px-The_Ugly_Duckling_by_Theo_van_Hoytema_-_Rijksmuseum.jpg" alt="Vilain Petit Canard" onerror="this.style.display='none'">
+      <span class="tale-name">Le Vilain Petit Canard</span>
+      <span class="tale-author">Andersen</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Pinocchio','Collodi')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Pinocchio_1883.jpg/400px-Pinocchio_1883.jpg" alt="Pinocchio" onerror="this.style.display='none'">
+      <span class="tale-name">Pinocchio</span>
+      <span class="tale-author">Collodi</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Ali Baba','Mille et Une Nuits')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Gustave_Boulanger_-_The_Rehearsal_of_the_Flute_Player_and_the_Wife_of_Diomedes.jpg/400px-Gustave_Boulanger_-_The_Rehearsal_of_the_Flute_Player_and_the_Wife_of_Diomedes.jpg" alt="Ali Baba" onerror="this.style.display='none'">
+      <span class="tale-name">Ali Baba</span>
+      <span class="tale-author">Mille et Une Nuits</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Peter Pan','J. M. Barrie')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Peter_Pan_1915_poster.jpg/400px-Peter_Pan_1915_poster.jpg" alt="Peter Pan" onerror="this.style.display='none'">
+      <span class="tale-name">Peter Pan</span>
+      <span class="tale-author">J. M. Barrie</span>
+    </div>
+    <div class="tale-card" onclick="select(this,'Blanche-Neige','Frères Grimm')">
+      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Snow_white_1843.jpg/400px-Snow_white_1843.jpg" alt="Blanche-Neige" onerror="this.style.display='none'">
+      <span class="tale-name">Blanche-Neige</span>
+      <span class="tale-author">Frères Grimm</span>
+    </div>
+  </div>
+
+  <div class="selection-box" id="selBox">
+    <div class="sel-label">Вы выбрали · Vous avez choisi</div>
+    <div class="sel-name" id="selName">—</div>
+    <div style="font-size:12px;color:rgba(200,232,255,0.5);margin-bottom:16px;">Louis Yvon écrira un poème en français dans l'univers de ce conte, spécialement pour votre enfant</div>
+    <a id="tgLink" href="https://t.me/LouisYvonPoete" class="btn-tg" target="_blank">📩 Заказать в Telegram</a>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+  <div style="text-align:center;font-size:10px;letter-spacing:3px;color:rgba(100,180,255,0.45);text-transform:uppercase;margin-bottom:4px;">Тарифы · Tarifs</div>
+  <div class="price-grid">
+    <a href="../commande.html?tarif=standard" class="price-box"><div class="ps">Стандарт</div><div class="pa">490₽</div><div class="pd">до 24 ч</div></a>
+    <a href="../commande.html?tarif=express" class="price-box"><div class="ps">Экспресс</div><div class="pa">790₽</div><div class="pd">за 2 ч</div></a>
+    <a href="../commande.html?tarif=flash" class="price-box"><div class="ps">Флэш ⚡</div><div class="pa">1290₽</div><div class="pd">30 мин</div></a>
+  </div>
+  <div class="footer">ПоэмБукет · poème · cadeau · enfance</div>
+</div>
+<script>
+const bg = document.getElementById('bg');
+const items = ['⭐','✨','🌟','💫'];
+for(let i=0;i<20;i++){const s=document.createElement('div');s.className='star-float';const sz=(Math.random()*12+10).toFixed(0);const dur=(Math.random()*8+6).toFixed(1);s.textContent=items[Math.floor(Math.random()*items.length)];s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-60px;--d:${dur}s;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(2)}s;font-size:${sz}px;`;bg.appendChild(s);}
+function select(el,name,author){
+  document.querySelectorAll('.tale-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('selName').textContent=name+' — '+author;
+  const box=document.getElementById('selBox');
+  box.classList.add('visible');
+  document.getElementById('tgLink').href='https://t.me/LouisYvonPoete?text='+encodeURIComponent('Bonjour Louis Yvon ! Je voudrais un poème inspiré de « '+name+' » pour un enfant. 📖');
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
