@@ -80,6 +80,12 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
 .sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#B8965A; letter-spacing:1px; }
 
 /* SVG texte doré */
+@keyframes orbit { from{transform:rotate(0deg) translateX(108px) rotate(0deg);} to{transform:rotate(360deg) translateX(108px) rotate(-360deg);} }
+@keyframes breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.04);} }
+.medallion-wrap { position:relative; width:200px; height:200px; animation:fadeUp 1.4s ease forwards 0.35s; opacity:0; }
+.medallion-ring { width:200px; height:200px; border-radius:50%; border:3px solid rgba(184,150,90,0.6); box-shadow:0 0 40px rgba(184,150,90,0.3),0 0 80px rgba(184,150,90,0.1); background:#0a0810; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.medallion-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; animation:breathe 7s ease-in-out infinite; }
+.orbit-item { position:absolute; font-size:18px; animation:orbit var(--od) linear infinite; }
 .cta-svg { width:100%; overflow:visible; animation:goldPulse 2.4s ease-in-out infinite; display:block; margin:16px 0 8px; }
 
 /* Footer */
@@ -111,6 +117,15 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
       <span class="ribbon-ru"><!-- TITRE RU --></span>
       <span class="ribbon-sep">✦ · ✦</span>
       <span class="ribbon-fr"><!-- TITRE FR --></span>
+    </div>
+
+    <div class="medallion-wrap">
+      <div class="medallion-ring">
+        <img src="<!-- PHOTO_FILENAME -->" alt="<!-- PRÉNOM -->">
+      </div>
+      <span class="orbit-item" style="--od:9s;animation-delay:0s">🌹</span>
+      <span class="orbit-item" style="--od:9s;animation-delay:-3s">💕</span>
+      <span class="orbit-item" style="--od:9s;animation-delay:-6s">✨</span>
     </div>
 
     <div class="dedicace">— Pour <!-- PRÉNOM -->, avec tout mon cœur —</div>
