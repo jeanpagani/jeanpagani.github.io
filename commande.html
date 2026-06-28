@@ -104,127 +104,8 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
       <textarea class="story-area" id="story" placeholder="Например: Я хочу подарить поэм своей жене на годовщину. Мы вместе 10 лет, она из Санкт-Петербурга, любит розы и море…" rows="5"></textarea>
     </div>
 
-    <div class="section" style="animation-delay:0.2s;">
-      <div class="section-title"><span class="section-num">2</span>Выберите музыку для вашего поэма</div>
-      <div class="section-hint">Нажмите ▶ чтобы послушать, затем выберите атмосферу которая вам близка.</div>
-      <div class="music-hint">🎵 Эта мелодия будет звучать когда получатель откроет ваш поэм</div>
-      <div class="music-grid">
-
-        <label class="music-card" onclick="selectMusic(this,'01-melancolie')">
-          <input type="radio" name="musique" value="01-melancolie">
-          <div class="play-btn" onclick="playMusic(event,'musiques/01-melancolie.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Mélancolie</div>
-            <div class="music-mood">Грусть · Меланхолия</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'02-emotion')">
-          <input type="radio" name="musique" value="02-emotion">
-          <div class="play-btn" onclick="playMusic(event,'musiques/02-emotion.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Émotion pure</div>
-            <div class="music-mood">Чистая эмоция · Глубина</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'03-nostalgie')">
-          <input type="radio" name="musique" value="03-nostalgie">
-          <div class="play-btn" onclick="playMusic(event,'musiques/03-nostalgie.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Nostalgie</div>
-            <div class="music-mood">Ностальгия · Воспоминания</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'04-romance')">
-          <input type="radio" name="musique" value="04-romance">
-          <div class="play-btn" onclick="playMusic(event,'musiques/04-romance.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Romance</div>
-            <div class="music-mood">Романтика · Любовь</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'05-tendresse')">
-          <input type="radio" name="musique" value="05-tendresse">
-          <div class="play-btn" onclick="playMusic(event,'musiques/05-tendresse.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Tendresse</div>
-            <div class="music-mood">Нежность · Тепло</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'06-espoir')">
-          <input type="radio" name="musique" value="06-espoir">
-          <div class="play-btn" onclick="playMusic(event,'musiques/06-espoir.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Espoir</div>
-            <div class="music-mood">Надежда · Новое начало</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'07-douceur')">
-          <input type="radio" name="musique" value="07-douceur">
-          <div class="play-btn" onclick="playMusic(event,'musiques/07-douceur.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Douceur</div>
-            <div class="music-mood">Мягкость · Нежный покой</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'08-serenite')">
-          <input type="radio" name="musique" value="08-serenite">
-          <div class="play-btn" onclick="playMusic(event,'musiques/08-serenite.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Sérénité</div>
-            <div class="music-mood">Безмятежность · Спокойствие</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'09-elegance')">
-          <input type="radio" name="musique" value="09-elegance">
-          <div class="play-btn" onclick="playMusic(event,'musiques/09-elegance.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Élégance</div>
-            <div class="music-mood">Элегантность · Классика</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-        <label class="music-card" onclick="selectMusic(this,'10-nature')">
-          <input type="radio" name="musique" value="10-nature">
-          <div class="play-btn" onclick="playMusic(event,'musiques/10-nature.mp3',this)">▶</div>
-          <div class="music-info">
-            <div class="music-name">Nature</div>
-            <div class="music-mood">Природа · Медитация</div>
-            <div class="wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-          <div class="select-circle"></div>
-        </label>
-
-      </div>
-    </div>
-
     <div class="section" style="animation-delay:0.3s;">
-      <div class="section-title"><span class="section-num">3</span>Выберите тариф</div>
+      <div class="section-title"><span class="section-num">2</span>Выберите тариф</div>
       <div class="tarif-grid">
         <label class="tarif-box" onclick="selectTarif(this,'standard')">
           <input type="radio" name="tarif" value="standard">
@@ -242,7 +123,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
     </div>
 
     <div class="section" style="animation-delay:0.4s;">
-      <div class="section-title"><span class="section-num">4</span>Как вам отправить поэм?</div>
+      <div class="section-title"><span class="section-num">3</span>Как вам отправить поэм?</div>
       <div class="field-group">
         <div class="field-label">Ваш email</div>
         <input type="email" class="field-input" id="email" placeholder="votre@email.com">
