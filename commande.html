@@ -212,6 +212,7 @@ function submitForm() {
   const body=encodeURIComponent(`=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}\n\n=== Créez le poème et envoyez le lien+code au client ===`);
 
   if(currentAudio) currentAudio.pause();
+
   window.location.href=`mailto:jeanlouispagani.info@gmail.com?subject=${subj}&body=${body}`;
 
   setTimeout(()=>{
