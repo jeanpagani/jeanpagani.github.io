@@ -151,6 +151,12 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
       ссылку + личный код доступа к вашему поэму.<br><br>
       <span style="color:rgba(184,150,90,0.5);font-family:'Cormorant Garamond',serif;font-style:italic;">Merci de me confier votre histoire — Louis Yvon</span>
     </div>
+    <div id="gmailFallback" style="display:none;width:100%;max-width:440px;margin-top:10px;">
+      <div style="background:rgba(184,150,90,0.06);border:1px solid rgba(184,150,90,0.2);border-radius:12px;padding:16px 18px;font-size:13px;color:rgba(240,235,224,0.55);line-height:1.8;text-align:left;white-space:pre-wrap;font-family:'Courier New',monospace;" id="orderSummary"></div>
+      <a id="gmailBtn" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:14px 20px;background:rgba(184,150,90,0.1);border:1.5px solid rgba(184,150,90,0.35);border-radius:12px;color:#f0d898;font-family:'Raleway',sans-serif;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.5px;transition:all 0.3s;">
+        📧 Envoyer via Gmail
+      </a>
+    </div>
   </div>
 
   <div class="footer-brand">ПоэмБукет · poème · création · sur mesure</div>
@@ -215,8 +221,14 @@ function submitForm() {
 
   window.location.href=`mailto:jeanlouispagani.info@gmail.com?subject=${subj}&body=${body}`;
 
+  const summaryText = `=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${subj}&body=${body}`;
+
   setTimeout(()=>{
     document.getElementById('successEmail').textContent=email;
+    document.getElementById('orderSummary').textContent=summaryText;
+    document.getElementById('gmailBtn').href=gmailUrl;
+    document.getElementById('gmailFallback').style.display='block';
     document.getElementById('formSection').style.display='none';
     document.getElementById('successScreen').style.display='flex';
   }, 900);
