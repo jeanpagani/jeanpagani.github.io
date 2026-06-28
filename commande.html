@@ -203,15 +203,13 @@ function submitForm() {
   const email=document.getElementById('email').value.trim();
   const prenom=document.getElementById('prenom').value.trim();
   if(!story){ alert('Пожалуйста, расскажите мне вашу историю 💌'); return; }
-  if(!selectedMusic){ alert('Пожалуйста, выберите музыку 🎵'); return; }
   if(!selectedTarif){ alert('Пожалуйста, выберите тариф'); return; }
   if(!email||!email.includes('@')){ alert('Пожалуйста, введите корректный email'); return; }
 
-  const ml={'01-melancolie':'Mélancolie','02-emotion':'Émotion pure','03-nostalgie':'Nostalgie','04-romance':'Romance','05-tendresse':'Tendresse','06-espoir':'Espoir','07-douceur':'Douceur','08-serenite':'Sérénité','09-elegance':'Élégance','10-nature':'Nature'};
   const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)'};
 
   const subj=encodeURIComponent('🎭 Новый заказ поэма · ПоэмБукет');
-  const body=encodeURIComponent(`=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n🎵 МУЗЫКА: ${ml[selectedMusic]||selectedMusic}\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}\n\n=== Создайте поэм и отправьте ссылку+код клиенту ===`);
+  const body=encodeURIComponent(`=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}\n\n=== Créez le poème et envoyez le lien+code au client ===`);
 
   if(currentAudio) currentAudio.pause();
   window.location.href=`mailto:jeanlouispagani.info@gmail.com?subject=${subj}&body=${body}`;
