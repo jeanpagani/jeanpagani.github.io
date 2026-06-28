@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поэма на заказ | ПоэмБукет</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50%,#08060d 100%); font-family:'Raleway',sans-serif; overflow-x:hidden; color:#f0ebe0; }
+  .bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .spark { position:absolute; z-index:1; opacity:0; animation:floatSpark var(--d) linear infinite; }
+  @keyframes floatSpark { 0%{transform:translateY(0) rotate(0deg);opacity:0;} 10%{opacity:0.7;} 85%{opacity:0.2;} 100%{transform:translateY(-110vh) rotate(20deg);opacity:0;} }
+  .wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:28px 20px 60px; display:flex; flex-direction:column; align-items:center; gap:22px; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+
+  .ribbon { width:100%; text-align:center; padding:20px 0; border-top:1px solid rgba(184,150,90,0.4); border-bottom:1px solid rgba(184,150,90,0.4); }
+  .ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(22px,6vw,30px); letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+  .ribbon-sep { display:block; margin:5px auto; font-size:11px; letter-spacing:8px; color:rgba(255,255,255,0.15); }
+  .ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,3.5vw,17px); letter-spacing:6px; color:rgba(240,216,152,0.4); }
+
+  .hero-icon { font-size:64px; line-height:1; text-align:center; animation:float 3.5s ease-in-out infinite alternate; display:block; }
+  @keyframes float { from{transform:translateY(0);} to{transform:translateY(-12px);} }
+
+  .pitch { width:100%; background:rgba(184,150,90,0.05); border:1px solid rgba(184,150,90,0.18); border-radius:18px; padding:24px 20px; text-align:center; animation:fadeUp 1.2s ease forwards 0.3s; opacity:0; }
+  .pitch-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#B8965A; margin-bottom:12px; letter-spacing:1px; }
+  .pitch-text { font-size:14px; color:rgba(240,235,224,0.7); line-height:1.85; }
+  .pitch-text strong { color:#f0d898; }
+
+  .steps { width:100%; display:flex; flex-direction:column; gap:12px; animation:fadeUp 1.2s ease forwards 0.5s; opacity:0; }
+  .step { display:flex; align-items:flex-start; gap:14px; background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.12); border-radius:14px; padding:14px 16px; }
+  .step-num { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:rgba(184,150,90,0.4); line-height:1; flex-shrink:0; min-width:28px; }
+  .step-text { font-size:13px; color:rgba(240,235,224,0.65); line-height:1.7; }
+  .step-text strong { color:#f0d898; display:block; margin-bottom:3px; font-size:14px; }
+
+  .divider { display:flex; align-items:center; gap:12px; width:100%; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(184,150,90,0.3),transparent); }
+  .divider-icon { color:#B8965A; font-size:13px; }
+
+  .cta-block { width:100%; display:flex; flex-direction:column; gap:12px; animation:fadeUp 1.2s ease forwards 0.7s; opacity:0; }
+  .cta-title { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:rgba(240,216,152,0.7); letter-spacing:1px; }
+
+  .price-grid { display:flex; gap:8px; width:100%; }
+  .price-box { flex:1; background:rgba(184,150,90,0.05); border:1px solid rgba(184,150,90,0.15); border-radius:12px; padding:12px 6px; text-align:center; text-decoration:none; transition:all 0.3s; }
+  .price-box:hover { background:rgba(184,150,90,0.1); border-color:rgba(184,150,90,0.35); transform:translateY(-1px); }
+  .ps { font-size:9px; letter-spacing:1.5px; color:rgba(184,150,90,0.5); text-transform:uppercase; margin-bottom:6px; }
+  .pa { font-family:'Playfair Display',serif; font-size:19px; color:#f0d898; margin-bottom:3px; }
+  .pd { font-size:9px; color:rgba(184,150,90,0.4); }
+
+  .btn-tg { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px 20px; background:rgba(184,150,90,0.08); border:1.5px solid rgba(184,150,90,0.35); border-radius:14px; color:#f0d898; font-family:'Raleway',sans-serif; font-size:15px; font-weight:600; letter-spacing:0.5px; text-decoration:none; transition:all 0.3s; }
+  .btn-tg:hover { background:rgba(184,150,90,0.16); border-color:rgba(184,150,90,0.6); transform:translateY(-1px); }
+
+  .note { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(184,150,90,0.4); letter-spacing:1px; }
+  .footer { font-family:'Cormorant Garamond',serif; font-size:15px; text-align:center; letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 3s linear infinite; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+  <div class="ribbon">
+    <span class="ribbon-ru">✍️ Поэма на заказ</span>
+    <span class="ribbon-sep">✦ · ✦</span>
+    <span class="ribbon-fr">Poème sur mesure</span>
+  </div>
+
+  <span class="hero-icon">✍️</span>
+
+  <div class="pitch">
+    <div class="pitch-title">Ваша идея — моя поэзия</div>
+    <p class="pitch-text">
+      Вы рассказываете мне <strong>вашу историю, вашу эмоцию, вашу мысль</strong> —<br>
+      я превращаю её в стихотворение на французском,<br>
+      созданное только для вас. Ни шаблонов. Ни копий.<br>
+      <strong>Живое произведение французской классики.</strong>
+    </p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-text"><strong>Напишите мне в Telegram</strong>Расскажите вашу идею, историю или эмоцию. Любой язык — русский, французский, английский.</div>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-text"><strong>Я задаю вопросы</strong>Чтобы понять глубже — тон, стиль, кому посвящено, какой эффект вы хотите произвести.</div>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-text"><strong>Вы получаете ваш поэм</strong>На французском, с переводом на русский. Уникальный. Авторский. Достойный подарок.</div>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+
+  <div class="cta-block">
+    <div class="cta-title">Выберите тариф · Choisissez votre formule</div>
+    <div class="price-grid">
+      <a href="../commande.html?tarif=standard" class="price-box">
+        <div class="ps">Стандарт</div><div class="pa">490₽</div><div class="pd">до 24 ч</div>
+      </a>
+      <a href="../commande.html?tarif=express" class="price-box">
+        <div class="ps">Экспресс</div><div class="pa">790₽</div><div class="pd">за 2 ч</div>
+      </a>
+      <a href="../commande.html?tarif=flash" class="price-box">
+        <div class="ps">Флэш ⚡</div><div class="pa">1290₽</div><div class="pd">30 мин</div>
+      </a>
+    </div>
+    <a href="https://t.me/LouisYvonPoete?text=Bonjour%20Louis%20Yvon%20!%20Je%20voudrais%20un%20po%C3%A8me%20sur%20mesure.%20Voici%20mon%20id%C3%A9e%20%3A%20" class="btn-tg" target="_blank">
+      ✉️ Начать мою историю
+    </a>
+    <div class="note">Каждый поэм — это соавторство между вами и мной</div>
+  </div>
+
+  <div class="footer">ПоэмБукет · poème · création · sur mesure</div>
+</div>
+<script>
+const bg = document.getElementById('bg');
+const items = ['✨','⭐','💫','✦','🌟'];
+for(let i=0;i<22;i++){
+  const s=document.createElement('div');
+  s.className='spark';
+  const sz=(Math.random()*10+8).toFixed(0);
+  const dur=(Math.random()*8+6).toFixed(1);
+  s.textContent=items[Math.floor(Math.random()*items.length)];
+  s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-60px;--d:${dur}s;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(2)}s;font-size:${sz}px;`;
+  bg.appendChild(s);
+}
+</script>
+</body>
+</html>
