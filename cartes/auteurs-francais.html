@@ -32,7 +32,7 @@
   }
   .author-card:hover { background:rgba(184,150,90,0.12); border-color:rgba(184,150,90,0.4); transform:translateY(-3px); box-shadow:0 8px 24px rgba(184,150,90,0.1); }
   .author-card.selected { background:rgba(184,150,90,0.18); border-color:#B8965A; box-shadow:0 0 24px rgba(184,150,90,0.25); }
-  .card-img { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid rgba(184,150,90,0.3); transition:border-color 0.3s; background:#1a1200; filter:sepia(20%); }
+  .card-img { width:72px; height:72px; border-radius:50%; border:2px solid rgba(184,150,90,0.3); transition:border-color 0.3s; background:#1a1200; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:#B8965A; flex-shrink:0; }
   .author-card.selected .card-img { border-color:#B8965A; }
   .author-card:hover .card-img { border-color:rgba(184,150,90,0.6); }
   .author-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#f0ebe0; line-height:1.3; }
@@ -74,61 +74,61 @@
 
   <div class="catalog">
     <div class="author-card" onclick="select(this,'Victor Hugo','1802–1885','Épique · Romantique')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg/200px-Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg" alt="Victor Hugo" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=VH'">
+      <div class="card-img">VH</div>
       <span class="author-name">Victor Hugo</span>
       <span class="author-dates">1802–1885</span>
       <span class="author-style">Épique · Romantique</span>
     </div>
     <div class="author-card" onclick="select(this,'Charles Baudelaire','1821–1867','Mélancolie · Sensuel')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Baudelaire_photographié_par_Nadar.jpg/200px-Baudelaire_photographié_par_Nadar.jpg" alt="Baudelaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=CB'">
+      <div class="card-img">CB</div>
       <span class="author-name">Charles Baudelaire</span>
       <span class="author-dates">1821–1867</span>
       <span class="author-style">Mélancolie · Sensuel</span>
     </div>
     <div class="author-card" onclick="select(this,'Paul Verlaine','1844–1896','Musical · Symboliste')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Paul_Verlaine_1866.jpg/200px-Paul_Verlaine_1866.jpg" alt="Verlaine" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=PV'">
+      <div class="card-img">PV</div>
       <span class="author-name">Paul Verlaine</span>
       <span class="author-dates">1844–1896</span>
       <span class="author-style">Musical · Symboliste</span>
     </div>
     <div class="author-card" onclick="select(this,'Arthur Rimbaud','1854–1891','Visionnaire · Rebelle')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Arthur_Rimbaud.jpg/200px-Arthur_Rimbaud.jpg" alt="Rimbaud" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=AR'">
+      <div class="card-img">AR</div>
       <span class="author-name">Arthur Rimbaud</span>
       <span class="author-dates">1854–1891</span>
       <span class="author-style">Visionnaire · Rebelle</span>
     </div>
     <div class="author-card" onclick="select(this,'Molière','1622–1673','Théâtral · Satirique')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Molière.jpg/200px-Molière.jpg" alt="Molière" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=M'">
+      <div class="card-img">M</div>
       <span class="author-name">Molière</span>
       <span class="author-dates">1622–1673</span>
       <span class="author-style">Théâtral · Satirique</span>
     </div>
     <div class="author-card" onclick="select(this,'Voltaire','1694–1778','Esprit · Philosophique')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Nicolas_de_Largillière%2C_François-Marie_Arouet_dit_Voltaire_%28vers_1718-1720%29_-_Château_de_Versailles.jpg/200px-Nicolas_de_Largillière%2C_François-Marie_Arouet_dit_Voltaire_%28vers_1718-1720%29_-_Château_de_Versailles.jpg" alt="Voltaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=V'">
+      <div class="card-img">V</div>
       <span class="author-name">Voltaire</span>
       <span class="author-dates">1694–1778</span>
       <span class="author-style">Esprit · Philosophique</span>
     </div>
     <div class="author-card" onclick="select(this,'Alfred de Musset','1810–1857','Passion · Douleur')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Alfred_de_Musset.jpg/200px-Alfred_de_Musset.jpg" alt="Musset" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=AM'">
+      <div class="card-img">AM</div>
       <span class="author-name">Alfred de Musset</span>
       <span class="author-dates">1810–1857</span>
       <span class="author-style">Passion · Douleur</span>
     </div>
     <div class="author-card" onclick="select(this,'Lamartine','1790–1869','Nature · Nostalgie')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Alphonse_de_Lamartine.jpg/200px-Alphonse_de_Lamartine.jpg" alt="Lamartine" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=L'">
+      <div class="card-img">L</div>
       <span class="author-name">Lamartine</span>
       <span class="author-dates">1790–1869</span>
       <span class="author-style">Nature · Nostalgie</span>
     </div>
     <div class="author-card" onclick="select(this,'Stéphane Mallarmé','1842–1898','Hermétique · Rare')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Stéphane_Mallarmé_par_Nadar.jpg/200px-Stéphane_Mallarmé_par_Nadar.jpg" alt="Mallarmé" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=SM'">
+      <div class="card-img">SM</div>
       <span class="author-name">Mallarmé</span>
       <span class="author-dates">1842–1898</span>
       <span class="author-style">Hermétique · Rare</span>
     </div>
     <div class="author-card" onclick="select(this,'Guillaume Apollinaire','1880–1918','Moderne · Lyrique')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Guillaume_Apollinaire.jpg/200px-Guillaume_Apollinaire.jpg" alt="Apollinaire" onerror="this.src='https://via.placeholder.com/72/1a1200/B8965A?text=GA'">
+      <div class="card-img">GA</div>
       <span class="author-name">Apollinaire</span>
       <span class="author-dates">1880–1918</span>
       <span class="author-style">Moderne · Lyrique</span>

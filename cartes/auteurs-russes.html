@@ -32,7 +32,7 @@
   }
   .author-card:hover { background:rgba(180,120,255,0.12); border-color:rgba(180,120,255,0.4); transform:translateY(-3px); box-shadow:0 8px 24px rgba(180,120,255,0.1); }
   .author-card.selected { background:rgba(180,120,255,0.18); border-color:#b478ff; box-shadow:0 0 24px rgba(180,120,255,0.25); }
-  .card-img { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid rgba(180,120,255,0.3); transition:border-color 0.3s; background:#180020; filter:sepia(15%); }
+  .card-img { width:72px; height:72px; border-radius:50%; border:2px solid rgba(180,120,255,0.3); transition:border-color 0.3s; background:#180020; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:#b478ff; flex-shrink:0; }
   .author-card.selected .card-img { border-color:#b478ff; }
   .author-card:hover .card-img { border-color:rgba(180,120,255,0.6); }
   .author-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#f0eaff; line-height:1.3; }
@@ -75,70 +75,70 @@
 
   <div class="catalog">
     <div class="author-card" onclick="select(this,'Пушкин','Pouchkine','1799–1837','Лирика · Классика')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Pushkin_by_Kiprensky.jpg/200px-Pushkin_by_Kiprensky.jpg" alt="Пушкин" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=П'">
+      <div class="card-img">П</div>
       <span class="author-name">Пушкин</span>
       <span class="author-name-fr">Pouchkine</span>
       <span class="author-dates">1799–1837</span>
       <span class="author-style">Лирика · Классика</span>
     </div>
     <div class="author-card" onclick="select(this,'Толстой','Tolstoï','1828–1910','Эпос · Мудрость')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/L.N.Tolstoy_Prokudin-Gorsky.jpg/200px-L.N.Tolstoy_Prokudin-Gorsky.jpg" alt="Толстой" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Т'">
+      <div class="card-img">Т</div>
       <span class="author-name">Толстой</span>
       <span class="author-name-fr">Tolstoï</span>
       <span class="author-dates">1828–1910</span>
       <span class="author-style">Эпос · Мудрость</span>
     </div>
     <div class="author-card" onclick="select(this,'Достоевский','Dostoïevski','1821–1881','Душа · Страсть')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg/200px-Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg" alt="Достоевский" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Д'">
+      <div class="card-img">Д</div>
       <span class="author-name">Достоевский</span>
       <span class="author-name-fr">Dostoïevski</span>
       <span class="author-dates">1821–1881</span>
       <span class="author-style">Душа · Страсть</span>
     </div>
     <div class="author-card" onclick="select(this,'Чехов','Tchekhov','1860–1904','Нежность · Меланхолия')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Chekhov_2.jpg/200px-Chekhov_2.jpg" alt="Чехов" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Ч'">
+      <div class="card-img">Ч</div>
       <span class="author-name">Чехов</span>
       <span class="author-name-fr">Tchekhov</span>
       <span class="author-dates">1860–1904</span>
       <span class="author-style">Нежность · Меланхолия</span>
     </div>
     <div class="author-card" onclick="select(this,'Ахматова','Akhmatova','1889–1966','Любовь · Боль')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Akhmatova.jpg/200px-Akhmatova.jpg" alt="Ахматова" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=А'">
+      <div class="card-img">А</div>
       <span class="author-name">Ахматова</span>
       <span class="author-name-fr">Akhmatova</span>
       <span class="author-dates">1889–1966</span>
       <span class="author-style">Любовь · Боль</span>
     </div>
     <div class="author-card" onclick="select(this,'Лермонтов','Lermontov','1814–1841','Одиночество · Бунт')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Lermontov_by_Zabolotsky_1837.jpg/200px-Lermontov_by_Zabolotsky_1837.jpg" alt="Лермонтов" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Л'">
+      <div class="card-img">Л</div>
       <span class="author-name">Лермонтов</span>
       <span class="author-name-fr">Lermontov</span>
       <span class="author-dates">1814–1841</span>
       <span class="author-style">Одиночество · Бунт</span>
     </div>
     <div class="author-card" onclick="select(this,'Тургенев','Tourgueniev','1818–1883','Природа · Тоска')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Turgenev_by_Repin.jpg/200px-Turgenev_by_Repin.jpg" alt="Тургенев" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Т'">
+      <div class="card-img">Т</div>
       <span class="author-name">Тургенев</span>
       <span class="author-name-fr">Tourgueniev</span>
       <span class="author-dates">1818–1883</span>
       <span class="author-style">Природа · Тоска</span>
     </div>
     <div class="author-card" onclick="select(this,'Пастернак','Pasternak','1890–1960','Зима · Судьба')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Boris_Pasternak_1910s.jpg/200px-Boris_Pasternak_1910s.jpg" alt="Пастернак" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=П'">
+      <div class="card-img">П</div>
       <span class="author-name">Пастернак</span>
       <span class="author-name-fr">Pasternak</span>
       <span class="author-dates">1890–1960</span>
       <span class="author-style">Зима · Судьба</span>
     </div>
     <div class="author-card" onclick="select(this,'Булгаков','Boulgakov','1891–1940','Магия · Абсурд')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Bulgakov_en_1928.jpg/200px-Bulgakov_en_1928.jpg" alt="Булгаков" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Б'">
+      <div class="card-img">Б</div>
       <span class="author-name">Булгаков</span>
       <span class="author-name-fr">Boulgakov</span>
       <span class="author-dates">1891–1940</span>
       <span class="author-style">Магия · Абсурд</span>
     </div>
     <div class="author-card" onclick="select(this,'Цветаева','Tsvetaïeva','1892–1941','Страсть · Разлука')">
-      <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Marina_Tsvetaeva.jpg/200px-Marina_Tsvetaeva.jpg" alt="Цветаева" onerror="this.src='https://via.placeholder.com/72/180020/b478ff?text=Ц'">
+      <div class="card-img">Ц</div>
       <span class="author-name">Цветаева</span>
       <span class="author-name-fr">Tsvetaïeva</span>
       <span class="author-dates">1892–1941</span>
