@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Поэм для [PRÉNOM] · Louis Yvon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50%,#08060d 100%); font-family:'Raleway',sans-serif; color:#f0ebe0; overflow-x:hidden; }
+
+/* ========== PARTICULES ========== */
+.bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.spark { position:absolute; opacity:0; animation:floatSpark var(--d) linear infinite; font-size:var(--s); }
+@keyframes floatSpark { 0%{transform:translateY(0);opacity:0;} 15%{opacity:0.5;} 85%{opacity:0.15;} 100%{transform:translateY(-110vh);opacity:0;} }
+
+/* ========== ÉCRAN CADENAS ========== */
+#lockScreen {
+  position:fixed; inset:0; z-index:100;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(160deg,#08060d 0%,#141020 50%,#08060d 100%);
+  padding:30px 24px;
+  transition:opacity 0.8s ease;
+}
+.lock-icon { font-size:56px; animation:lockFloat 3s ease-in-out infinite alternate; margin-bottom:20px; }
+@keyframes lockFloat { from{transform:translateY(0);} to{transform:translateY(-10px);} }
+
+.lock-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(22px,5vw,30px); letter-spacing:2px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; text-align:center; margin-bottom:8px; }
+.lock-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:rgba(184,150,90,0.45); letter-spacing:3px; text-align:center; margin-bottom:32px; }
+
+.lock-box { width:100%; max-width:320px; display:flex; flex-direction:column; gap:12px; }
+.lock-label { font-size:10px; letter-spacing:3px; color:rgba(184,150,90,0.4); text-transform:uppercase; text-align:center; }
+.lock-input { width:100%; background:rgba(184,150,90,0.05); border:1.5px solid rgba(184,150,90,0.25); border-radius:14px; padding:16px 20px; color:#f0d898; font-family:'Playfair Display',serif; font-style:italic; font-size:20px; letter-spacing:4px; text-align:center; outline:none; transition:all 0.3s; text-transform:uppercase; }
+.lock-input:focus { border-color:rgba(184,150,90,0.6); background:rgba(184,150,90,0.08); }
+.lock-input.shake { animation:shake 0.4s ease; border-color:rgba(200,60,60,0.6); }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-8px);} 75%{transform:translateX(8px);} }
+
+.lock-btn { width:100%; padding:15px; background:rgba(184,150,90,0.08); border:1.5px solid rgba(184,150,90,0.35); border-radius:14px; color:#f0d898; font-family:'Raleway',sans-serif; font-size:15px; font-weight:600; letter-spacing:1px; cursor:pointer; transition:all 0.3s; }
+.lock-btn:hover { background:rgba(184,150,90,0.16); border-color:#B8965A; transform:translateY(-1px); }
+
+.lock-error { font-size:12px; color:rgba(220,80,80,0.7); text-align:center; letter-spacing:1px; height:16px; transition:opacity 0.3s; }
+.lock-hint { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(184,150,90,0.25); text-align:center; margin-top:8px; }
+
+/* ========== CONTENU POÈME ========== */
+#poemContent { display:none; position:relative; z-index:10; }
+.wrap { max-width:500px; margin:0 auto; padding:32px 20px 80px; display:flex; flex-direction:column; align-items:center; gap:24px; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+@keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+@keyframes revealPoem { from{opacity:0;transform:scale(0.96);} to{opacity:1;transform:scale(1);} }
+
+/* Ruban titre */
+.ribbon { width:100%; text-align:center; padding:22px 0; border-top:1px solid rgba(184,150,90,0.35); border-bottom:1px solid rgba(184,150,90,0.35); animation:fadeUp 1.2s ease forwards 0.2s; opacity:0; }
+.ribbon-ru { display:block; font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(22px,6vw,30px); letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+.ribbon-sep { display:block; margin:5px auto; font-size:11px; letter-spacing:8px; color:rgba(255,255,255,0.15); }
+.ribbon-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,3.5vw,17px); letter-spacing:6px; color:rgba(240,216,152,0.35); }
+
+/* Dédicace */
+.dedicace { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:rgba(184,150,90,0.55); letter-spacing:2px; text-align:center; animation:fadeUp 1.2s ease forwards 0.4s; opacity:0; }
+
+/* Bouton audio */
+.audio-btn { display:flex; align-items:center; gap:12px; background:rgba(184,150,90,0.07); border:1px solid rgba(184,150,90,0.3); border-radius:50px; padding:10px 22px; cursor:pointer; transition:all 0.3s; animation:fadeUp 1.2s ease forwards 0.5s; opacity:0; }
+.audio-btn:hover { background:rgba(184,150,90,0.14); }
+.play-circle { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#B8965A,#7a5a10); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff; flex-shrink:0; box-shadow:0 2px 12px rgba(184,150,90,0.4); animation:goldPulse 2.5s ease infinite; }
+@keyframes goldPulse { 0%,100%{box-shadow:0 2px 12px rgba(184,150,90,0.4);} 50%{box-shadow:0 2px 24px rgba(184,150,90,0.8);} }
+.audio-label { font-size:13px; color:#B8965A; letter-spacing:1px; }
+
+/* Divider */
+.divider { display:flex; align-items:center; gap:12px; width:100%; animation:fadeUp 1.2s ease forwards 0.6s; opacity:0; }
+.divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(184,150,90,0.3),transparent); }
+.divider-icon { color:#B8965A; font-size:14px; }
+
+/* Poème */
+.poem-fr { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(17px,4.5vw,22px); line-height:2; text-align:center; color:#f0ebe0; animation:revealPoem 1.6s ease forwards 0.8s; opacity:0; }
+.poem-ru { font-family:'Cormorant Garamond',serif; font-size:clamp(15px,4vw,19px); line-height:2; text-align:center; color:rgba(240,220,230,0.7); animation:revealPoem 1.6s ease forwards 1.1s; opacity:0; }
+
+/* Signature */
+.signature { display:flex; flex-direction:column; align-items:flex-end; width:100%; animation:fadeUp 1.4s ease forwards 1.4s; opacity:0; }
+.sig-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#B8965A; letter-spacing:1px; }
+
+/* SVG texte doré */
+.cta-svg { width:100%; overflow:visible; animation:goldPulse 2.4s ease-in-out infinite; display:block; margin:16px 0 8px; }
+
+/* Footer */
+.footer-brand { font-family:'Cormorant Garamond',serif; font-size:13px; text-align:center; letter-spacing:3px; background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 4s linear infinite; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+
+<!-- ===== ÉCRAN CADENAS ===== -->
+<div id="lockScreen">
+  <div class="lock-icon">🔐</div>
+  <div class="lock-title">Поэм создан только для вас</div>
+  <div class="lock-sub">Poème exclusif · accès personnel</div>
+  <div class="lock-box">
+    <div class="lock-label">Введите ваш личный код доступа</div>
+    <input type="text" class="lock-input" id="codeInput" placeholder="· · · · · ·" maxlength="12" autocomplete="off" onkeydown="if(event.key==='Enter')checkCode()">
+    <button class="lock-btn" onclick="checkCode()">🗝️ Открыть мой поэм</button>
+    <div class="lock-error" id="lockError"></div>
+    <div class="lock-hint">Код указан в письме, которое вы получили</div>
+  </div>
+</div>
+
+<!-- ===== CONTENU POÈME ===== -->
+<div id="poemContent">
+  <div class="wrap">
+
+    <div class="ribbon">
+      <span class="ribbon-ru"><!-- TITRE RU --></span>
+      <span class="ribbon-sep">✦ · ✦</span>
+      <span class="ribbon-fr"><!-- TITRE FR --></span>
+    </div>
+
+    <div class="dedicace">— Pour <!-- PRÉNOM -->, avec tout mon cœur —</div>
+
+    <div class="audio-btn" onclick="toggleAudio()">
+      <div class="play-circle" id="playIcon">▶</div>
+      <div>
+        <div class="audio-label">🎵 Musique · Музыка</div>
+        <div style="font-size:10px;color:rgba(184,150,90,0.35);margin-top:2px;">Нажмите · Appuyez pour écouter</div>
+      </div>
+    </div>
+    <audio id="bgMusic" src="../musiques/<!-- FICHIER_MUSIQUE -->" loop></audio>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+
+    <div class="poem-fr">
+      <!-- POÈME EN FRANÇAIS --><br>
+      <!-- (strophe par strophe, séparer les strophes par <br><br>) -->
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+
+    <div class="poem-ru">
+      <!-- TRADUCTION RUSSE -->
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
+
+    <div class="signature"><div class="sig-name">— Louis Yvon</div></div>
+
+    <svg class="cta-svg" height="30" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#B8965A"/>
+          <stop offset="50%" stop-color="#fff8e0"/>
+          <stop offset="100%" stop-color="#B8965A"/>
+        </linearGradient>
+      </defs>
+      <text x="0" y="24" textLength="100%" lengthAdjust="spacingAndGlyphs" font-family="Cormorant Garamond, serif" font-style="italic" font-size="20" fill="url(#g)">Ce poème vous appartient pour toujours</text>
+    </svg>
+
+    <div class="footer-brand">ПоэмБукет · Louis Yvon · poète français</div>
+  </div>
+</div>
+
+<script>
+// ======= À MODIFIER POUR CHAQUE COMMANDE =======
+const ACCESS_CODE  = "<!-- CODE -->";       // ex: IRINA2024
+const EXPIRY_DATE  = "<!-- DATE_EXPIRY -->"; // ex: 2024-09-28  (3 mois après création)
+// ================================================
+
+// Vérification expiration
+(function(){
+  if(!EXPIRY_DATE || EXPIRY_DATE.startsWith('<!--')) return;
+  const expiry = new Date(EXPIRY_DATE);
+  expiry.setHours(23,59,59);
+  if(new Date() > expiry){
+    document.getElementById('lockScreen').innerHTML = `
+      <div style="text-align:center;padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:20px;">
+        <div style="font-size:52px;">🕯️</div>
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(20px,5vw,28px);background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10);background-size:250%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;line-height:1.4;">Ваш прекрасный поэм<br>скоро прощается с вами…</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(184,150,90,0.45);line-height:1.9;text-align:center;">Merci d'avoir choisi ПоэмБукет.<br>Ce fut un honneur de vous confier ces mots.<br><br><span style="font-size:13px;letter-spacing:2px;color:rgba(184,150,90,0.3);">— Louis Yvon, poète français</span></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(184,150,90,0.2);letter-spacing:3px;margin-top:8px;">ПоэмБукет · poème · souvenir · éternité</div>
+      </div>`;
+  }
+})();
+
+const bg = document.getElementById('bg');
+const sparks = ['✨','⭐','💫','✦','🌟','🌹'];
+for(let i=0;i<16;i++){
+  const s=document.createElement('div'); s.className='spark';
+  const sz=(Math.random()*8+7).toFixed(0), dur=(Math.random()*10+8).toFixed(1);
+  s.textContent=sparks[Math.floor(Math.random()*sparks.length)];
+  s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-40px;--d:${dur}s;--s:${sz}px;animation-delay:-${(Math.random()*parseFloat(dur)).toFixed(1)}s;`;
+  bg.appendChild(s);
+}
+
+function checkCode() {
+  const input = document.getElementById('codeInput').value.trim().toUpperCase();
+  const correct = ACCESS_CODE.toUpperCase();
+  if(input === correct) {
+    document.getElementById('lockScreen').style.opacity='0';
+    setTimeout(()=>{
+      document.getElementById('lockScreen').style.display='none';
+      document.getElementById('poemContent').style.display='block';
+    }, 800);
+  } else {
+    const inp = document.getElementById('codeInput');
+    const err = document.getElementById('lockError');
+    inp.classList.add('shake');
+    err.textContent = 'Неверный код · Code incorrect';
+    setTimeout(()=>{ inp.classList.remove('shake'); err.textContent=''; inp.value=''; }, 1600);
+  }
+}
+
+// Audio
+const bgMusic = document.getElementById('bgMusic');
+const playIcon = document.getElementById('playIcon');
+let isPlaying = false;
+function toggleAudio(){
+  if(!isPlaying){ bgMusic.volume=0.35; bgMusic.play().catch(()=>{}); playIcon.textContent='⏸'; isPlaying=true; }
+  else { bgMusic.pause(); playIcon.textContent='▶'; isPlaying=false; }
+}
+</script>
+</body>
+</html>
