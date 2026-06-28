@@ -154,7 +154,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
     <div id="gmailFallback" style="display:none;width:100%;max-width:440px;margin-top:10px;">
       <div style="background:rgba(184,150,90,0.06);border:1px solid rgba(184,150,90,0.2);border-radius:12px;padding:16px 18px;font-size:13px;color:rgba(240,235,224,0.55);line-height:1.8;text-align:left;white-space:pre-wrap;font-family:'Courier New',monospace;" id="orderSummary"></div>
       <a id="gmailBtn" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:14px 20px;background:rgba(184,150,90,0.1);border:1.5px solid rgba(184,150,90,0.35);border-radius:12px;color:#f0d898;font-family:'Raleway',sans-serif;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.5px;transition:all 0.3s;">
-        📧 Envoyer via Gmail
+        💬 Envoyer via WhatsApp
       </a>
     </div>
   </div>
@@ -214,15 +214,15 @@ function submitForm() {
 
   const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)'};
 
-  const subj=encodeURIComponent('🎭 Новый заказ поэма · ПоэмБукет');
-  const body=encodeURIComponent(`=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}\n\n=== Créez le poème et envoyez le lien+code au client ===`);
+  const msgText = `🎭 Новый заказ · ПоэмБукет\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
+  const waUrl = `https://wa.me/32498574812?text=${encodeURIComponent(msgText)}`;
 
   if(currentAudio) currentAudio.pause();
 
-  window.location.href=`mailto:jeanlouispagani.info@gmail.com?subject=${subj}&body=${body}`;
+  window.open(waUrl, '_blank');
 
-  const summaryText = `=== НОВЫЙ ЗАКАЗ ===\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${subj}&body=${body}`;
+  const summaryText = msgText;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ поэма · ПоэмБукет')}&body=${encodeURIComponent(msgText)}`;
 
   setTimeout(()=>{
     document.getElementById('successEmail').textContent=email;
