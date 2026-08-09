@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Начать мою историю | ПоэмБукет · Louis Yvon</title>
+<title>Начать мою историю | Букет Французской Поэзии · Louis Yvon</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -91,7 +91,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
 <div class="wrap">
 
   <div class="header">
-    <div class="header-sub">ПоэмБукет · Louis Yvon</div>
+    <div class="header-sub">Букет Французской Поэзии · Louis Yvon</div>
     <div class="header-title">Начните вашу историю<span class="header-fr">Commencer mon histoire</span></div>
     <div class="header-poet">✦ Ваш французский поэт готов создать только для вас ✦</div>
   </div>
@@ -159,7 +159,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
     </div>
   </div>
 
-  <div class="footer-brand">ПоэмБукет · poème · création · sur mesure</div>
+  <div class="footer-brand">Букет Французской Поэзии · poème · création · sur mesure</div>
 </div>
 
 <script>
@@ -214,7 +214,7 @@ function submitForm() {
 
   const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)'};
 
-  const msgText = `🎭 Новый заказ · ПоэмБукет\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
+  const msgText = `🎭 Новый заказ · Букет Французской Поэзии\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
   const waUrl = `https://wa.me/32498574812?text=${encodeURIComponent(msgText)}`;
 
   if(currentAudio) currentAudio.pause();
@@ -222,7 +222,7 @@ function submitForm() {
   window.open(waUrl, '_blank');
 
   const summaryText = msgText;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ поэма · ПоэмБукет')}&body=${encodeURIComponent(msgText)}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ поэма · Букет Французской Поэзии')}&body=${encodeURIComponent(msgText)}`;
 
   setTimeout(()=>{
     document.getElementById('successEmail').textContent=email;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ПоэмБукет — Стихи в подарок</title>
+<title>Букет Французской Поэзии — Стихи в подарок</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -297,7 +297,7 @@ function orderViaTelegram(){
   const name = document.getElementById("inp-name")?.value || "—";
   const story = document.getElementById("inp-story")?.value || "—";
   const delay = document.querySelector(".delay-btn.sel .delay-price")?.textContent || "490₽";
-  const msg = "🌹 ПоэмБукет — Новый заказ\n\n💰 Тариф: "+delay+"\n🎯 Повод: "+occ+"\n👤 Получатель: "+name+"\n📝 О человеке: "+story;
+  const msg = "🌹 Букет Французской Поэзии — Новый заказ\n\n💰 Тариф: "+delay+"\n🎯 Повод: "+occ+"\n👤 Получатель: "+name+"\n📝 О человеке: "+story;
   window.open("https://t.me/PoemBouquet?text="+encodeURIComponent(msg),"_blank");
 }
 </script>
