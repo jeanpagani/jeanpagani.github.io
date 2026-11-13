@@ -20,8 +20,8 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
 .header-sub { font-size:10px; letter-spacing:4px; color:rgba(184,150,90,0.5); text-transform:uppercase; margin-bottom:10px; }
 .header-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(26px,6vw,36px); line-height:1.3; }
 .header-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:4px; color:rgba(240,216,152,0.4); margin-top:6px; }
-.frame { position:relative; padding:6px; border:1px solid rgba(184,150,90,0.45); border-radius:14px; background:rgba(184,150,90,0.05); box-shadow:0 20px 60px rgba(0,0,0,0.5); animation:fadeUp 1s ease forwards; }
-.video { position:relative; width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; }
+.frame { position:relative; width:100%; max-width:380px; margin:0 auto; padding:6px; border:1px solid rgba(184,150,90,0.45); border-radius:14px; background:rgba(184,150,90,0.05); box-shadow:0 20px 60px rgba(0,0,0,0.5); animation:fadeUp 1s ease forwards; }
+.video { position:relative; width:100%; aspect-ratio:9/16; border-radius:10px; overflow:hidden; background:#000; }
 .video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
 .text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; line-height:1.75; color:rgba(240,235,224,0.8); text-align:center; }
 .btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; max-width:440px; margin:0 auto; padding:17px 20px; border-radius:16px; font-size:16px; font-weight:600; text-decoration:none; transition:all 0.25s; background:linear-gradient(90deg,#9a7a3a,#B8965A,#d8b870); color:#08060d; }
@@ -40,15 +40,15 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
   </div>
 
   <div class="frame"><div class="video">
-    <!-- Remplacer VIDEO_ID par l'identifiant YouTube -->
-    <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="Louis Yvon · видео" loading="lazy"
+    <!-- Vidéo YouTube Short : kK-vwbsYhlk -->
+    <iframe src="https://www.youtube-nocookie.com/embed/kK-vwbsYhlk?rel=0" title="Louis Yvon · видео" loading="lazy"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div></div>
 
   <div class="text">Французская поэзия — для вас и ваших близких.<br>Расскажите вашу историю — я превращу её в стихи.</div>
 
   <a class="btn" href="commande.html">✍️ Заказать стихотворение</a>
-  <a class="btn ghost" href="https://www.youtube.com/watch?v=VIDEO_ID" target="_blank" rel="noopener">▶ Смотреть на YouTube</a>
+  <a class="btn ghost" href="https://youtube.com/shorts/kK-vwbsYhlk" target="_blank" rel="noopener">▶ Смотреть на YouTube</a>
 
   <div class="back"><a href="index.html">← Букет Французской Поэзии</a></div>
   <div class="footer-brand gold">Букет Французской Поэзии · Louis Yvon</div>
