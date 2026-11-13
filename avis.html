@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оставить отзыв | Букет Французской Поэзии · Louis Yvon</title>
+<meta name="description" content="Поделитесь впечатлениями о вашем стихотворении от Louis Yvon.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50%,#08060d 100%); font-family:'Raleway',sans-serif; color:#f0ebe0; overflow-x:hidden; }
+.bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.spark { position:absolute; opacity:0; animation:floatSpark var(--d) linear infinite; font-size:var(--s); }
+@keyframes floatSpark { 0%{transform:translateY(0);opacity:0;} 15%{opacity:0.6;} 85%{opacity:0.2;} 100%{transform:translateY(-110vh);opacity:0;} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+@keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+.wrap { position:relative; z-index:10; max-width:560px; margin:0 auto; padding:32px 16px 80px; display:flex; flex-direction:column; gap:22px; }
+.gold { background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+.header { text-align:center; padding:20px 0 18px; border-bottom:1px solid rgba(184,150,90,0.25); animation:fadeUp 1s ease forwards; }
+.header-sub { font-size:10px; letter-spacing:4px; color:rgba(184,150,90,0.5); text-transform:uppercase; margin-bottom:10px; }
+.header-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(26px,6vw,34px); line-height:1.3; }
+.header-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:4px; color:rgba(240,216,152,0.4); margin-top:6px; }
+.header-text { margin-top:14px; font-size:14px; color:rgba(240,235,224,0.6); line-height:1.8; }
+.section { background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.14); border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:16px; animation:fadeUp 1s ease forwards; }
+.field-group { display:flex; flex-direction:column; gap:6px; }
+.field-label { font-size:11px; letter-spacing:2px; color:rgba(184,150,90,0.55); text-transform:uppercase; }
+.field-input { background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.2); border-radius:10px; padding:12px 14px; color:#f0ebe0; font-family:'Raleway',sans-serif; font-size:15px; outline:none; width:100%; transition:border-color 0.3s; }
+.field-input:focus { border-color:rgba(184,150,90,0.55); }
+.field-input::placeholder { color:rgba(184,150,90,0.3); }
+select.field-input { appearance:none; background-image:linear-gradient(45deg,transparent 50%,#B8965A 50%),linear-gradient(135deg,#B8965A 50%,transparent 50%); background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%; background-size:5px 5px; background-repeat:no-repeat; }
+select.field-input option { background:#141020; }
+textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.6; resize:vertical; min-height:130px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media (max-width:420px){ .row2 { grid-template-columns:1fr; } }
+.stars { display:flex; justify-content:center; gap:10px; }
+.star { font-size:36px; cursor:pointer; color:rgba(184,150,90,0.25); transition:transform 0.15s,color 0.2s; background:none; border:0; line-height:1; }
+.star.on { color:#f0d898; }
+.star:hover { transform:scale(1.15); }
+.check { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:rgba(240,235,224,0.65); line-height:1.6; cursor:pointer; }
+.check input { margin-top:3px; accent-color:#B8965A; width:18px; height:18px; flex-shrink:0; }
+.btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:17px 20px; border-radius:16px; font-family:'Raleway',sans-serif; font-size:16px; font-weight:600; cursor:pointer; border:0; background:linear-gradient(90deg,#9a7a3a,#B8965A,#d8b870); color:#08060d; text-decoration:none; transition:transform 0.2s; }
+.btn:hover { transform:translateY(-1px); }
+.note { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:rgba(184,150,90,0.5); }
+.thanks { text-align:center; display:flex; flex-direction:column; gap:16px; align-items:center; padding:30px 10px; }
+.thanks-title { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; }
+.thanks-text { font-size:15px; color:rgba(240,235,224,0.65); line-height:1.8; }
+.hidden { display:none !important; }
+.back { text-align:center; font-size:12px; } .back a { color:rgba(184,150,90,0.6); text-decoration:none; }
+.footer-brand { font-family:'Cormorant Garamond',serif; font-size:14px; text-align:center; letter-spacing:3px; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="header-sub">Букет Французской Поэзии · Louis Yvon</div>
+    <div class="header-title gold">Оставить отзыв<span class="header-fr">Votre avis</span></div>
+    <div class="header-text">Спасибо, что доверили мне вашу историю.<br>Мне очень важно узнать, что вы почувствовали.</div>
+  </div>
+
+  <div id="form">
+    <div class="section">
+      <div class="field-group" style="align-items:center;">
+        <div class="field-label">Ваша оценка</div>
+        <div class="stars" id="stars"></div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Ваш отзыв</div>
+        <textarea class="field-input" id="text" maxlength="600" placeholder="Как получатель отреагировал на стихотворение? Что вам понравилось?"></textarea>
+      </div>
+      <div class="row2">
+        <div class="field-group">
+          <div class="field-label">Ваше имя</div>
+          <input class="field-input" id="name" maxlength="30" placeholder="Ирина">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Город</div>
+          <input class="field-input" id="city" maxlength="30" placeholder="Москва">
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Повод</div>
+        <select class="field-input" id="occasion">
+          <option value="">— выберите —</option>
+          <option>💕 Любовь</option><option>🎂 День рождения</option><option>🎄 Новый год</option>
+          <option>👩 День матери</option><option>💍 Свадьба</option><option>🥂 Годовщина свадьбы</option>
+          <option>👶 Рождение</option><option>👴 Дедушке</option><option>👵 Бабушке</option>
+          <option>🎓 Диплом</option><option>🤒 Выздоровление</option><option>🌸 8 Марта</option>
+          <option>💼 Коллеге</option><option>🎁 Сертификат</option><option>✍️ Другое</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="consent" checked> Я разрешаю опубликовать мой отзыв на сайте (имя будет сокращено: «Ирина М.»)</label>
+    </div>
+    <button class="btn" style="margin-top:22px;" onclick="send()">💌 Отправить отзыв · Envoyer</button>
+    <div class="note" style="margin-top:12px;">Отзыв отправляется Louis Yvon в WhatsApp</div>
+  </div>
+
+  <div id="thanks" class="thanks hidden">
+    <div style="font-size:56px;">🌹</div>
+    <div class="thanks-title gold">Merci de tout cœur</div>
+    <div class="thanks-text">Спасибо за ваш отзыв!<br>Для меня это большая радость.<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(184,150,90,0.6);">— Louis Yvon</span></div>
+    <a class="btn" href="index.html" style="max-width:340px;">← На главную</a>
+  </div>
+
+  <div class="back"><a href="index.html">← Букет Французской Поэзии</a></div>
+  <div class="footer-brand gold">Букет Французской Поэзии · Louis Yvon</div>
+</div>
+<script>
+const WHATSAPP='32498574812';
+const bg=document.getElementById('bg'), sp=['✨','⭐','💫','✦','🌟'];
+for(let i=0;i<14;i++){ const s=document.createElement('div'); s.className='spark'; const d=(Math.random()*10+7).toFixed(1);
+  s.textContent=sp[i%sp.length]; s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-40px;--d:${d}s;--s:${(Math.random()*8+7).toFixed(0)}px;animation-delay:-${(Math.random()*d).toFixed(1)}s;`; bg.appendChild(s); }
+
+let rating=0;
+const st=document.getElementById('stars');
+for(let i=1;i<=5;i++){ const b=document.createElement('button'); b.type='button'; b.className='star'; b.textContent='★'; b.setAttribute('aria-label',i+' / 5');
+  b.onclick=()=>{ rating=i; [...st.children].forEach((x,j)=>x.classList.toggle('on',j<i)); }; st.appendChild(b); }
+
+// Pré-remplissage possible : avis.html?occasion=Свадьба&name=Ирина
+const p=new URLSearchParams(location.search);
+if(p.get('name')) document.getElementById('name').value=p.get('name');
+if(p.get('occasion')){ const sel=document.getElementById('occasion'); [...sel.options].forEach(o=>{ if(o.text.includes(p.get('occasion'))) sel.value=o.value||o.text; }); }
+
+function send(){
+  const text=document.getElementById('text').value.trim(), name=document.getElementById('name').value.trim();
+  const city=document.getElementById('city').value.trim(), occ=document.getElementById('occasion').value;
+  const ok=document.getElementById('consent').checked;
+  if(!rating){ alert('Пожалуйста, поставьте оценку ★'); return; }
+  if(text.length<10){ alert('Пожалуйста, напишите несколько слов 💌'); return; }
+  if(!name){ alert('Пожалуйста, укажите ваше имя'); return; }
+  const msg=`⭐ НОВЫЙ ОТЗЫВ · Букет Французской Поэзии\n\n${'★'.repeat(rating)}${'☆'.repeat(5-rating)} (${rating}/5)\n\n«${text}»\n\n👤 ${name}${city?' · '+city:''}\n🎯 ${occ||'—'}\n📢 Публикация: ${ok?'✅ РАЗРЕШЕНА':'❌ не публиковать'}`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
+  document.getElementById('form').classList.add('hidden');
+  document.getElementById('thanks').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

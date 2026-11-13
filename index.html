@@ -673,6 +673,36 @@ audio { display:none; }
     </div>
   </section>
 
+  <!-- AVIS CLIENTS (vrais avis, gérés dans avis-publies.js) -->
+  <section id="avisSection" style="width:100%;display:none;margin-top:36px;">
+    <div style="text-align:center;font-size:11px;letter-spacing:4px;color:rgba(184,150,90,0.55);text-transform:uppercase;margin-bottom:18px;">Отзывы · Avis</div>
+    <div id="avisList" style="display:flex;flex-direction:column;gap:14px;"></div>
+  </section>
+  <div style="text-align:center;margin-top:28px;">
+    <a href="avis.html" style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border:1px solid rgba(184,150,90,0.35);border-radius:50px;color:#f0d898;text-decoration:none;font-size:13px;letter-spacing:0.5px;">⭐ Оставить отзыв · Laisser un avis</a>
+  </div>
+  <script src="avis-publies.js"></script>
+  <script>
+  (function(){
+    var L=window.AVIS_PUBLIES||[]; if(!L.length) return;
+    var box=document.getElementById('avisList');
+    L.forEach(function(a){
+      var c=document.createElement('div');
+      c.style.cssText='background:rgba(184,150,90,0.05);border:1px solid rgba(184,150,90,0.15);border-radius:16px;padding:18px 20px;';
+      var t=document.createElement('div');
+      t.style.cssText="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#f0ebe0;line-height:1.75;margin-bottom:12px;";
+      t.textContent='«'+a.texte+'»';
+      var m=document.createElement('div'); m.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
+      var n=document.createElement('div'); n.style.cssText='font-size:14px;color:#B8965A;letter-spacing:1px;'; n.textContent=a.nom;
+      var s=document.createElement('div'); s.style.cssText='font-size:11px;color:rgba(240,235,224,0.4);letter-spacing:1px;'; s.textContent=[a.ville,a.occasion].filter(Boolean).join(' · ');
+      var r=document.createElement('div'); r.style.cssText='margin-left:auto;font-size:13px;color:#B8965A;letter-spacing:2px;'; var k=Math.max(1,Math.min(5,a.note||5)); r.textContent='★'.repeat(k)+'☆'.repeat(5-k);
+      var w=document.createElement('div'); w.appendChild(n); w.appendChild(s);
+      m.appendChild(w); m.appendChild(r); c.appendChild(t); c.appendChild(m); box.appendChild(c);
+    });
+    document.getElementById('avisSection').style.display='block';
+  })();
+  </script>
+
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-brand">Букет Французской Поэзии</div>
