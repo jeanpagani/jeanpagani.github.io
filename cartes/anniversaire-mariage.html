@@ -77,12 +77,12 @@
   <div class="audio-btn" onclick="toggleAudio()">
     <div class="play-circle" id="playIcon">▶</div>
     <div>
-      <div class="audio-label">🎙️ Голос живой — voix du poète</div>
+      <div class="audio-label" id="audioLabel">🎙️ Голос живой — voix du poète</div>
       <div style="font-size:10px;color:#7a3050;margin-top:2px;">Нажмите · Appuyez pour écouter</div>
     </div>
   </div>
   <audio id="poemAudio" src="poeme-anniversaire-mariage.mp3"></audio>
-  <audio id="bgMusic" src="musique-bg.mp3" loop></audio>
+  <audio id="bgMusic" src="../musique-bg.mp3" loop></audio>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-icon">🌹</div><div class="divider-line"></div></div>
 
@@ -165,10 +165,21 @@ function fadeVol(from,to,ms,cb){
   const steps=40, delay=ms/steps; let i=0; bgMusic.volume=from;
   fadeIv=setInterval(()=>{i++;bgMusic.volume=Math.max(0,Math.min(BASE_VOL,from+(to-from)*i/steps));if(i>=steps){clearInterval(fadeIv);bgMusic.volume=to;if(cb)cb();}},delay);
 }
+// Si l'enregistrement du poème n'existe pas encore, le bouton joue seulement la musique.
+// Dès que poeme-anniversaire-mariage.mp3 sera ajouté dans cartes/, la voix fonctionnera automatiquement.
+let noVoice=false;
+function setNoVoice(){ if(noVoice) return; noVoice=true; document.getElementById('audioLabel').textContent='🎵 Музыка — musique'; }
+audio.addEventListener('error',setNoVoice);
+if(audio.error) setNoVoice();
 function toggleAudio(){
+  if(noVoice){
+    if(!isPlaying){ isPlaying=true; playIcon.textContent='⏸'; bgMusic.volume=BASE_VOL*2; bgMusic.play().catch(()=>{}); }
+    else { isPlaying=false; bgMusic.pause(); playIcon.textContent='▶'; }
+    return;
+  }
   if(!isPlaying){
     isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play().catch(()=>{});
-    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{}));},5000);
+    voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{ if(noVoice){ bgMusic.volume=BASE_VOL*2; } }));},5000);
   }else{
     isPlaying=false;clearTimeout(voiceTimer);clearTimeout(endTimer);clearInterval(fadeIv);
     audio.pause();audio.currentTime=0;bgMusic.pause();bgMusic.volume=BASE_VOL;playIcon.textContent='▶';
