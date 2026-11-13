@@ -138,7 +138,7 @@
     <div class="sel-label">Вы выбрали · Vous avez choisi</div>
     <div class="sel-name" id="selName">—</div>
     <div style="font-size:12px;color:rgba(200,232,255,0.5);margin-bottom:16px;">Louis Yvon écrira un poème en français dans l'univers de ce conte, spécialement pour votre enfant</div>
-    <a id="tgLink" href="https://t.me/LouisYvonPoete" class="btn-tg" target="_blank">📩 Заказать в Telegram</a>
+    <a id="tgLink" href="https://t.me/FrancuzskayaPoeziya" class="btn-tg" target="_blank">📩 Заказать в Telegram</a>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
@@ -160,7 +160,7 @@ function select(el,name,author){
   document.getElementById('selName').textContent=name+' — '+author;
   const box=document.getElementById('selBox');
   box.classList.add('visible');
-  document.getElementById('tgLink').href='https://t.me/LouisYvonPoete?text='+encodeURIComponent('Bonjour Louis Yvon ! Je voudrais un poème inspiré de « '+name+' » pour un enfant. 📖');
+  document.getElementById('tgLink').href='https://t.me/FrancuzskayaPoeziya?text='+encodeURIComponent('Bonjour Louis Yvon ! Je voudrais un poème inspiré de « '+name+' » pour un enfant. 📖');
   box.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 </script>
