@@ -104,7 +104,13 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
       <textarea class="story-area" id="story" placeholder="Например: Я хочу подарить поэм своей жене на годовщину. Мы вместе 10 лет, она из Санкт-Петербурга, любит розы и море…" rows="5"></textarea>
     </div>
 
-    <div class="section" style="animation-delay:0.3s;">
+    <div class="section" id="certSection" style="display:none;animation-delay:0.2s;text-align:center;">
+      <div style="font-size:34px;">🎁</div>
+      <div class="section-title" style="justify-content:center;">Подарочный сертификат</div>
+      <div class="section-hint">Ваш код: <b id="certCode" style="color:#f0d898;font-family:'Courier New',monospace;letter-spacing:2px;"></b><br>Оплата не нужна — просто расскажите вашу историю 💌</div>
+    </div>
+
+    <div class="section" id="tarifSection" style="animation-delay:0.3s;">
       <div class="section-title"><span class="section-num">2</span>Выберите тариф</div>
       <div class="tarif-grid">
         <label class="tarif-box" onclick="selectTarif(this,'standard')">
@@ -212,7 +218,7 @@ function submitForm() {
   if(!selectedTarif){ alert('Пожалуйста, выберите тариф'); return; }
   if(!email||!email.includes('@')){ alert('Пожалуйста, введите корректный email'); return; }
 
-  const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)'};
+  const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)',cert:'🎁 СЕРТИФИКАТ '+certCode+' ('+certFormule+') — проверить оплату'};
 
   const msgText = `🎭 Новый заказ · Букет Французской Поэзии\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
   const waUrl = `https://wa.me/32498574812?text=${encodeURIComponent(msgText)}`;
@@ -236,6 +242,15 @@ function submitForm() {
 
 // Pré-sélection tarif via URL
 const p=new URLSearchParams(window.location.search);
+// Utilisation d'un certificat-cadeau (certificat.html → commande.html?cert=CODE)
+const certCode=(p.get('cert')||'').toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,20);
+const certFormule=({classic:'Классика',premium:'Премиум',luxe:'Люкс'})[p.get('formule')]||'Классика';
+if(certCode){
+  selectedTarif='cert';
+  document.getElementById('tarifSection').style.display='none';
+  document.getElementById('certSection').style.display='flex';
+  document.getElementById('certCode').textContent=certCode+' · '+certFormule;
+}
 if(p.get('tarif')){ const m={standard:0,express:1,flash:2}; const i=m[p.get('tarif')]; if(i!==undefined) setTimeout(()=>document.querySelectorAll('.tarif-box')[i]?.click(),200); }
 </script>
 </body>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подарочный сертификат | Букет Французской Поэзии · Louis Yvon</title>
+<meta name="description" content="Подарочный сертификат на стихотворение на французском языке от поэта Louis Yvon. Идеальный подарок на Новый год.">
+<meta property="og:title" content="🎁 Для вас — подарочный сертификат на французское стихотворение">
+<meta property="og:description" content="Поэт Louis Yvon напишет стихотворение на французском только для вас.">
+<meta property="og:image" content="photo-poete.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ══ CONFIG FACILE À MODIFIER : prix et date limite dans le <script> en bas (TIERS / VALID_UNTIL) ══ */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50%,#08060d 100%); font-family:'Raleway',sans-serif; color:#f0ebe0; overflow-x:hidden; }
+.bg { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.spark { position:absolute; opacity:0; animation:floatSpark var(--d) linear infinite; font-size:var(--s); }
+@keyframes floatSpark { 0%{transform:translateY(0);opacity:0;} 15%{opacity:0.6;} 85%{opacity:0.2;} 100%{transform:translateY(-110vh);opacity:0;} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+@keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+.wrap { position:relative; z-index:10; max-width:560px; margin:0 auto; padding:32px 16px 80px; display:flex; flex-direction:column; gap:24px; }
+.gold { background:linear-gradient(90deg,#7a5a10,#B8965A,#f0d898,#B8965A,#7a5a10); background-size:250%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:shimmer 5s linear infinite; }
+
+.header { text-align:center; padding:20px 0 18px; border-bottom:1px solid rgba(184,150,90,0.25); animation:fadeUp 1s ease forwards; }
+.header-sub { font-size:10px; letter-spacing:4px; color:rgba(184,150,90,0.5); text-transform:uppercase; margin-bottom:10px; }
+.header-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(24px,6vw,34px); letter-spacing:1px; line-height:1.3; }
+.header-fr { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:4px; color:rgba(240,216,152,0.4); margin-top:6px; }
+.header-text { margin-top:14px; font-size:14px; color:rgba(240,235,224,0.6); line-height:1.8; }
+.deadline { display:inline-block; margin-top:14px; padding:6px 16px; border:1px solid rgba(184,150,90,0.35); border-radius:50px; font-size:11px; letter-spacing:1.5px; color:#f0d898; }
+
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; animation:fadeUp 1s ease forwards; }
+.step { text-align:center; background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.12); border-radius:12px; padding:12px 6px; font-size:11px; line-height:1.5; color:rgba(240,235,224,0.6); }
+.step b { display:block; font-size:20px; margin-bottom:4px; }
+
+.section { background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.14); border-radius:18px; padding:22px 18px; display:flex; flex-direction:column; gap:14px; animation:fadeUp 1s ease forwards; }
+.section-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#B8965A; display:flex; align-items:center; gap:10px; }
+.section-num { font-family:'Playfair Display',serif; font-style:italic; font-size:28px; color:rgba(184,150,90,0.25); line-height:1; }
+.hint { font-size:12px; color:rgba(240,235,224,0.4); line-height:1.7; }
+
+.tier { display:flex; align-items:center; gap:14px; background:rgba(184,150,90,0.03); border:2px solid rgba(184,150,90,0.12); border-radius:14px; padding:14px; cursor:pointer; transition:all 0.25s; position:relative; }
+.tier:hover { border-color:rgba(184,150,90,0.3); }
+.tier.selected { border-color:#B8965A; background:rgba(184,150,90,0.1); }
+.tier-emoji { font-size:26px; }
+.tier-info { flex:1; }
+.tier-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#f0d898; }
+.tier-desc { font-size:11px; color:rgba(240,235,224,0.5); line-height:1.6; margin-top:2px; }
+.tier-price { font-family:'Playfair Display',serif; font-size:22px; color:#f0d898; white-space:nowrap; }
+.tier-badge { position:absolute; top:-9px; right:14px; background:#B8965A; color:#08060d; font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; padding:3px 9px; border-radius:50px; }
+
+.field-group { display:flex; flex-direction:column; gap:6px; }
+.field-label { font-size:11px; letter-spacing:2px; color:rgba(184,150,90,0.55); text-transform:uppercase; }
+.field-input { background:rgba(184,150,90,0.04); border:1px solid rgba(184,150,90,0.2); border-radius:10px; padding:12px 14px; color:#f0ebe0; font-family:'Raleway',sans-serif; font-size:15px; outline:none; width:100%; transition:border-color 0.3s; }
+.field-input:focus { border-color:rgba(184,150,90,0.55); }
+.field-input::placeholder { color:rgba(184,150,90,0.3); }
+textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:17px; resize:vertical; min-height:80px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media (max-width:420px){ .row2 { grid-template-columns:1fr; } }
+
+.btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:17px 20px; background:rgba(184,150,90,0.1); border:1.5px solid rgba(184,150,90,0.45); border-radius:16px; color:#f0d898; font-family:'Raleway',sans-serif; font-size:16px; font-weight:600; cursor:pointer; transition:all 0.25s; text-decoration:none; }
+.btn:hover { background:rgba(184,150,90,0.18); border-color:#B8965A; transform:translateY(-1px); }
+.btn.solid { background:linear-gradient(90deg,#9a7a3a,#B8965A,#d8b870); color:#08060d; border-color:transparent; }
+.btn-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.btn-row .btn { font-size:13px; padding:14px 10px; }
+.note { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:rgba(184,150,90,0.5); line-height:1.6; }
+
+/* ══ LE CERTIFICAT ══ */
+.cert { position:relative; background:radial-gradient(ellipse at top,#1d1730 0%,#0d0a16 70%); border:1px solid rgba(184,150,90,0.5); border-radius:6px; padding:34px 24px 28px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 6px #0d0a16, inset 0 0 0 7px rgba(184,150,90,0.35); animation:fadeUp 1s ease forwards; overflow:hidden; }
+.cert::before, .cert::after { content:'⚜'; position:absolute; top:14px; font-size:18px; color:rgba(184,150,90,0.5); }
+.cert::before { left:18px; } .cert::after { right:18px; }
+.cert-top { font-size:10px; letter-spacing:4px; color:rgba(184,150,90,0.6); text-transform:uppercase; }
+.cert-title { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(26px,7vw,36px); margin:10px 0 2px; line-height:1.2; }
+.cert-fr { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; letter-spacing:3px; color:rgba(240,216,152,0.45); }
+.cert-orn { margin:18px auto; width:70%; height:1px; background:linear-gradient(90deg,transparent,#B8965A,transparent); }
+.cert-for { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,235,224,0.45); }
+.cert-to { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(28px,8vw,40px); color:#f0d898; margin:6px 0 4px; word-break:break-word; }
+.cert-gift { font-family:'Cormorant Garamond',serif; font-size:19px; line-height:1.6; color:rgba(240,235,224,0.85); margin:10px auto 0; max-width:420px; }
+.cert-msg { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; line-height:1.6; color:rgba(240,216,152,0.8); margin:16px auto 0; max-width:420px; white-space:pre-line; word-break:break-word; }
+.cert-from { margin-top:12px; font-size:13px; color:rgba(240,235,224,0.55); }
+.cert-code-box { display:inline-block; margin-top:20px; padding:10px 22px; border:1px dashed rgba(184,150,90,0.6); border-radius:8px; }
+.cert-code-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(184,150,90,0.6); }
+.cert-code { font-family:'Courier New',monospace; font-size:22px; letter-spacing:3px; color:#f0d898; margin-top:2px; }
+.cert-foot { margin-top:18px; font-size:11px; color:rgba(240,235,224,0.35); line-height:1.7; }
+.cert-sign { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#B8965A; margin-top:10px; }
+
+.hidden { display:none !important; }
+.footer-brand { font-family:'Cormorant Garamond',serif; font-size:14px; text-align:center; letter-spacing:3px; }
+.back { text-align:center; font-size:12px; } .back a { color:rgba(184,150,90,0.6); text-decoration:none; }
+
+/* ══ IMPRESSION : seul le certificat, en version claire ══ */
+@media print {
+  body { background:#fff !important; }
+  .bg, .no-print { display:none !important; }
+  .wrap { padding:0; max-width:none; }
+  .cert { background:#fbf7ee !important; color:#2a2218; box-shadow:inset 0 0 0 6px #fbf7ee, inset 0 0 0 7px #B8965A; border-color:#B8965A; animation:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .cert .gold, .cert-to, .cert-code, .cert-sign { -webkit-text-fill-color:#8a6a2a; color:#8a6a2a; background:none; animation:none; }
+  .cert-gift, .cert-msg, .cert-from, .cert-for, .cert-foot, .cert-fr { color:#4a3e2c !important; }
+}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+  <!-- ═════════ MODE ACHAT ═════════ -->
+  <div id="buyView">
+    <div class="header">
+      <div class="header-sub">Букет Французской Поэзии · Louis Yvon</div>
+      <div class="header-title gold">Подарочный сертификат<span class="header-fr">Certificat-cadeau</span></div>
+      <div class="header-text">Подарите близкому человеку стихотворение на французском, написанное поэтом <b>только для него</b>. Он сам расскажет свою историю — когда захочет.</div>
+      <div class="deadline" id="deadlineTag">🎄 Идеальный подарок под ёлку</div>
+    </div>
+
+    <div class="steps" style="margin-top:24px;">
+      <div class="step"><b>🎁</b>Вы дарите сертификат</div>
+      <div class="step"><b>💌</b>Получатель рассказывает историю</div>
+      <div class="step"><b>✍️</b>Louis Yvon пишет стихотворение</div>
+    </div>
+
+    <div class="section" style="margin-top:24px;">
+      <div class="section-title"><span class="section-num">1</span>Выберите подарок</div>
+      <div id="tierList" style="display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+
+    <div class="section" style="margin-top:24px;">
+      <div class="section-title"><span class="section-num">2</span>Оформите сертификат</div>
+      <div class="row2">
+        <div class="field-group">
+          <div class="field-label">Для кого</div>
+          <input class="field-input" id="toName" maxlength="40" placeholder="Ирина">
+        </div>
+        <div class="field-group">
+          <div class="field-label">От кого</div>
+          <input class="field-input" id="fromName" maxlength="40" placeholder="Сергей">
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Пожелание (необязательно)</div>
+        <textarea class="field-input" id="wish" maxlength="220" placeholder="С Новым годом, любимая! Пусть этот год будет полон поэзии…"></textarea>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:24px;">
+      <div class="section-title"><span class="section-num">3</span>Ваши контакты</div>
+      <div class="field-group">
+        <div class="field-label">Ваш email</div>
+        <input type="email" class="field-input" id="buyerEmail" placeholder="votre@email.com">
+      </div>
+      <div class="hint">После отправки Louis Yvon пришлёт вам способ оплаты. Сертификат активируется сразу после оплаты.</div>
+    </div>
+
+    <button class="btn solid" style="margin-top:24px;" onclick="buy()">🎁 Заказать сертификат · Commander</button>
+    <div class="note" style="margin-top:12px;">Заказ отправляется в WhatsApp — Louis Yvon отвечает очень быстро</div>
+  </div>
+
+  <!-- ═════════ MODE CERTIFICAT ═════════ -->
+  <div id="certView" class="hidden">
+    <div id="buyerNotice" class="section no-print hidden" style="margin-bottom:22px;text-align:center;">
+      <div style="font-size:40px;">💌</div>
+      <div class="section-title" style="justify-content:center;">Ваш сертификат готов!</div>
+      <div class="hint" style="font-size:13px;">Заказ отправлен Louis Yvon. После оплаты сертификат активируется.<br>Отправьте ссылку получателю или распечатайте сертификат и положите под ёлку 🎄</div>
+    </div>
+
+    <div class="cert" id="cert">
+      <div class="cert-top">Букет Французской Поэзии</div>
+      <div class="cert-title gold">Подарочный сертификат</div>
+      <div class="cert-fr">Certificat-cadeau · Poème sur mesure</div>
+      <div class="cert-orn"></div>
+      <div class="cert-for">Для вас</div>
+      <div class="cert-to" id="cTo"></div>
+      <div class="cert-gift" id="cGift"></div>
+      <div class="cert-msg" id="cMsg"></div>
+      <div class="cert-from" id="cFrom"></div>
+      <div class="cert-code-box">
+        <div class="cert-code-label">Код сертификата</div>
+        <div class="cert-code" id="cCode"></div>
+      </div>
+      <div class="cert-foot" id="cFoot"></div>
+      <div class="cert-sign">Louis Yvon</div>
+    </div>
+
+    <div class="no-print" style="display:flex;flex-direction:column;gap:12px;margin-top:22px;">
+      <a class="btn solid" id="useBtn" href="#">✍️ Использовать сертификат · Utiliser</a>
+      <div class="btn-row" id="buyerTools">
+        <button class="btn" onclick="share()">📤 Поделиться</button>
+        <button class="btn" onclick="window.print()">🖨 Распечатать</button>
+      </div>
+      <div class="note" id="copyNote"></div>
+    </div>
+  </div>
+
+  <div class="back no-print"><a href="index.html">← Букет Французской Поэзии</a></div>
+  <div class="footer-brand gold">Букет Французской Поэзии · Louis Yvon</div>
+</div>
+
+<script>
+/* ══════════ RÉGLAGES (modifiez ici) ══════════ */
+const WHATSAPP = '32498574812';
+const VALID_UNTIL = '31 марта 2027';           // date de validité affichée
+const TIERS = {
+  classic: { emoji:'📜', name:'Классика',  price:590,  desc:'Авторское стихотворение на французском + перевод смысла на русский', gift:'стихотворение на французском языке, написанное поэтом Louis Yvon только для вас' },
+  premium: { emoji:'🎙', name:'Премиум',   price:990,  desc:'Стихотворение + аудиозапись: поэт читает его своим голосом', gift:'стихотворение на французском языке и его аудиозапись голосом поэта Louis Yvon', badge:'Хит' },
+  luxe:    { emoji:'👑', name:'Люкс',      price:1490, desc:'Стихотворение + голос поэта + музыкальная открытка с вашим поэмом', gift:'стихотворение на французском, голос поэта и музыкальную открытку — создано Louis Yvon только для вас' }
+};
+/* ═════════════════════════════════════════════ */
+
+// Étincelles de fond
+const bg=document.getElementById('bg'), sp=['✨','⭐','💫','✦','❄️'];
+for(let i=0;i<18;i++){ const s=document.createElement('div'); s.className='spark'; const d=(Math.random()*10+7).toFixed(1);
+  s.textContent=sp[i%sp.length]; s.style.cssText=`left:${(Math.random()*95+2).toFixed(1)}%;bottom:-40px;--d:${d}s;--s:${(Math.random()*8+7).toFixed(0)}px;animation-delay:-${(Math.random()*d).toFixed(1)}s;`; bg.appendChild(s); }
+
+// Liste des formules
+let tier='premium';
+const list=document.getElementById('tierList');
+Object.entries(TIERS).forEach(([k,t])=>{
+  const el=document.createElement('div'); el.className='tier'+(k===tier?' selected':''); el.dataset.k=k;
+  el.innerHTML=`${t.badge?`<span class="tier-badge">${t.badge}</span>`:''}<span class="tier-emoji">${t.emoji}</span><div class="tier-info"><div class="tier-name">${t.name}</div><div class="tier-desc">${t.desc}</div></div><div class="tier-price">${t.price}₽</div>`;
+  el.onclick=()=>{ document.querySelectorAll('.tier').forEach(x=>x.classList.remove('selected')); el.classList.add('selected'); tier=k; };
+  list.appendChild(el);
+});
+
+// Code unique, lisible (sans 0/O/1/I)
+function makeCode(){ const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', r=new Uint32Array(8); crypto.getRandomValues(r);
+  const c=[...r].map(n=>A[n%A.length]).join(''); return 'LY-'+c.slice(0,4)+'-'+c.slice(4); }
+
+function certUrl(d){ const u=new URL(location.href.split('?')[0].split('#')[0]);
+  Object.entries(d).forEach(([k,v])=>{ if(v) u.searchParams.set(k,v); }); return u.toString(); }
+
+function buy(){
+  const to=document.getElementById('toName').value.trim(), from=document.getElementById('fromName').value.trim();
+  const msg=document.getElementById('wish').value.trim(), email=document.getElementById('buyerEmail').value.trim();
+  if(!to){ alert('Пожалуйста, укажите, для кого сертификат 🎁'); return; }
+  if(!email||!email.includes('@')){ alert('Пожалуйста, введите корректный email'); return; }
+  const code=makeCode(), t=TIERS[tier];
+  const link=certUrl({c:code,t:tier,to,from,m:msg});
+  const text=`🎁 НОВЫЙ СЕРТИФИКАТ · Букет Французской Поэзии\n\n🔑 КОД: ${code}\n💰 ${t.name} — ${t.price}₽\n👤 Для: ${to}\n✍️ От: ${from||'—'}\n💬 Пожелание: ${msg||'—'}\n📧 Email покупателя: ${email}\n\n🔗 ${link}\n\n(Отправьте способ оплаты и отметьте код как оплаченный)`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,'_blank');
+  history.replaceState(null,'',link+'#new');
+  showCert(true);
+}
+
+function showCert(isBuyer){
+  const p=new URLSearchParams(location.search), t=TIERS[p.get('t')]||TIERS.classic;
+  document.getElementById('cTo').textContent=p.get('to')||'';
+  document.getElementById('cGift').textContent='Этот сертификат дарит вам '+t.gift+'.';
+  document.getElementById('cMsg').textContent=p.get('m')?'«'+p.get('m')+'»':'';
+  document.getElementById('cFrom').textContent=p.get('from')?'— '+p.get('from'):'';
+  document.getElementById('cCode').textContent=p.get('c');
+  document.getElementById('cFoot').innerHTML=`Формула «${t.name}» · действителен до ${VALID_UNTIL}<br>Нажмите «Использовать» или напишите поэту, указав код`;
+  document.getElementById('useBtn').href=`commande.html?cert=${encodeURIComponent(p.get('c'))}&formule=${encodeURIComponent(p.get('t')||'classic')}`;
+  document.getElementById('buyerNotice').classList.toggle('hidden',!isBuyer);
+  document.getElementById('buyView').classList.add('hidden');
+  document.getElementById('certView').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+async function share(){
+  const url=location.href.split('#')[0], to=new URLSearchParams(location.search).get('to')||'';
+  const data={title:'🎁 Подарочный сертификат', text:`${to}, для вас подарок — стихотворение на французском от поэта Louis Yvon 🌹`, url};
+  try{ if(navigator.share){ await navigator.share(data); return; } }catch(e){ return; }
+  try{ await navigator.clipboard.writeText(url); document.getElementById('copyNote').textContent='Ссылка скопирована ✓ — отправьте её получателю'; }
+  catch(e){ prompt('Скопируйте ссылку:',url); }
+}
+
+if(new URLSearchParams(location.search).get('c')) showCert(location.hash==='#new');
+</script>
+</body>
+</html>
