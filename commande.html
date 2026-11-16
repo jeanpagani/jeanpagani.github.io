@@ -101,8 +101,8 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
 
     <div class="section" style="animation-delay:0.1s;">
       <div class="section-title"><span class="section-num">1</span>Расскажите мне вашу историю</div>
-      <div class="section-hint">Кому посвящён поэм? Что произошло? Какую эмоцию вы хотите передать?<br>Любой язык — русский, французский, английский.</div>
-      <textarea class="story-area" id="story" placeholder="Например: Я хочу подарить поэм своей жене на годовщину. Мы вместе 10 лет, она из Санкт-Петербурга, любит розы и море…" rows="5"></textarea>
+      <div class="section-hint">Кому посвящено стихотворение? Что произошло? Какую эмоцию вы хотите передать?<br>Любой язык — русский, французский, английский.</div>
+      <textarea class="story-area" id="story" placeholder="Например: Я хочу подарить стихотворение своей жене на годовщину. Мы вместе 10 лет, она из Санкт-Петербурга, любит розы и море…" rows="5"></textarea>
     </div>
 
     <div class="section" id="certSection" style="display:none;animation-delay:0.2s;text-align:center;">
@@ -130,7 +130,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
     </div>
 
     <div class="section" style="animation-delay:0.4s;">
-      <div class="section-title"><span class="section-num">3</span>Как вам отправить поэм?</div>
+      <div class="section-title"><span class="section-num">3</span>Как вам отправить стихотворение?</div>
       <div class="field-group">
         <div class="field-label">Ваш email</div>
         <input type="email" class="field-input" id="email" placeholder="votre@email.com">
@@ -139,7 +139,7 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
         <div class="field-label">Имя получателя (необязательно)</div>
         <input type="text" class="field-input" id="prenom" placeholder="Ирина, Наташа, Анна…">
       </div>
-      <div class="section-hint">Вы получите ссылку + личный код доступа к поэму. Никто другой не сможет его прочитать.</div>
+      <div class="section-hint">Вы получите ссылку + личный код доступа к стихотворению. Никто другой не сможет его прочитать.</div>
     </div>
 
     <div class="divider"><div class="divider-line"></div><div class="divider-icon">✦</div><div class="divider-line"></div></div>
@@ -153,9 +153,9 @@ body { min-height:100vh; background:linear-gradient(160deg,#08060d 0%,#141020 50
     <div class="success-icon">💌</div>
     <div class="success-title">Votre histoire est entre mes mains</div>
     <div class="success-text">
-      Ваш заказ получен. Луи Ивон уже работает над вашим поэмом.<br><br>
+      Ваш заказ получен. Луи Ивон уже работает над вашим стихотворением.<br><br>
       Вы получите на email <strong id="successEmail"></strong><br>
-      ссылку + личный код доступа к вашему поэму.<br><br>
+      ссылку + личный код доступа к вашему стихотворению.<br><br>
       <span style="color:rgba(184,150,90,0.5);font-family:'Cormorant Garamond',serif;font-style:italic;">Merci de me confier votre histoire — Louis Yvon</span>
     </div>
     <div id="gmailFallback" style="display:none;width:100%;max-width:440px;margin-top:10px;">
@@ -229,7 +229,7 @@ function submitForm() {
   window.open(waUrl, '_blank');
 
   const summaryText = msgText;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ поэма · Букет Французской Поэзии')}&body=${encodeURIComponent(msgText)}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ стихотворения · Букет Французской Поэзии')}&body=${encodeURIComponent(msgText)}`;
 
   setTimeout(()=>{
     document.getElementById('successEmail').textContent=email;
