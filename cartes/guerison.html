@@ -102,11 +102,11 @@
   <div class="audio-btn" onclick="toggleAudio()">
     <div class="play-circle" id="playIcon">▶</div>
     <div>
-      <div class="audio-label">🎙️ Голос живой — voix du poète</div>
+      <div class="audio-label" id="audioLabel">🎙️ Голос живой — voix du poète</div>
       <div style="font-size:10px;color:#204830;margin-top:2px;">Нажмите · Appuyez pour écouter</div>
     </div>
   </div>
-  <audio id="poemAudio" src="../poeme.mp3"></audio>
+  <audio id="poemAudio" src="poeme-guerison.mp3"></audio>
   <audio id="bgMusic" src="musique-guerison.mp3" loop></audio>
   <div class="divider"><div class="divider-line"></div><div class="divider-icon">🌿</div><div class="divider-line"></div></div>
   <div class="poem-ru">
@@ -191,7 +191,17 @@ function fadeVol(from,to,ms,cb){
   const steps=40,delay=ms/steps;let i=0;bgMusic.volume=from;
   fadeIv=setInterval(()=>{i++;bgMusic.volume=Math.max(0,Math.min(BASE_VOL,from+(to-from)*i/steps));if(i>=steps){clearInterval(fadeIv);bgMusic.volume=to;if(cb)cb();}},delay);
 }
+// Tant que l'enregistrement de ce poème n'existe pas, le bouton joue seulement la musique.
+let noVoice=false;
+function setNoVoice(){ if(noVoice) return; noVoice=true; var l=document.getElementById('audioLabel'); if(l) l.textContent='🎵 Музыка — musique'; }
+audio.addEventListener('error',setNoVoice);
+if(audio.error) setNoVoice();
 function toggleAudio(){
+  if(noVoice){
+    if(!isPlaying){ isPlaying=true; playIcon.textContent='⏸'; bgMusic.volume=BASE_VOL*2; bgMusic.play().catch(()=>{}); }
+    else { isPlaying=false; bgMusic.pause(); playIcon.textContent='▶'; }
+    return;
+  }
   if(!isPlaying){
     isPlaying=true;playIcon.textContent='⏸';bgMusic.volume=BASE_VOL;bgMusic.play().catch(()=>{});
     voiceTimer=setTimeout(()=>{fadeVol(BASE_VOL,LOW_VOL,2000,()=>audio.play().catch(()=>{}));},5000);
