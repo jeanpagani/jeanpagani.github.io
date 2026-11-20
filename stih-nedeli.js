@@ -329,5 +329,11 @@ window.STIKHI_NEDELI = [
   "e": "⭐",
   "ru": ["Январская ночь в снегу засыпает,","Звезда загорается над крышами вновь,","Вдали колокольный звон напевает,","И в каждом окне — свеча и любовь."],
   "fr": ["La nuit de janvier s'habille de neige,","Une étoile s'allume au-dessus des toits,","Les cloches au loin chantent leur cortège,","Et chaque fenêtre garde une bougie pour toi."]
+ },
+ {
+  "u": "cartes/vieux-nouvel-an.html",
+  "e": "🕰️",
+  "ru": ["И снова Новый год стучится в двери —","Как старый друг, нежданный, но родной.","Он снег приносит, радость и поверье:","«Загадывай желанье — шанс второй!»"],
+  "fr": ["Le Nouvel An revient frapper à la porte,","Comme un vieil ami qu'on n'attendait plus,","Il apporte la neige et la joie qui réconforte,","Une seconde chance pour les vœux perdus."]
  }
 ];

@@ -757,6 +757,7 @@ audio { display:none; }
       <a href="cartes/jubile.html" target="_blank" class="occ-card"><span class="occ-emoji">🏵️</span><span class="occ-name">Юбилей</span></a>
       <a href="cartes/nouvel-an.html" target="_blank" class="occ-card"><span class="occ-emoji">🎄</span><span class="occ-name">Новый год</span></a>
       <a href="cartes/noel.html" target="_blank" class="occ-card"><span class="occ-emoji">⭐</span><span class="occ-name">Рождество</span></a>
+      <a href="cartes/vieux-nouvel-an.html" target="_blank" class="occ-card"><span class="occ-emoji">🕰️</span><span class="occ-name">Старый Новый год</span></a>
       <a href="cartes/fete-meres.html" target="_blank" class="occ-card"><span class="occ-emoji">👩</span><span class="occ-name">День матери</span></a>
       <a href="cartes/papa.html" target="_blank" class="occ-card"><span class="occ-emoji">👨</span><span class="occ-name">Папе</span></a>
       <a href="cartes/famille.html" target="_blank" class="occ-card"><span class="occ-emoji">🌼</span><span class="occ-name">День семьи</span></a>
@@ -910,6 +911,7 @@ async function partagerSite(){
   function fetes(an){ return [
     {d:new Date(an,0,1),  n:'Новый год',                    e:'🎄', u:'cartes/nouvel-an.html'},
     {d:new Date(an,0,7),  n:'Рождество Христово',           e:'⭐', u:'cartes/noel.html'},
+    {d:new Date(an,0,14), n:'Старый Новый год',             e:'🕰️', u:'cartes/vieux-nouvel-an.html'},
     {d:new Date(an,1,14), n:'День святого Валентина',       e:'💌', u:'cartes/saint-valentin.html'},
     {d:new Date(an,1,23), n:'День защитника Отечества',     e:'🎖️', u:'cartes/23-fevrier.html'},
     {d:new Date(an,2,8),  n:'Международный женский день',   e:'🌸', u:'cartes/fete-femme.html'},
