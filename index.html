@@ -558,6 +558,14 @@ audio { display:none; }
 .stamp-ru{display:block;font-size:20px;letter-spacing:6px;}
 .stamp-fr{display:block;font-size:10px;letter-spacing:5px;margin-top:2px;}
 @keyframes stampIn{from{opacity:0;transform:rotate(-8deg) scale(1.8);}to{opacity:0.92;transform:rotate(-8deg) scale(1);}}
+
+/* ── QR code (ordinateur) / bouton Partager (téléphone) ── */
+.qr-desktop{display:none;flex-direction:column;align-items:center;gap:10px;margin-bottom:22px;}
+.share-mobile{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:24px;}
+.share-btn{font-family:'Raleway',sans-serif;font-size:14px;letter-spacing:1px;color:#f0d898;background:rgba(184,150,90,0.08);border:1.5px solid rgba(184,150,90,0.5);border-radius:50px;padding:12px 26px;cursor:pointer;transition:all .25s;}
+.share-btn:hover,.share-btn:active{background:rgba(184,150,90,0.18);border-color:#B8965A;}
+.share-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,216,152,0.6);letter-spacing:.5px;}
+@media (min-width:900px) and (hover:hover) and (pointer:fine){ .qr-desktop{display:flex;} .share-mobile{display:none;} }
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jeanpagani.github.io/">
@@ -728,9 +736,13 @@ audio { display:none; }
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:22px;">
+    <div class="qr-desktop">
       <img src="qr-site.png" alt="QR-код сайта Французская Поэзия" width="132" height="132" style="border-radius:12px;border:2px solid rgba(184,150,90,0.55);box-shadow:0 0 24px rgba(184,150,90,0.18);">
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,216,152,0.7);letter-spacing:1px;">Поделитесь сайтом · QR-код</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,216,152,0.7);letter-spacing:1px;">Отсканируйте, чтобы открыть на телефоне</div>
+    </div>
+    <div class="share-mobile">
+      <button type="button" class="share-btn" onclick="partagerSite()">📤 Поделиться сайтом</button>
+      <div class="share-note" id="shareNote">Отправьте стихи другу ✨</div>
     </div>
     <div class="footer-brand">Французская Поэзия<br>Louis Yvon</div>
     <div class="footer-sub" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;letter-spacing:1px;text-transform:none;margin-top:6px;">Французские стихи с русским сердцем</div>
@@ -807,6 +819,16 @@ voiceAudio.onended = () => {
   fadeVol(BG_VOL, 0, 3000, ()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
 };
 
+</script>
+<script>
+async function partagerSite(){
+  var url='https://jeanpagani.github.io/';
+  var data={title:'Французская Поэзия · Louis Yvon',text:'Французские стихи с русским сердцем 🌹',url:url};
+  var note=document.getElementById('shareNote');
+  try{ if(navigator.share){ await navigator.share(data); return; } }catch(e){ return; }
+  try{ await navigator.clipboard.writeText(url); note.textContent='Ссылка скопирована ✓'; }
+  catch(e){ prompt('Скопируйте ссылку:',url); }
+}
 </script>
 </body>
 </html>
