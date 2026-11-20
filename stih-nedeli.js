@@ -335,5 +335,11 @@ window.STIKHI_NEDELI = [
   "e": "🕰️",
   "ru": ["И снова Новый год стучится в двери —","Как старый друг, нежданный, но родной.","Он снег приносит, радость и поверье:","«Загадывай желанье — шанс второй!»"],
   "fr": ["Le Nouvel An revient frapper à la porte,","Comme un vieil ami qu'on n'attendait plus,","Il apporte la neige et la joie qui réconforte,","Une seconde chance pour les vœux perdus."]
+ },
+ {
+  "u": "cartes/tatiana.html",
+  "e": "✒️",
+  "ru": ["Татьяна — как музыка, нежное имя,","Его сам Пушкин сердцем воспел.","Письмо по-французски — словами простыми —","Признанье, что век пережить сумел."],
+  "fr": ["Tatiana, ton nom chante comme un poème,","Pouchkine l'a écrit à l'encre du cœur,","Ta lettre en français fut un aveu suprême","Et tout un pays en garde la douceur."]
  }
 ];
