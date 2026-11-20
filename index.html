@@ -566,6 +566,16 @@ audio { display:none; }
 .share-btn:hover,.share-btn:active{background:rgba(184,150,90,0.18);border-color:#B8965A;}
 .share-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(240,216,152,0.6);letter-spacing:.5px;}
 @media (min-width:900px) and (hover:hover) and (pointer:fine){ .qr-desktop{display:flex;} .share-mobile{display:none;} }
+
+/* ── Prochaine fête ── */
+.next-fete{display:flex;align-items:center;gap:14px;width:100%;max-width:420px;margin:0 auto 26px;padding:12px 18px;border:1px solid rgba(184,150,90,0.4);border-radius:16px;background:linear-gradient(135deg,rgba(184,150,90,0.12),rgba(184,150,90,0.03));text-decoration:none;color:#f0ebe0;transition:all .25s;animation:fadeUp 1.2s ease forwards .6s;opacity:0;}
+.next-fete:hover{border-color:#B8965A;background:linear-gradient(135deg,rgba(184,150,90,0.2),rgba(184,150,90,0.06));}
+.nf-emoji{font-size:30px;flex-shrink:0;}
+.nf-txt{flex:1;display:flex;flex-direction:column;gap:2px;text-align:left;}
+.nf-label{font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(184,150,90,0.75);}
+.nf-name{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#f0d898;line-height:1.25;}
+.nf-when{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(240,235,224,0.7);}
+.nf-arrow{color:#B8965A;font-size:18px;flex-shrink:0;}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jeanpagani.github.io/">
@@ -597,6 +607,17 @@ audio { display:none; }
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;letter-spacing:4px;text-align:center;color:rgba(240,216,152,0.75);margin-top:2px;">poème · cadeau · amour</div>
     </div>
   </nav>
+
+  <!-- PROCHAINE FÊTE (calculée automatiquement) -->
+  <a id="nextFete" class="next-fete" href="#" target="_blank" style="display:none;">
+    <span class="nf-emoji" id="nfEmoji">🌹</span>
+    <span class="nf-txt">
+      <span class="nf-label">Ближайший праздник</span>
+      <span class="nf-name" id="nfName"></span>
+      <span class="nf-when" id="nfWhen"></span>
+    </span>
+    <span class="nf-arrow">→</span>
+  </a>
 
   <!-- HERO -->
   <section class="hero">
@@ -829,6 +850,34 @@ async function partagerSite(){
   try{ await navigator.clipboard.writeText(url); note.textContent='Ссылка скопирована ✓'; }
   catch(e){ prompt('Скопируйте ссылку:',url); }
 }
+</script>
+<script>
+// ── Prochaine fête russe : calculée chaque jour, aucune mise à jour nécessaire ──
+(function(){
+  var MOIS=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  function nDimanche(an,mois,n){ var d=new Date(an,mois,1); var dec=(7-d.getDay())%7; return new Date(an,mois,1+dec+7*(n-1)); }
+  function dernierDimanche(an,mois){ var d=new Date(an,mois+1,0); return new Date(an,mois,d.getDate()-d.getDay()); }
+  function fetes(an){ return [
+    {d:new Date(an,0,1),  n:'Новый год',                    e:'🎄', u:'cartes/nouvel-an.html'},
+    {d:new Date(an,1,14), n:'День святого Валентина',       e:'💌', u:'cartes/saint-valentin.html'},
+    {d:new Date(an,1,23), n:'День защитника Отечества',     e:'🎖️', u:'cartes/23-fevrier.html'},
+    {d:new Date(an,2,8),  n:'Международный женский день',   e:'🌸', u:'cartes/fete-femme.html'},
+    {d:new Date(an,6,8),  n:'День семьи, любви и верности', e:'🌼', u:'cartes/famille.html'},
+    {d:new Date(an,9,5),  n:'День учителя',                 e:'📖', u:'cartes/enseignant.html'},
+    {d:nDimanche(an,9,3), n:'День отца',                    e:'👨', u:'cartes/papa.html'},
+    {d:dernierDimanche(an,10), n:'День матери',             e:'👩', u:'cartes/fete-meres.html'}
+  ]; }
+  function jours(n){ var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return 'день'; if(m10>=2&&m10<=4&&(m100<12||m100>14)) return 'дня'; return 'дней'; }
+  var now=new Date(), auj=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var liste=fetes(auj.getFullYear()).concat(fetes(auj.getFullYear()+1)).filter(function(f){return f.d>=auj;}).sort(function(a,b){return a.d-b.d;});
+  var f=liste[0]; if(!f) return;
+  var diff=Math.round((f.d-auj)/86400000);
+  var quand = diff===0 ? 'Сегодня! 🎉' : diff===1 ? 'Завтра · '+f.d.getDate()+' '+MOIS[f.d.getMonth()] : f.d.getDate()+' '+MOIS[f.d.getMonth()]+' · через '+diff+' '+jours(diff);
+  document.getElementById('nfEmoji').textContent=f.e;
+  document.getElementById('nfName').textContent=f.n;
+  document.getElementById('nfWhen').textContent=quand;
+  var a=document.getElementById('nextFete'); a.href=f.u; a.style.display='flex';
+})();
 </script>
 </body>
 </html>
