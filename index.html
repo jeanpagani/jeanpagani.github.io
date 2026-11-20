@@ -576,6 +576,16 @@ audio { display:none; }
 .nf-name{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#f0d898;line-height:1.25;}
 .nf-when{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(240,235,224,0.7);}
 .nf-arrow{color:#B8965A;font-size:18px;flex-shrink:0;}
+
+/* ── Стих недели ── */
+.stih-nedeli{width:100%;margin-top:6px;padding:24px 12px 22px;border:1px solid rgba(184,150,90,0.3);border-radius:20px;background:radial-gradient(ellipse at top,rgba(184,150,90,0.1),rgba(184,150,90,0.02) 70%);text-align:center;animation:fadeUp 1.2s ease forwards 1.3s;opacity:0;}
+.sn-label{font-family:'Raleway',sans-serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#f0d898;}
+.sn-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:2px;color:rgba(240,216,152,0.5);margin-top:2px;}
+.sn-emoji{font-size:30px;margin:14px 0 8px;}
+.sn-ru{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,4.3vw,20px);line-height:1.8;color:#f0ebe0;}
+.sn-fr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,3.8vw,16px);line-height:1.8;color:rgba(240,216,152,0.65);margin-top:14px;padding-top:14px;border-top:1px solid rgba(184,150,90,0.18);}
+.sn-link{display:inline-block;margin-top:16px;padding:9px 22px;border:1px solid rgba(184,150,90,0.45);border-radius:50px;color:#f0d898;text-decoration:none;font-family:'Raleway',sans-serif;font-size:13px;letter-spacing:.5px;transition:all .25s;}
+.sn-link:hover{background:rgba(184,150,90,0.14);border-color:#B8965A;}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jeanpagani.github.io/">
@@ -690,6 +700,18 @@ audio { display:none; }
 
   <!-- SÉPARATEUR -->
   <div class="sep" style="--d:1.2s;margin-top:36px;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
+
+  <!-- STIH NEDELI (poème de la semaine, change automatiquement chaque lundi) -->
+  <section id="stihNedeli" class="stih-nedeli" style="display:none;">
+    <div class="sn-label">✦ Стих недели ✦</div>
+    <div class="sn-sub">Poème de la semaine</div>
+    <div class="sn-emoji" id="snEmoji"></div>
+    <div class="sn-ru" id="snRu"></div>
+    <div class="sn-fr" id="snFr"></div>
+    <a class="sn-link" id="snLink" href="#" target="_blank">Читать полностью →</a>
+  </section>
+
+  <div class="sep" style="--d:1.3s;margin-top:36px;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
 
   <!-- OCCASIONS + CTA -->
   <section class="occasions-section">
@@ -877,6 +899,22 @@ async function partagerSite(){
   document.getElementById('nfName').textContent=f.n;
   document.getElementById('nfWhen').textContent=quand;
   var a=document.getElementById('nextFete'); a.href=f.u; a.style.display='flex';
+})();
+</script>
+<script src="stih-nedeli.js"></script>
+<script>
+// ── Стих недели : un poème différent chaque semaine (change le lundi) ──
+(function(){
+  var L=window.STIKHI_NEDELI||[]; if(!L.length) return;
+  var now=new Date(), lundi=new Date(now.getFullYear(),now.getMonth(),now.getDate()-((now.getDay()+6)%7));
+  var semaine=Math.floor(Math.round(lundi.getTime()/86400000 + 3)/7); // n° de semaine continu
+  var p=L[((semaine%L.length)+L.length)%L.length];
+  function lignes(el,arr){ arr.forEach(function(l,i){ if(i) el.appendChild(document.createElement('br')); el.appendChild(document.createTextNode(l)); }); }
+  document.getElementById('snEmoji').textContent=p.e;
+  lignes(document.getElementById('snRu'),p.ru);
+  lignes(document.getElementById('snFr'),p.fr);
+  document.getElementById('snLink').href=p.u;
+  document.getElementById('stihNedeli').style.display='block';
 })();
 </script>
 </body>
