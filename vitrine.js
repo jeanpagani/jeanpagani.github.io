@@ -21,7 +21,7 @@ var MODE_VITRINE = true;
     '#orderCta, svg:has(+ .price-grid), .price-grid, .price-box, .price-hint,' +
     '.btn-order-main, .btn-order, .cta-block, .btn-tg, .btn-boosty, #tgLink,' +
     'a[href*="commande.html"], a[href*="certificat.html"], a[href*="avis.html"],' +
-    'a[href*="telegram.html"], a[href*="t.me/"], a[href*="wa.me/"], a[href*="boosty"],' +
+    'a[href*="telegram.html"], a[href*="t.me/"]:not([data-libre]), a[href*="wa.me/"], a[href*="boosty"],' +
     'button[onclick*="openDrawer"], button[onclick*="commande"], [data-vente]' +
     '{ display:none !important; }' +
     '[data-vitrine] { display:block !important; }';  // textes de remplacement
