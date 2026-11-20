@@ -552,6 +552,12 @@ body {
 /* ── AUDIO ── */
 audio { display:none; }
 
+
+/* ── Tampon « Скоро » (phase préparatoire) ── */
+.stamp-soon{margin:0 auto 10px;padding:6px 18px 5px;border:3px double rgba(214,72,60,0.85);border-radius:8px;color:rgba(214,72,60,0.9);text-align:center;transform:rotate(-8deg);width:max-content;line-height:1.05;text-transform:uppercase;font-family:'Raleway',sans-serif;font-weight:600;box-shadow:0 0 0 1px rgba(214,72,60,0.15) inset;opacity:0.92;mix-blend-mode:screen;animation:stampIn 0.6s cubic-bezier(.2,1.6,.4,1) 0.4s both;}
+.stamp-ru{display:block;font-size:20px;letter-spacing:6px;}
+.stamp-fr{display:block;font-size:10px;letter-spacing:5px;margin-top:2px;}
+@keyframes stampIn{from{opacity:0;transform:rotate(-8deg) scale(1.8);}to{opacity:0.92;transform:rotate(-8deg) scale(1);}}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jeanpagani.github.io/">
@@ -571,6 +577,9 @@ audio { display:none; }
   <!-- NAV -->
   <nav class="top-nav" style="justify-content:center;border-bottom:none;margin-bottom:28px;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div data-vitrine class="stamp-soon" style="display:none;" aria-label="Скоро · Bientôt">
+        <span class="stamp-ru">Скоро</span><span class="stamp-fr">bientôt</span>
+      </div>
       <div style="display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,16px);max-width:100%;">
         <span style="font-size:clamp(15px,3vw,22px);color:#B8965A;opacity:0.7;animation:brandglow 3s ease-in-out infinite;flex-shrink:0;">⚜</span>
         <div class="brand" style="font-size:clamp(24px,6.2vw,38px);letter-spacing:clamp(0.5px,0.3vw,2px);min-width:0;background:linear-gradient(90deg,#B8965A,#f0d898,#e8c87a,#f0d898,#B8965A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.25;text-align:center;">Подарите индивидуальный<br>французский стих в&nbsp;один&nbsp;клик</div>
@@ -578,7 +587,6 @@ audio { display:none; }
       </div>
       <div style="font-family:'Raleway',sans-serif;font-size:clamp(14px,3.8vw,17px);letter-spacing:clamp(3px,1vw,6px);text-transform:uppercase;text-align:center;background:linear-gradient(90deg,#B8965A,#fff8e7,#f0d898,#fff8e7,#B8965A);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;">стихи · подарок · любовь</div>
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;letter-spacing:4px;text-align:center;color:rgba(240,216,152,0.75);margin-top:2px;">poème · cadeau · amour</div>
-      <div data-vitrine style="display:none;margin:10px auto 0;padding:5px 16px;border:1px solid rgba(240,216,152,0.45);border-radius:50px;font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f0d898;text-align:center;width:max-content;">Скоро · Bientôt</div>
     </div>
   </nav>
 
