@@ -222,7 +222,8 @@ function submitForm() {
   const tl={standard:'Стандарт 490₽ (до 24ч)',express:'Экспресс 790₽ (за 2ч)',flash:'Флэш 1290₽ (30 мин)',cert:'🎁 СЕРТИФИКАТ '+certCode+' ('+certFormule+') — проверить оплату'};
 
   const msgText = `🎭 Новый заказ · Французская Поэзия\n\n📖 ИСТОРИЯ:\n${story}\n\n💰 ТАРИФ: ${tl[selectedTarif]||selectedTarif}\n📧 EMAIL: ${email}\n👤 ПОЛУЧАТЕЛЬ: ${prenom||'не указано'}`;
-  const waUrl = `https://wa.me/32498574812?text=${encodeURIComponent(msgText)}`;
+  const WHATSAPP = ""; // numéro retiré pendant la préparation — à définir au lancement
+  const waUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msgText)}`;
 
   if(currentAudio) currentAudio.pause();
 
