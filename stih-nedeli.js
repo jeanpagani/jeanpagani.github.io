@@ -323,5 +323,11 @@ window.STIKHI_NEDELI = [
    "Avec patience et des mots si doux,",
    "Vous nous avez appris à prendre notre envol."
   ]
+ },
+ {
+  "u": "cartes/noel.html",
+  "e": "⭐",
+  "ru": ["Январская ночь в снегу засыпает,","Звезда загорается над крышами вновь,","Вдали колокольный звон напевает,","И в каждом окне — свеча и любовь."],
+  "fr": ["La nuit de janvier s'habille de neige,","Une étoile s'allume au-dessus des toits,","Les cloches au loin chantent leur cortège,","Et chaque fenêtre garde une bougie pour toi."]
  }
 ];
