@@ -230,7 +230,8 @@ function submitForm() {
   window.open(waUrl, '_blank');
 
   const summaryText = msgText;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=jeanlouispagani.info%40gmail.com&su=${encodeURIComponent('🎭 Новый заказ стихотворения · Французская Поэзия')}&body=${encodeURIComponent(msgText)}`;
+  const CONTACT_EMAIL = ""; // e-mail retiré pendant la préparation — à définir au lancement
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent('🎭 Новый заказ стихотворения · Французская Поэзия')}&body=${encodeURIComponent(msgText)}`;
 
   setTimeout(()=>{
     document.getElementById('successEmail').textContent=email;
