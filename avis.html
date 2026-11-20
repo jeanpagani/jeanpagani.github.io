@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Оставить отзыв | Букет Французской Поэзии · Louis Yvon</title>
+<title>Оставить отзыв | Французская Поэзия · Louis Yvon</title>
 <meta name="description" content="Поделитесь впечатлениями о вашем стихотворении от Louis Yvon.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -54,7 +54,7 @@ textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:18px; l
 <div class="bg" id="bg"></div>
 <div class="wrap">
   <div class="header">
-    <div class="header-sub">Букет Французской Поэзии · Louis Yvon</div>
+    <div class="header-sub">Французская Поэзия · Louis Yvon</div>
     <div class="header-title gold">Оставить отзыв<span class="header-fr">Votre avis</span></div>
     <div class="header-text">Спасибо, что доверили мне вашу историю.<br>Мне очень важно узнать, что вы почувствовали.</div>
   </div>
@@ -103,8 +103,8 @@ textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:18px; l
     <a class="btn" href="index.html" style="max-width:340px;">← На главную</a>
   </div>
 
-  <div class="back"><a href="index.html">← Букет Французской Поэзии</a></div>
-  <div class="footer-brand gold">Букет Французской Поэзии · Louis Yvon</div>
+  <div class="back"><a href="index.html">← Французская Поэзия</a></div>
+  <div class="footer-brand gold">Французская Поэзия · Louis Yvon</div>
 </div>
 <script>
 const WHATSAPP='32498574812';
@@ -129,7 +129,7 @@ function send(){
   if(!rating){ alert('Пожалуйста, поставьте оценку ★'); return; }
   if(text.length<10){ alert('Пожалуйста, напишите несколько слов 💌'); return; }
   if(!name){ alert('Пожалуйста, укажите ваше имя'); return; }
-  const msg=`⭐ НОВЫЙ ОТЗЫВ · Букет Французской Поэзии\n\n${'★'.repeat(rating)}${'☆'.repeat(5-rating)} (${rating}/5)\n\n«${text}»\n\n👤 ${name}${city?' · '+city:''}\n🎯 ${occ||'—'}\n📢 Публикация: ${ok?'✅ РАЗРЕШЕНА':'❌ не публиковать'}`;
+  const msg=`⭐ НОВЫЙ ОТЗЫВ · Французская Поэзия\n\n${'★'.repeat(rating)}${'☆'.repeat(5-rating)} (${rating}/5)\n\n«${text}»\n\n👤 ${name}${city?' · '+city:''}\n🎯 ${occ||'—'}\n📢 Публикация: ${ok?'✅ РАЗРЕШЕНА':'❌ не публиковать'}`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
   document.getElementById('form').classList.add('hidden');
   document.getElementById('thanks').classList.remove('hidden');

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подарочный сертификат | Букет Французской Поэзии · Louis Yvon</title>
+<title>Подарочный сертификат | Французская Поэзия · Louis Yvon</title>
 <meta name="description" content="Подарочный сертификат на стихотворение на французском языке от поэта Louis Yvon. Идеальный подарок на Новый год.">
 <meta property="og:title" content="🎁 Для вас — подарочный сертификат на французское стихотворение">
 <meta property="og:description" content="Поэт Louis Yvon напишет стихотворение на французском только для вас.">
@@ -105,7 +105,7 @@ textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:17px; r
   <!-- ═════════ MODE ACHAT ═════════ -->
   <div id="buyView">
     <div class="header">
-      <div class="header-sub">Букет Французской Поэзии · Louis Yvon</div>
+      <div class="header-sub">Французская Поэзия · Louis Yvon</div>
       <div class="header-title gold">Подарочный сертификат<span class="header-fr">Certificat-cadeau</span></div>
       <div class="header-text">Подарите близкому человеку стихотворение на французском, написанное поэтом <b>только для него</b>. Он сам расскажет свою историю — когда захочет.</div>
       <div class="deadline" id="deadlineTag">🎄 Идеальный подарок под ёлку</div>
@@ -162,7 +162,7 @@ textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:17px; r
     </div>
 
     <div class="cert" id="cert">
-      <div class="cert-top">Букет Французской Поэзии</div>
+      <div class="cert-top">Французская Поэзия</div>
       <div class="cert-title gold">Подарочный сертификат</div>
       <div class="cert-fr">Certificat-cadeau · Poème sur mesure</div>
       <div class="cert-orn"></div>
@@ -189,8 +189,8 @@ textarea.field-input { font-family:'Cormorant Garamond',serif; font-size:17px; r
     </div>
   </div>
 
-  <div class="back no-print"><a href="index.html">← Букет Французской Поэзии</a></div>
-  <div class="footer-brand gold">Букет Французской Поэзии · Louis Yvon</div>
+  <div class="back no-print"><a href="index.html">← Французская Поэзия</a></div>
+  <div class="footer-brand gold">Французская Поэзия · Louis Yvon</div>
 </div>
 
 <script>
@@ -233,7 +233,7 @@ function buy(){
   if(!email||!email.includes('@')){ alert('Пожалуйста, введите корректный email'); return; }
   const code=makeCode(), t=TIERS[tier];
   const link=certUrl({c:code,t:tier,to,from,m:msg});
-  const text=`🎁 НОВЫЙ СЕРТИФИКАТ · Букет Французской Поэзии\n\n🔑 КОД: ${code}\n💰 ${t.name} — ${t.price}₽\n👤 Для: ${to}\n✍️ От: ${from||'—'}\n💬 Пожелание: ${msg||'—'}\n📧 Email покупателя: ${email}\n\n🔗 ${link}\n\n(Отправьте способ оплаты и отметьте код как оплаченный)`;
+  const text=`🎁 НОВЫЙ СЕРТИФИКАТ · Французская Поэзия\n\n🔑 КОД: ${code}\n💰 ${t.name} — ${t.price}₽\n👤 Для: ${to}\n✍️ От: ${from||'—'}\n💬 Пожелание: ${msg||'—'}\n📧 Email покупателя: ${email}\n\n🔗 ${link}\n\n(Отправьте способ оплаты и отметьте код как оплаченный)`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,'_blank');
   history.replaceState(null,'',link+'#new');
   showCert(true);

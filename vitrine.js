@@ -52,7 +52,7 @@ var MODE_VITRINE = true;
         '<div style="font-family:\'Playfair Display\',serif;font-style:italic;font-size:34px;color:#f0d898;">Скоро</div>' +
         '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:18px;letter-spacing:4px;color:rgba(240,216,152,0.5);">Bientôt</div>' +
         '<div style="max-width:400px;font-size:15px;line-height:1.8;color:rgba(240,235,224,0.65);">Эта страница скоро откроется.<br>А пока — слушайте стихи и смотрите видео.</div>' +
-        '<a href="' + racine + 'index.html" style="margin-top:8px;padding:14px 28px;border:1.5px solid rgba(184,150,90,0.45);border-radius:50px;color:#f0d898;text-decoration:none;font-size:14px;">← Букет Французской Поэзии</a>';
+        '<a href="' + racine + 'index.html" style="margin-top:8px;padding:14px 28px;border:1.5px solid rgba(184,150,90,0.45);border-radius:50px;color:#f0d898;text-decoration:none;font-size:14px;">← Французская Поэзия</a>';
       document.body.appendChild(d);
     }
   });
