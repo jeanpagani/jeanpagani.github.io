@@ -586,6 +586,13 @@ audio { display:none; }
 .sn-fr{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,3.8vw,16px);line-height:1.8;color:rgba(240,216,152,0.65);margin-top:14px;padding-top:14px;border-top:1px solid rgba(184,150,90,0.18);}
 .sn-link{display:inline-block;margin-top:16px;padding:9px 22px;border:1px solid rgba(184,150,90,0.45);border-radius:50px;color:#f0d898;text-decoration:none;font-family:'Raleway',sans-serif;font-size:13px;letter-spacing:.5px;transition:all .25s;}
 .sn-link:hover{background:rgba(184,150,90,0.14);border-color:#B8965A;}
+
+/* ── Слово дня ── */
+.mot-jour{width:100%;margin-top:16px;padding:18px 16px;border:1px dashed rgba(184,150,90,0.4);border-radius:18px;text-align:center;background:rgba(184,150,90,0.03);animation:fadeUp 1.2s ease forwards 1.4s;opacity:0;}
+.mj-label{font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,216,152,0.8);}
+.mj-word{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(26px,7vw,32px);color:#f0d898;margin-top:10px;line-height:1.2;}
+.mj-pron{font-family:'Raleway',sans-serif;font-size:14px;letter-spacing:1px;color:rgba(240,235,224,0.55);margin-top:4px;}
+.mj-tr{font-family:'Cormorant Garamond',serif;font-size:20px;color:#f0ebe0;margin-top:6px;}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jeanpagani.github.io/">
@@ -709,6 +716,14 @@ audio { display:none; }
     <div class="sn-ru" id="snRu"></div>
     <div class="sn-fr" id="snFr"></div>
     <a class="sn-link" id="snLink" href="#" target="_blank">Читать полностью →</a>
+  </section>
+
+  <!-- MOT DU JOUR (change automatiquement chaque jour) -->
+  <section id="motJour" class="mot-jour" style="display:none;">
+    <div class="mj-label">🇫🇷 Французское слово дня</div>
+    <div class="mj-word" id="mjWord"></div>
+    <div class="mj-pron" id="mjPron"></div>
+    <div class="mj-tr" id="mjTr"></div>
   </section>
 
   <div class="sep" style="--d:1.3s;margin-top:36px;"><div class="sep-line"></div><div class="sep-icon">✦</div><div class="sep-line"></div></div>
@@ -915,6 +930,19 @@ async function partagerSite(){
   lignes(document.getElementById('snFr'),p.fr);
   document.getElementById('snLink').href=p.u;
   document.getElementById('stihNedeli').style.display='block';
+})();
+</script>
+<script src="mot-du-jour.js"></script>
+<script>
+// ── Слово дня : un mot différent chaque jour ──
+(function(){
+  var L=window.MOTS_DU_JOUR||[]; if(!L.length) return;
+  var n=new Date(), jour=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/86400000);
+  var m=L[jour%L.length];
+  document.getElementById('mjWord').textContent=m.f;
+  document.getElementById('mjPron').textContent='[ '+m.p+' ]';
+  document.getElementById('mjTr').textContent='— '+m.r;
+  document.getElementById('motJour').style.display='block';
 })();
 </script>
 </body>
