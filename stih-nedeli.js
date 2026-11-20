@@ -341,5 +341,11 @@ window.STIKHI_NEDELI = [
   "e": "✒️",
   "ru": ["Татьяна — как музыка, нежное имя,","Его сам Пушкин сердцем воспел.","Письмо по-французски — словами простыми —","Признанье, что век пережить сумел."],
   "fr": ["Tatiana, ton nom chante comme un poème,","Pouchkine l'a écrit à l'encre du cœur,","Ta lettre en français fut un aveu suprême","Et tout un pays en garde la douceur."]
+ },
+ {
+  "u": "cartes/maslenitsa.html",
+  "e": "🥞",
+  "ru": ["Солнце вернулось румяным блином,","Зима прощается в песнях, в кострах,","Пляшем по снегу, смеёмся, поём —","И мёдом, и счастьем пахнет в домах."],
+  "fr": ["Le soleil revient, rond comme une crêpe d'or,","L'hiver fait ses adieux dans les chants et les feux,","On danse sur la neige, on rit, on chante encore,","Et chaque table sent le miel et les jours heureux."]
  }
 ];

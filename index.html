@@ -772,6 +772,7 @@ audio { display:none; }
       <a href="cartes/guerison.html" target="_blank" class="occ-card"><span class="occ-emoji">🤒🛌</span><span class="occ-name">Выздоровление</span></a>
       <a href="cartes/fete-femme.html" target="_blank" class="occ-card"><span class="occ-emoji">🌸</span><span class="occ-name">8 Марта</span></a>
       <a href="cartes/23-fevrier.html" target="_blank" class="occ-card"><span class="occ-emoji">🎖️</span><span class="occ-name">23 Февраля</span></a>
+      <a href="cartes/maslenitsa.html" target="_blank" class="occ-card"><span class="occ-emoji">🥞</span><span class="occ-name">Масленица</span></a>
       <a href="cartes/collegue.html" target="_blank" class="occ-card"><span class="occ-emoji">💼</span><span class="occ-name">Коллеге</span></a>
       <a href="cartes/anniversaire-mariage.html" target="_blank" class="occ-card"><span class="occ-emoji">🥂</span><span class="occ-name">Годовщина свадьбы</span></a>
       <a data-vente href="cartes/poeme-sur-mesure.html" target="_blank" class="occ-card"><span class="occ-emoji">✍️</span><span class="occ-name">Стихи на заказ</span></a>
@@ -915,6 +916,7 @@ async function partagerSite(){
     {d:new Date(an,0,7),  n:'Рождество Христово',           e:'⭐', u:'cartes/noel.html'},
     {d:new Date(an,0,14), n:'Старый Новый год',             e:'🕰️', u:'cartes/vieux-nouvel-an.html'},
     {d:new Date(an,0,25), n:'Татьянин день',                e:'✒️', u:'cartes/tatiana.html'},
+    {d:decale(paques(an),-55), fin:decale(paques(an),-49), n:'Масленица', e:'🥞', u:'cartes/maslenitsa.html'},
     {d:new Date(an,1,14), n:'День святого Валентина',       e:'💌', u:'cartes/saint-valentin.html'},
     {d:new Date(an,1,23), n:'День защитника Отечества',     e:'🎖️', u:'cartes/23-fevrier.html'},
     {d:new Date(an,2,8),  n:'Международный женский день',   e:'🌸', u:'cartes/fete-femme.html'},
@@ -923,12 +925,16 @@ async function partagerSite(){
     {d:nDimanche(an,9,3), n:'День отца',                    e:'👨', u:'cartes/papa.html'},
     {d:dernierDimanche(an,10), n:'День матери',             e:'👩', u:'cartes/fete-meres.html'}
   ]; }
+  // Pâques orthodoxe (calendrier julien + 13 jours, valable 1900–2099)
+  function paques(an){ var a=an%4,b=an%7,c=an%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7,m=Math.floor((d+e+114)/31),j=((d+e+114)%31)+1; return new Date(an,m-1,j+13); }
+  function decale(d,n){ return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n); }
   function jours(n){ var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return 'день'; if(m10>=2&&m10<=4&&(m100<12||m100>14)) return 'дня'; return 'дней'; }
   var now=new Date(), auj=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  var liste=fetes(auj.getFullYear()).concat(fetes(auj.getFullYear()+1)).filter(function(f){return f.d>=auj;}).sort(function(a,b){return a.d-b.d;});
+  var liste=fetes(auj.getFullYear()).concat(fetes(auj.getFullYear()+1)).filter(function(f){return (f.fin||f.d)>=auj;}).sort(function(a,b){return a.d-b.d;});
   var f=liste[0]; if(!f) return;
   var diff=Math.round((f.d-auj)/86400000);
-  var quand = diff===0 ? 'Сегодня! 🎉' : diff===1 ? 'Завтра · '+f.d.getDate()+' '+MOIS[f.d.getMonth()] : f.d.getDate()+' '+MOIS[f.d.getMonth()]+' · через '+diff+' '+jours(diff);
+  if(f.fin && diff<=0){ diff=0; var quand='Сейчас! 🎉 · до '+f.fin.getDate()+' '+MOIS[f.fin.getMonth()]; }
+  else var quand = diff===0 ? 'Сегодня! 🎉' : diff===1 ? 'Завтра · '+f.d.getDate()+' '+MOIS[f.d.getMonth()] : f.d.getDate()+' '+MOIS[f.d.getMonth()]+' · через '+diff+' '+jours(diff);
   document.getElementById('nfEmoji').textContent=f.e;
   document.getElementById('nfName').textContent=f.n;
   document.getElementById('nfWhen').textContent=quand;
