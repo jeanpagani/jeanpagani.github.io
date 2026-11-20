@@ -347,5 +347,11 @@ window.STIKHI_NEDELI = [
   "e": "🥞",
   "ru": ["Солнце вернулось румяным блином,","Зима прощается в песнях, в кострах,","Пляшем по снегу, смеёмся, поём —","И мёдом, и счастьем пахнет в домах."],
   "fr": ["Le soleil revient, rond comme une crêpe d'or,","L'hiver fait ses adieux dans les chants et les feux,","On danse sur la neige, on rit, on chante encore,","Et chaque table sent le miel et les jours heureux."]
+ },
+ {
+  "u": "cartes/paques.html",
+  "e": "🕊️",
+  "ru": ["Пасхальным утром звонят колокола,","Весна одевается в светлый наряд,","«Христос воскресе!» — и радость пришла:","«Воистину воскресе!» — сердца говорят."],
+  "fr": ["Au matin de Pâques les cloches s'éveillent,","Le printemps se couvre d'un manteau de clarté,","« Le Christ est ressuscité ! » — et la joie qui veille","Répond dans chaque cœur : « Il est vraiment ressuscité ! »"]
  }
 ];
