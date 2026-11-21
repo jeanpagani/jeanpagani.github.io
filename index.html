@@ -40,7 +40,7 @@ a{color:inherit}
 .gold-shine{background:linear-gradient(90deg,#b8965a,#f0d898,#fff3d0,#f0d898,#b8965a);background-size:250%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 6s linear infinite}
 
 /* En-tête */
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top{display:flex;align-items:center;justify-content:flex-end;gap:12px}
 .brand{font-weight:800;font-size:15px;letter-spacing:.2px}
 .brand em{font-family:var(--serif);font-weight:600}
 .stamp{border:3.5px double var(--stamp);color:var(--stamp);font-weight:800;font-size:16px;letter-spacing:4px;padding:6px 14px 5px;border-radius:8px;text-align:center;line-height:1.1;transform:rotate(7deg);animation:stampIn .6s cubic-bezier(.2,1.6,.4,1) .4s both}
@@ -159,7 +159,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
 
   <!-- En-tête -->
   <div class="top reveal">
-    <div class="brand">Французская <em class="gold-shine">Поэзия</em></div>
     <div data-vitrine class="stamp" style="display:none;" aria-label="Скоро открытие">СКОРО<small>ОТКРЫТИЕ</small></div>
   </div>
 
