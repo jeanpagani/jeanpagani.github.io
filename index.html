@@ -78,8 +78,9 @@ a{color:inherit}
 @keyframes orbit{from{transform:rotate(0) translateX(86px)}to{transform:rotate(360deg) translateX(86px)}}
 .poet-txt{display:flex;flex-direction:column;align-items:center;min-width:0}
 .poet-txt b{font-size:20px;font-weight:800}.poet-txt span{color:var(--muted);font-size:14px}
-.bars{display:flex;align-items:flex-end;gap:2px;height:14px;margin-top:4px}
+.bars{display:flex;visibility:hidden;align-items:flex-end;gap:2px;height:14px;margin-top:4px}
 .bars i{width:3px;height:4px;border-radius:2px;background:var(--gold);opacity:.5}
+.bars.on{visibility:visible}
 .bars.on i{opacity:1;animation:bar .8s ease-in-out infinite alternate}
 .bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}.bars i:nth-child(4){animation-delay:.45s}.bars i:nth-child(5){animation-delay:.6s}
 @keyframes bar{from{height:3px}to{height:14px}}
