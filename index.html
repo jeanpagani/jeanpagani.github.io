@@ -64,26 +64,26 @@ a{color:inherit}
 .chip{font-size:12px;font-weight:700;letter-spacing:1px;padding:6px 12px;border-radius:50px;background:var(--soft);text-transform:uppercase}
 .chip.fr{background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--poem);font-style:italic;font-size:14px;letter-spacing:.5px;text-transform:none;font-weight:500}
 
-.poet{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 14px 12px 12px}
-.ph{position:relative;width:64px;height:64px;flex-shrink:0}
-.ph img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.poet{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:radial-gradient(ellipse at 50% 30%,rgba(216,184,112,.12),transparent 70%),var(--card);border:1px solid var(--line);border-radius:24px;padding:26px 16px 20px}
+.ph{position:relative;width:150px;height:150px;flex-shrink:0}
+.ph img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.45)}
 .ph{--lvl:0}
-.ph::before{content:"";position:absolute;inset:-4px;border-radius:50%;box-shadow:0 0 calc(6px + var(--lvl) * 26px) calc(var(--lvl) * 6px) rgba(240,216,152,calc(.15 + var(--lvl) * .75));opacity:0;transition:opacity .4s;pointer-events:none}
+.ph::before{content:"";position:absolute;inset:-6px;border-radius:50%;box-shadow:0 0 calc(10px + var(--lvl) * 46px) calc(var(--lvl) * 12px) rgba(240,216,152,calc(.15 + var(--lvl) * .75));opacity:0;transition:opacity .4s;pointer-events:none}
 .ph.speaking::before{opacity:1}
 .ph.speaking img{animation:breathe 4.5s ease-in-out infinite;border-color:var(--gold-hi)}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 .ph.speaking .orb{animation-duration:4s}
-.ph .orb{position:absolute;top:50%;left:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 6px var(--gold-hi);animation:orbit 9s linear infinite}
+.ph .orb{position:absolute;top:50%;left:50%;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 6px var(--gold-hi);animation:orbit 9s linear infinite}
 .ph .orb.b{animation-delay:-3s}.ph .orb.c{animation-delay:-6s}
-@keyframes orbit{from{transform:rotate(0) translateX(38px)}to{transform:rotate(360deg) translateX(38px)}}
-.poet-txt{display:flex;flex-direction:column;min-width:0}
-.poet-txt b{font-size:15px}.poet-txt span{color:var(--muted);font-size:13px}
+@keyframes orbit{from{transform:rotate(0) translateX(86px)}to{transform:rotate(360deg) translateX(86px)}}
+.poet-txt{display:flex;flex-direction:column;align-items:center;min-width:0}
+.poet-txt b{font-size:20px;font-weight:800}.poet-txt span{color:var(--muted);font-size:14px}
 .bars{display:flex;align-items:flex-end;gap:2px;height:14px;margin-top:4px}
 .bars i{width:3px;height:4px;border-radius:2px;background:var(--gold);opacity:.5}
 .bars.on i{opacity:1;animation:bar .8s ease-in-out infinite alternate}
 .bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}.bars i:nth-child(4){animation-delay:.45s}.bars i:nth-child(5){animation-delay:.6s}
 @keyframes bar{from{height:3px}to{height:14px}}
-.play{margin-left:auto;width:48px;height:48px;border:0;border-radius:50%;background:var(--gold);color:#141626;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;box-shadow:0 0 0 0 rgba(216,184,112,.5);animation:pulse 2.6s ease-out infinite}
+.play{width:auto;height:52px;padding:0 24px 0 16px;gap:6px;border-radius:50px!important;font:inherit;font-weight:800;font-size:15px;border:0;border-radius:50%;background:var(--gold);color:#141626;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;box-shadow:0 0 0 0 rgba(216,184,112,.5);animation:pulse 2.6s ease-out infinite}
 .play .ms{font-size:30px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(216,184,112,.45)}70%{box-shadow:0 0 0 12px rgba(216,184,112,0)}100%{box-shadow:0 0 0 0 rgba(216,184,112,0)}}
 
@@ -191,7 +191,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
         <span>Французский поэт</span>
         <div class="bars" id="audioBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
-      <button type="button" class="play" id="playBtn" onclick="toggleVoice()" aria-label="Слушать представление поэта"><span class="ms" id="playIcon">play_arrow</span></button>
+      <button type="button" class="play" id="playBtn" onclick="toggleVoice()" aria-label="Слушать представление поэта"><span class="ms" id="playIcon">play_arrow</span><span class="play-lbl">Слушать</span></button>
     </div>
     <audio id="voiceAudio" src="presentation-poete.mp3" preload="auto"></audio>
     <audio id="bgMusic" src="musique-bg.mp3" loop preload="auto"></audio>
