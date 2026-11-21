@@ -191,7 +191,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
       <div class="ph"><img id="poetPhoto" src="photo-poete.jpg" alt="Louis Yvon"><span class="orb"></span><span class="orb b"></span><span class="orb c"></span></div>
       <div class="poet-txt">
         <b>Louis Yvon</b>
-        <span>Французский поэт</span>
+        <span>Французский поэт · <em style="font-family:var(--poem);font-style:italic;color:var(--gold-hi);font-size:16px">влюблённый в поэзию</em></span>
         <div class="bars" id="audioBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <p class="subs" id="subs" aria-live="polite"></p>
@@ -337,11 +337,10 @@ function fadeVol(from,to,ms,cb){ const steps=40,delay=ms/steps; let i=0; bgMusic
   const iv=setInterval(()=>{ i++; bgMusic.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps)); if(i>=steps){ clearInterval(iv); bgMusic.volume=to; if(cb)cb(); } },delay); }
 // ── Sous-titres russes synchronisés sur la voix ──
 const SUBS=[
-  [1.0, 5.4, 'Здравствуйте! Меня зовут Луи Ивон, я французский поэт.'],
-  [5.6, 9.5, 'Уже более тридцати лет я пишу стихи.'],
-  [10.0,16.7,'Здесь я дарю вам стихи на французском — с переводом на русский, а иногда и своим голосом.'],
-  [17.2,21.1,'Красота слов — для вас, влюблённых в этот язык.'],
-  [21.2,24.6,'Добро пожаловать в мой мир.']
+  [1.0, 5.6, 'Здравствуйте! Меня зовут Луи Ивон, я французский поэт.'],
+  [5.8, 12.6,'Здесь я дарю вам стихи на французском — с переводом на русский, а иногда и своим голосом.'],
+  [13.0,16.9,'Красота слов — для вас, влюблённых в этот язык.'],
+  [17.0,20.4,'Добро пожаловать в мой мир.']
 ];
 const subsEl=document.getElementById('subs'); let curSub=-1;
 function showSub(){ const t=voiceAudio.currentTime; let i=SUBS.findIndex(x=>t>=x[0]&&t<x[1]);
