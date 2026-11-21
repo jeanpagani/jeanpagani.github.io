@@ -28,10 +28,18 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 a{color:inherit}
 .ms{font-family:'Material Symbols Rounded';font-weight:300;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;display:inline-block;white-space:nowrap;font-feature-settings:'liga';-webkit-font-feature-settings:'liga'}
 
-/* Poussière d'or (fond) */
+/* ══ Fond poétique : poussière d'or, lettres qui flottent, pétales, scintillements ══ */
 .dust{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.dust i{position:absolute;bottom:-10px;width:var(--s);height:var(--s);border-radius:50%;background:var(--gold-hi);box-shadow:0 0 6px rgba(240,216,152,.8);opacity:0;animation:rise var(--d) linear infinite}
-@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:.7}85%{opacity:.25}100%{transform:translateY(-105vh);opacity:0}}
+.dust::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 30% at 20% 15%,rgba(216,184,112,.10),transparent 70%),radial-gradient(35% 28% at 85% 60%,rgba(120,90,200,.10),transparent 70%),radial-gradient(30% 25% at 30% 90%,rgba(200,70,100,.08),transparent 70%);animation:aurora 26s ease-in-out infinite alternate}
+@keyframes aurora{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-4%,3%) scale(1.08)}}
+.dust i{position:absolute;bottom:-10px;width:var(--s);height:var(--s);border-radius:50%;background:var(--gold-hi);box-shadow:0 0 8px rgba(240,216,152,.9);opacity:0;animation:rise var(--d) linear infinite}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}15%{opacity:.85}60%{transform:translate(var(--x),-60vh)}85%{opacity:.3}100%{transform:translate(0,-105vh);opacity:0}}
+.dust .lt{position:absolute;top:-60px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:var(--s);color:var(--gold-hi);opacity:0;text-shadow:0 0 12px rgba(240,216,152,.55);animation:drift var(--d) linear infinite}
+@keyframes drift{0%{transform:translate(0,0) rotate(-15deg);opacity:0}12%{opacity:.5}50%{transform:translate(var(--x),55vh) rotate(10deg)}88%{opacity:.35}100%{transform:translate(0,112vh) rotate(25deg);opacity:0}}
+.dust .pt{position:absolute;top:-30px;width:var(--s);height:calc(var(--s) * .7);border-radius:80% 0 80% 0;background:linear-gradient(135deg,#f0a0b4,#b8304f);opacity:0;animation:petal var(--d) linear infinite;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+@keyframes petal{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:.75}50%{transform:translate(var(--x),55vh) rotate(220deg)}90%{opacity:.5}100%{transform:translate(0,112vh) rotate(420deg);opacity:0}}
+.dust .tw{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 6px #fff,0 0 14px var(--gold-hi);animation:twinkle var(--d) ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:.9;transform:scale(1.3)}}
 
 .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:22px max(18px,env(safe-area-inset-right,0px)) 40px max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:24px}
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -291,12 +299,19 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
   document.getElementById('avisSection').style.display='flex';
 })();
 
-// ── Poussière d'or (discrète) ──
+// ── Fond poétique : poussière d'or, lettres, pétales, scintillements ──
 (function(){
-  var d=document.getElementById('dust');
-  for(var i=0;i<16;i++){ var e=document.createElement('i'); var dur=(Math.random()*14+14).toFixed(1);
-    e.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;--s:'+(Math.random()*2+1.5).toFixed(1)+'px;--d:'+dur+'s;animation-delay:-'+(Math.random()*dur).toFixed(1)+'s';
-    d.appendChild(e); }
+  var d=document.getElementById('dust'), R=Math.random;
+  function add(cls,css,txt){ var e=document.createElement(cls?'span':'i'); if(cls) e.className=cls; if(txt) e.textContent=txt; e.style.cssText=css; d.appendChild(e); }
+  for(var i=0;i<22;i++){ var t=(R()*14+14).toFixed(1);
+    add('', 'left:'+(R()*100).toFixed(1)+'%;--s:'+(R()*2.2+1.4).toFixed(1)+'px;--x:'+((R()-.5)*60).toFixed(0)+'px;--d:'+t+'s;animation-delay:-'+(R()*t).toFixed(1)+'s'); }
+  var L=['a','é','ж','я','♡','ê','л','ç','ю','ô','&','ё','à','м'];
+  for(var j=0;j<10;j++){ var t2=(R()*16+22).toFixed(1);
+    add('lt','left:'+(R()*95).toFixed(1)+'%;--s:'+(R()*14+16).toFixed(0)+'px;--x:'+((R()-.5)*80).toFixed(0)+'px;--d:'+t2+'s;animation-delay:-'+(R()*t2).toFixed(1)+'s', L[j%L.length]); }
+  for(var k=0;k<6;k++){ var t3=(R()*10+18).toFixed(1);
+    add('pt','left:'+(R()*95).toFixed(1)+'%;--s:'+(R()*6+9).toFixed(0)+'px;--x:'+((R()-.5)*120).toFixed(0)+'px;--d:'+t3+'s;animation-delay:-'+(R()*t3).toFixed(1)+'s'); }
+  for(var m=0;m<14;m++){ var t4=(R()*3+2.5).toFixed(1);
+    add('tw','left:'+(R()*100).toFixed(1)+'%;top:'+(R()*100).toFixed(1)+'%;--d:'+t4+'s;animation-delay:-'+(R()*t4).toFixed(1)+'s'); }
 })();
 
 // ── Lecteur : musique puis voix du poète ──
