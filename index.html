@@ -166,14 +166,13 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
   <!-- Hero -->
   <section class="hero reveal" style="animation-delay:.1s">
     <h1>Подарите индивидуальный <em class="gold-shine">французский стих</em> в&nbsp;один&nbsp;клик</h1>
-    <p class="lead">Стихи на французском с переводом на русский и голосом поэта.</p>
-    <div class="chips"><span class="chip">Стихи</span><span class="chip">Подарок</span><span class="chip">Любовь</span><span class="chip fr">poème · cadeau · amour</span></div>
+    <div class="chips"><span class="chip">Стихи</span><span class="chip">Подарок</span><span class="chip">Любовь</span></div>
 
     <div class="poet">
       <div class="ph"><img id="poetPhoto" src="photo-poete.jpg" alt="Louis Yvon"><span class="orb"></span><span class="orb b"></span><span class="orb c"></span></div>
       <div class="poet-txt">
         <b>Louis Yvon</b>
-        <span>Французский поэт · Представление поэта</span>
+        <span>Французский поэт</span>
         <div class="bars" id="audioBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <button type="button" class="play" id="playBtn" onclick="toggleVoice()" aria-label="Слушать представление поэта"><span class="ms" id="playIcon">play_arrow</span></button>
@@ -199,9 +198,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
 
   <!-- Bio -->
   <section class="bio reveal" style="animation-delay:.25s">
-    <h2>О поэте</h2>
-    <p>Я — <b>Луи Ивон</b>, французский поэт. Более 30 лет я создаю <b>стихотворения на французском</b> — живые, авторские, только для вас.</p>
-    <p>Любой повод — любовь, юбилей, свадьба, ребёнок, расставание… Вы рассказываете вашу историю — я облекаю её в слова французской классики.</p>
+    <p>Ваша история — в стихах на французском. <b>Лично для вас.</b></p>
   </section>
 
   <!-- Événements -->
@@ -239,11 +236,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
 
   <!-- Poème de la semaine -->
   <section id="stihNedeli" class="reveal" style="display:none;flex-direction:column;gap:14px">
-    <h2>Стих недели <span style="font-family:var(--poem);font-style:italic;text-transform:none;letter-spacing:.5px;font-weight:500">· poème de la semaine</span></h2>
+    <h2>Стих недели</h2>
     <div class="poem">
       <span id="snEmoji" hidden></span>
       <div class="ru" id="snRu"></div>
-      <div class="fr" id="snFr"></div>
+      <div class="fr" id="snFr" hidden></div>
       <a id="snLink" href="#" target="_blank">Читать полностью →</a>
     </div>
   </section>
@@ -269,10 +266,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
     </div>
     <div class="share">
       <button type="button" class="share-btn" onclick="partagerSite()"><span class="ms">ios_share</span>Поделиться сайтом</button>
-      <div class="motto" id="shareNote">Отправьте стихи другу</div>
+      <div class="motto" id="shareNote"></div>
     </div>
     <div class="fb">Французская <em class="gold-shine" style="font-family:var(--serif)">Поэзия</em> · Louis Yvon</div>
-    <div class="motto">Французские стихи с русским сердцем</div>
     <div style="opacity:.7">Poète Français · © 2027</div>
   </footer>
 
