@@ -61,7 +61,7 @@ a{color:inherit}
 .hero h1 em{font-family:var(--serif);font-weight:600}
 .lead{color:var(--muted)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.chip{font-size:12px;font-weight:700;letter-spacing:1px;padding:6px 12px;border-radius:50px;background:var(--soft);text-transform:uppercase}
+.chip{font-size:12px;font-weight:700;letter-spacing:1.5px;padding:6px 14px;border-radius:50px;background:transparent;border:1px solid var(--gold);color:var(--gold-hi);text-transform:uppercase}
 .chip.fr{background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--poem);font-style:italic;font-size:14px;letter-spacing:.5px;text-transform:none;font-weight:500}
 
 .poet{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:radial-gradient(ellipse at 50% 30%,rgba(216,184,112,.12),transparent 70%),var(--card);border:1px solid var(--line);border-radius:24px;padding:26px 16px 20px}
@@ -318,7 +318,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
   function add(cls,css,txt){ var e=document.createElement(cls?'span':'i'); if(cls) e.className=cls; if(txt) e.textContent=txt; e.style.cssText=css; d.appendChild(e); }
   for(var i=0;i<22;i++){ var t=(R()*14+14).toFixed(1);
     add('', 'left:'+(R()*100).toFixed(1)+'%;--s:'+(R()*2.2+1.4).toFixed(1)+'px;--x:'+((R()-.5)*60).toFixed(0)+'px;--d:'+t+'s;animation-delay:-'+(R()*t).toFixed(1)+'s'); }
-  var L=['a','é','ж','я','♡','ê','л','ç','ю','ô','&','ё','à','м'];
+  var L=['a','é','ж','я','ê','л','ç','ю','ô','ё','à','м','è','ш'];
   for(var j=0;j<10;j++){ var t2=(R()*16+22).toFixed(1);
     add('lt','left:'+(R()*95).toFixed(1)+'%;--s:'+(R()*14+16).toFixed(0)+'px;--x:'+((R()-.5)*80).toFixed(0)+'px;--d:'+t2+'s;animation-delay:-'+(R()*t2).toFixed(1)+'s', L[j%L.length]); }
   for(var k=0;k<6;k++){ var t3=(R()*10+18).toFixed(1);
