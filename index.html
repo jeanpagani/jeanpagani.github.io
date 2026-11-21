@@ -67,6 +67,12 @@ a{color:inherit}
 .poet{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 14px 12px 12px}
 .ph{position:relative;width:64px;height:64px;flex-shrink:0}
 .ph img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.ph{--lvl:0}
+.ph::before{content:"";position:absolute;inset:-4px;border-radius:50%;box-shadow:0 0 calc(6px + var(--lvl) * 26px) calc(var(--lvl) * 6px) rgba(240,216,152,calc(.15 + var(--lvl) * .75));opacity:0;transition:opacity .4s;pointer-events:none}
+.ph.speaking::before{opacity:1}
+.ph.speaking img{animation:breathe 4.5s ease-in-out infinite;border-color:var(--gold-hi)}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.ph.speaking .orb{animation-duration:4s}
 .ph .orb{position:absolute;top:50%;left:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 6px var(--gold-hi);animation:orbit 9s linear infinite}
 .ph .orb.b{animation-delay:-3s}.ph .orb.c{animation-delay:-6s}
 @keyframes orbit{from{transform:rotate(0) translateX(38px)}to{transform:rotate(360deg) translateX(38px)}}
@@ -322,7 +328,25 @@ const audioBars=document.getElementById('audioBars');
 let playing=false, voiceTimer=null; const BG_VOL=0.28;
 function fadeVol(from,to,ms,cb){ const steps=40,delay=ms/steps; let i=0; bgMusic.volume=from;
   const iv=setInterval(()=>{ i++; bgMusic.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps)); if(i>=steps){ clearInterval(iv); bgMusic.volume=to; if(cb)cb(); } },delay); }
+// ── Photo vivante : halo qui suit le volume de la voix ──
+const ph=document.querySelector('.ph'); let actx=null, analyser=null, buf=null, raf=0, lvl=0;
+function initAnalyser(){
+  if(actx) return; try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    actx=new AC(); const src=actx.createMediaElementSource(voiceAudio); analyser=actx.createAnalyser(); analyser.fftSize=512;
+    buf=new Uint8Array(analyser.fftSize); src.connect(analyser); analyser.connect(actx.destination);
+  }catch(e){ actx=null; analyser=null; }
+}
+function loop(){
+  if(analyser){ analyser.getByteTimeDomainData(buf); let sum=0; for(let i=0;i<buf.length;i++){ const v=(buf[i]-128)/128; sum+=v*v; }
+    const rms=Math.sqrt(sum/buf.length); lvl=lvl*0.8+Math.min(1,rms*5)*0.2; }
+  else { lvl=0.35+0.25*Math.sin(Date.now()/350); }
+  ph.style.setProperty('--lvl',lvl.toFixed(3)); raf=requestAnimationFrame(loop);
+}
+voiceAudio.addEventListener('play',()=>{ ph.classList.add('speaking'); if(actx&&actx.state==='suspended') actx.resume(); cancelAnimationFrame(raf); loop(); });
+['pause','ended'].forEach(ev=>voiceAudio.addEventListener(ev,()=>{ ph.classList.remove('speaking'); cancelAnimationFrame(raf); ph.style.setProperty('--lvl','0'); }));
 function toggleVoice(){
+  initAnalyser(); if(actx&&actx.state==='suspended') actx.resume();
   if(!playing){ playing=true; playIcon.textContent='pause'; audioBars.classList.add('on');
     bgMusic.volume=BG_VOL; bgMusic.play().catch(()=>{});
     voiceTimer=setTimeout(()=>{ fadeVol(BG_VOL,0.06,2000,()=>{ voiceAudio.play().catch(()=>{}); }); },5000);
