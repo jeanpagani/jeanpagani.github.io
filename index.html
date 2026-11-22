@@ -166,6 +166,10 @@ footer .motto{font-family:var(--serif);font-style:italic;font-size:14px}
 .share-btn .ms{font-size:20px}
 @media (min-width:900px) and (hover:hover) and (pointer:fine){.qr-desktop{display:flex}.share{display:none}}
 
+.sound-btn{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(13,15,29,.85);color:var(--gold-hi);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sound-btn .ms{font-size:22px}
+.sound-btn.on{animation:soundPulse 2.4s ease-in-out infinite}
+@keyframes soundPulse{0%,100%{box-shadow:0 0 0 0 rgba(216,184,112,.4)}50%{box-shadow:0 0 0 8px rgba(216,184,112,0)}}
 button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.dust{display:none}}
 </style>
@@ -174,6 +178,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-of
 <body>
 
 <div class="dust" id="dust" aria-hidden="true"></div>
+<button type="button" id="soundBtn" class="sound-btn" aria-label="Музыка: вкл/выкл" onclick="toggleAmbient()"><span class="ms" id="soundIcon">music_note</span></button>
 
 <main class="wrap">
 
@@ -371,14 +376,30 @@ voiceAudio.addEventListener('play',()=>{ ph.classList.add('speaking'); if(actx&&
 ['pause','ended'].forEach(ev=>voiceAudio.addEventListener(ev,()=>{ ph.classList.remove('speaking'); cancelAnimationFrame(raf); ph.style.setProperty('--lvl','0'); }));
 function toggleVoice(){
   initAnalyser(); if(actx&&actx.state==='suspended') actx.resume();
-  if(!playing){ playing=true; playIcon.textContent='pause'; audioBars.classList.add('on');
+  if(!playing){ playing=true; if(!muted) ambientOn=true; playIcon.textContent='pause'; audioBars.classList.add('on');
     bgMusic.volume=BG_VOL; bgMusic.play().catch(()=>{});
     voiceTimer=setTimeout(()=>{ fadeVol(BG_VOL,0.06,2000,()=>{ voiceAudio.play().catch(()=>{}); }); },5000);
-  } else { clearTimeout(voiceTimer); voiceAudio.pause(); fadeVol(BG_VOL,0,1500,()=>{ bgMusic.pause(); bgMusic.currentTime=0; });
+  } else { clearTimeout(voiceTimer); voiceAudio.pause(); backToAmbient(1500);
     playIcon.textContent='play_arrow'; audioBars.classList.remove('on'); playing=false; }
 }
-voiceAudio.onended=()=>{ playIcon.textContent='play_arrow'; audioBars.classList.remove('on'); playing=false;
-  fadeVol(BG_VOL,0,3000,()=>{ bgMusic.pause(); bgMusic.currentTime=0; }); };
+voiceAudio.onended=()=>{ playIcon.textContent='play_arrow'; audioBars.classList.remove('on'); playing=false; backToAmbient(3000); };
+
+// ── Musique d'ambiance : démarre toute seule au premier contact avec la page ──
+const AMB_VOL=0.14; let ambientOn=false, muted=false;
+try{ muted=localStorage.getItem('fp-muted')==='1'; }catch(e){}
+const soundBtn=document.getElementById('soundBtn'), soundIcon=document.getElementById('soundIcon');
+function setSoundUI(){ soundIcon.textContent=(ambientOn||playing)&&!muted?'music_note':'music_off'; soundBtn.classList.toggle('on',(ambientOn||playing)&&!muted); }
+function startAmbient(){ if(muted||playing||ambientOn) return; ambientOn=true; bgMusic.volume=0; bgMusic.play().then(()=>fadeVol(0,AMB_VOL,2500)).catch(()=>{ ambientOn=false; setSoundUI(); }); setSoundUI(); }
+function backToAmbient(ms){ if(ambientOn&&!muted){ fadeVol(bgMusic.volume,AMB_VOL,ms); } else { fadeVol(bgMusic.volume,0,ms,()=>{ bgMusic.pause(); bgMusic.currentTime=0; }); } setSoundUI(); }
+function toggleAmbient(){
+  if(muted||!(ambientOn||playing)){ muted=false; try{localStorage.setItem('fp-muted','0');}catch(e){} if(playing){ bgMusic.play().catch(()=>{}); } else { ambientOn=false; startAmbient(); } }
+  else { muted=true; try{localStorage.setItem('fp-muted','1');}catch(e){} ambientOn=false; fadeVol(bgMusic.volume,0,800,()=>bgMusic.pause()); }
+  setSoundUI();
+}
+function firstTouch(e){ if(e.target.closest&&(e.target.closest('#playBtn')||e.target.closest('#soundBtn'))) return; ['pointerdown','touchend','keydown'].forEach(t=>document.removeEventListener(t,firstTouch,true)); startAmbient(); }
+['pointerdown','touchend','keydown'].forEach(t=>document.addEventListener(t,firstTouch,true));
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){ if(!playing) bgMusic.pause(); } else if(ambientOn&&!muted&&!playing){ bgMusic.play().catch(()=>{}); } });
+setSoundUI();
 
 // ── Partager ──
 async function partagerSite(){
