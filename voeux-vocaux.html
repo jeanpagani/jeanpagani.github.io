@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Голосовое поздравление от француза · Французская Поэзия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f1d;--card:#161a2e;--soft:#1c2138;--ink:#f3eee4;--muted:#b3b0bb;--gold:#d8b870;--gold-hi:#f0d898;--line:rgba(216,184,112,.22);
+--sans:'Manrope',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--poem:'Cormorant Garamond',Georgia,serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden}
+body{background:radial-gradient(60% 40% at 50% 0%,rgba(216,184,112,.10),transparent 70%),var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;overflow-x:hidden}
+.ms{font-family:'Material Symbols Rounded';font-weight:300;font-size:24px;line-height:1;display:inline-block;font-feature-settings:'liga'}
+.wrap{max-width:520px;margin:0 auto;padding:28px 16px 60px;display:flex;flex-direction:column;gap:22px}
+.back{font-size:13px;color:var(--gold);text-decoration:none;padding:8px 0;align-self:flex-start}
+.kick{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:center;font-weight:700}
+h1{font-size:clamp(26px,7vw,34px);line-height:1.15;text-align:center;font-weight:800}
+h1 em{font-family:var(--serif);color:var(--gold-hi);font-weight:500}
+.lead{text-align:center;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 18px}
+.player{display:flex;align-items:center;gap:14px}
+.play{flex:none;width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#1a1408;display:grid;place-items:center;cursor:pointer;box-shadow:0 0 24px rgba(216,184,112,.35)}
+.play .ms{font-size:32px;font-variation-settings:'FILL' 1}
+.wave{flex:1;display:flex;align-items:center;gap:3px;height:40px}
+.wave i{flex:1;background:var(--gold);opacity:.55;border-radius:3px}
+.who{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.who img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold)}
+.who b{display:block;font-size:14px}.who span{font-size:12px;color:var(--muted)}
+.dur{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.quote{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.fr{font-family:var(--poem);font-style:italic;font-size:19px;line-height:1.4;color:var(--gold-hi)}
+.ru{font-size:14px;color:var(--muted)}
+h2{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.n{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-weight:800}
+.step b{display:block}.step span{color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--line);border-radius:30px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--gold-hi)}
+.soon{text-align:center;border:1.5px dashed rgba(224,96,79,.6);color:#f08a7a;border-radius:16px;padding:14px;font-weight:700;letter-spacing:1px}
+.tg{display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px solid var(--gold);border-radius:50px;padding:15px;color:var(--gold-hi);text-decoration:none;font-weight:700}
+.foot{text-align:center;font-size:12px;color:var(--muted)}
+.vid{position:relative;aspect-ratio:9/14;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#0b1030 0%,#243070 55%,#c98a5a 100%)}
+.vid svg{position:absolute;inset:0;width:100%;height:100%}
+.vid .sub{position:absolute;left:12px;right:12px;bottom:18px;text-align:center;display:flex;flex-direction:column;gap:6px}
+.vid .sub .f{font-family:var(--poem);font-style:italic;font-size:21px;color:#fff;text-shadow:0 2px 8px #000}
+.vid .sub .r{display:inline-block;align-self:center;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:8px;font-size:13px;color:#f3eee4}
+.vid .bigplay{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.6);display:grid;place-items:center;color:#fff}
+.vid .bigplay .ms{font-size:38px;font-variation-settings:'FILL' 1}
+.vid .badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.45);border-radius:20px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--gold-hi);letter-spacing:1px}
+.vid .time{position:absolute;top:12px;right:12px;font-size:11px;color:#fff;background:rgba(0,0,0,.45);border-radius:20px;padding:5px 9px}
+.opt{display:flex;gap:10px}.opt div{flex:1;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}.opt .ms{color:var(--gold);font-size:28px}.opt b{display:block;font-size:13px;margin-top:4px}.opt span{font-size:12px;color:var(--muted)}
+.opt div.on{border-color:var(--gold);background:rgba(216,184,112,.08)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Французская Поэзия</a>
+  <div class="kick">Новое · Nouveau</div>
+  <h1>Голосовое поздравление <em>от настоящего француза</em></h1>
+  <p class="lead">30 секунд тёплых слов на французском — с именем вашего близкого и переводом на русский.</p>
+
+  <div class="card">
+    <div class="who"><img src="photo-poete.jpg" alt=""><div><b>Louis Yvon</b><span>Французский поэт</span></div></div>
+    <div class="player">
+      <button class="play" aria-label="Слушать пример"><span class="ms">play_arrow</span></button>
+      <div class="wave" id="wave"></div>
+      <span class="dur">0:30</span>
+    </div>
+    <div class="quote">
+      <div class="fr">« Bonjour Macha ! Joyeux anniversaire… Que cette nouvelle année t'apporte la lumière de Paris et la douceur du printemps. »</div>
+      <div class="ru">«Здравствуй, Маша! С днём рождения… Пусть этот год подарит тебе свет Парижа и нежность весны».</div>
+    </div>
+  </div>
+
+  <h2>Два формата</h2>
+  <div class="opt">
+    <div class="on"><span class="ms">mic</span><b>Голос</b><span>30 секунд · аудио</span></div>
+    <div><span class="ms">movie</span><b>Видео ✦ премиум</b><span>Голос + Франция + субтитры</span></div>
+  </div>
+
+  <div class="vid">
+    <svg viewBox="0 0 360 560" preserveAspectRatio="xMidYMid slice">
+      <g fill="#fff">
+        <circle cx="40" cy="60" r="1.4"/><circle cx="120" cy="30" r="1"/><circle cx="300" cy="80" r="1.5"/><circle cx="250" cy="40" r="1"/><circle cx="70" cy="140" r="1"/><circle cx="330" cy="160" r="1.2"/><circle cx="190" cy="20" r="1.3"/>
+      </g>
+      <circle cx="290" cy="110" r="26" fill="#fff3c8" opacity=".9"/>
+      <g fill="#120f24">
+        <path d="M180 110 L186 110 L188 150 L196 260 L214 360 L240 470 L214 470 Q196 420 180 420 Q164 420 146 470 L120 470 L146 360 L164 260 L172 150 L174 110Z"/>
+        <rect x="150" y="355" width="60" height="9"/><rect x="164" y="255" width="32" height="7"/>
+        <rect x="178" y="88" width="4" height="24"/>
+        <path d="M0 470 L0 430 L30 430 L30 410 L60 410 L60 440 L90 440 L90 420 L110 420 L110 470Z"/>
+        <path d="M250 470 L250 425 L275 425 L275 400 L300 400 L300 430 L330 430 L330 415 L360 415 L360 470Z"/>
+        <rect x="0" y="468" width="360" height="92"/>
+      </g>
+      <g fill="#ffd77a" opacity=".85"><rect x="40" y="440" width="6" height="8"/><rect x="70" y="450" width="6" height="8"/><rect x="285" y="440" width="6" height="8"/><rect x="315" y="445" width="6" height="8"/></g>
+    </svg>
+    <span class="badge">LOUIS YVON · FRANCE</span><span class="time">1:00</span>
+    <div class="bigplay"><span class="ms">play_arrow</span></div>
+    <div class="sub"><span class="f">« Joyeux anniversaire, Macha ! »</span><span class="r">«С днём рождения, Маша!»</span></div>
+  </div>
+  <p class="lead" style="font-size:13px">Без лица — только голос, виды Франции и субтитры на русском.</p>
+
+  <h2>Как это работает</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><b>Имя и повод</b><span>Для кого и по какому случаю</span></div></div>
+    <div class="step"><div class="n">2</div><div><b>Я записываю голосом</b><span>Лично, на французском, с переводом</span></div></div>
+    <div class="step"><div class="n">3</div><div><b>Вы получаете аудио или видео</b><span>В Telegram — сразу можно переслать</span></div></div>
+  </div>
+
+  <h2>Для любого повода</h2>
+  <div class="chips"><span>День рождения</span><span>Любовь</span><span>Свадьба</span><span>Новый год</span><span>8 Марта</span><span>Маме</span></div>
+
+  <div class="soon">СКОРО ОТКРЫТИЕ</div>
+  <a class="tg" href="https://t.me/FrancuzskayaPoeziyaKanal">Узнать первым в Telegram</a>
+  <p class="foot">Французская Поэзия · Louis Yvon · © 2027</p>
+</div>
+<script>
+var w=document.getElementById('wave'),h='';for(var i=0;i<34;i++){var v=20+Math.round(80*Math.abs(Math.sin(i*1.7)*Math.cos(i*.45)));h+='<i style="height:'+v+'%"></i>'}w.innerHTML=h;
+</script>
+</body>
+</html>
