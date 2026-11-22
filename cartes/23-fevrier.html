@@ -328,23 +328,23 @@
 <script>
 // ── Pétales ──
 const petalsEl = document.getElementById('petals');
-const petalIcons = ['⭐','✦','★','✧','✦'];
-for (let i = 0; i < 20; i++) {
+const petalIcons = ['✦','✧','✦'];
+for (let i = 0; i < 6; i++) {
   const p = document.createElement('div');
   p.className = 'petal';
   p.textContent = petalIcons[Math.floor(Math.random() * petalIcons.length)];
-  const size = (Math.random() * 16 + 14).toFixed(0);
+  const size = (Math.random() * 6 + 10).toFixed(0);
   p.style.cssText = `
     left:${Math.random()*100}%;
     --s:${size}px;
-    --d:${(Math.random()*6+5).toFixed(1)}s;
-    animation-delay:${(Math.random()*8).toFixed(1)}s;
+    --d:${(Math.random()*8+14).toFixed(1)}s;
+    animation-delay:${(Math.random()*14).toFixed(1)}s;
   `;
   petalsEl.appendChild(p);
 }
 
 // ── Particules ──
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 10; i++) {
   const sp = document.createElement('div');
   sp.className = 'sparkle';
   sp.style.cssText = `
