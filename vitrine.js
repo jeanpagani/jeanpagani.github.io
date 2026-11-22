@@ -8,6 +8,25 @@
    ════════════════════════════════════════════════════════════════ */
 var MODE_VITRINE = true;
 
+// ── Aperçu privé du propriétaire : ouvrir le site avec ?apercu=<clé> (et ?apercu=off pour quitter) ──
+(function () {
+  function h(t){ var x=2166136261; for (var i=0;i<t.length;i++){ x^=t.charCodeAt(i); x=Math.imul(x,16777619)>>>0; } return x.toString(16); }
+  try {
+    var k = new URLSearchParams(location.search).get('apercu');
+    if (k === 'off') localStorage.removeItem('fp-apercu');
+    else if (k && h(k) === '37e1e2a') localStorage.setItem('fp-apercu', '1');
+    if (localStorage.getItem('fp-apercu') === '1') {
+      MODE_VITRINE = false;
+      document.addEventListener('DOMContentLoaded', function () {
+        var b = document.createElement('div');
+        b.textContent = '👁 Aperçu privé — mode fantôme (invisible pour les visiteurs)';
+        b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:8px 12px;text-align:center;font:600 12px system-ui,sans-serif;background:#c9392d;color:#fff';
+        document.body.appendChild(b);
+      });
+    }
+  } catch (e) {}
+})();
+
 (function () {
   if (!MODE_VITRINE) return;
 
