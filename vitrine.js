@@ -20,7 +20,7 @@ var MODE_VITRINE = true;
       document.addEventListener('DOMContentLoaded', function () {
         var b = document.createElement('div');
         b.textContent = '👁 Aperçu privé — mode fantôme (invisible pour les visiteurs)';
-        b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:8px 12px;text-align:center;font:600 12px system-ui,sans-serif;background:#c9392d;color:#fff';
+        b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:8px 12px;text-align:center;font:600 12px system-ui,sans-serif;background:#c9392d;color:#fff;pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none';
         document.body.appendChild(b);
       });
     }
