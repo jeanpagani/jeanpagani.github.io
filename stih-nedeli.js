@@ -351,7 +351,7 @@ window.STIKHI_NEDELI = [
  {
   "u": "cartes/paques.html",
   "e": "🕊️",
-  "ru": ["Пасхальным утром звонят колокола,","Весна одевается в светлый наряд,","«Христос воскресе!» — и радость пришла:","«Воистину воскресе!» — сердца говорят."],
-  "fr": ["Au matin de Pâques les cloches s'éveillent,","Le printemps se couvre d'un manteau de clarté,","« Le Christ est ressuscité ! » — et la joie qui veille","Répond dans chaque cœur : « Il est vraiment ressuscité ! »"]
+  "ru": ["«Христос воскресе!» — и брезжит рассвет,","«Воистину!» — вторят сердца в ответ,","И звон колокольный — как сказка, как сон,","И зиму не помнит уже небосклон."],
+  "fr": ["« Le Christ est ressuscité ! » — et l'aube se lève,","« Il l'est vraiment ! » répondent les cœurs émus,","Les cloches font chanter la terre comme un rêve,","Et l'hiver, doucement, ne se souvient plus."]
  }
 ];
