@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /essais/
+Disallow: /serveur/
+
+Sitemap: https://jeanpagani.github.io/sitemap.xml
