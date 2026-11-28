@@ -136,10 +136,10 @@ h2{font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;
 /* Tuiles avec image */
 .tile .art{position:absolute;top:8px;right:4px;width:68%;height:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));transition:transform .4s;pointer-events:none}
 .tile:hover .art,.tile:focus-visible .art{transform:scale(1.06) rotate(-4deg)}
-.tile.has-art{justify-content:flex-end}
-.tile .photo{position:absolute;top:8px;left:8px;width:calc(100% - 16px);height:calc(100% - 44px);object-fit:cover;border-radius:12px;background:#fff;transition:transform .4s;pointer-events:none}
+.tile.has-art{justify-content:flex-start;gap:8px;padding:8px 8px 10px}
+.tile .photo{position:relative;display:block;width:100%;aspect-ratio:10/7;height:auto;object-fit:cover;border-radius:12px;background:#1c2138;transition:transform .4s;pointer-events:none}
 .tile:hover .photo,.tile:focus-visible .photo{transform:scale(1.04)}
-.tile.has-art b{text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.tile.has-art b{text-shadow:0 1px 6px rgba(0,0,0,.6);min-height:2.4em;padding:0 2px}
 .cert{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;border:1px solid var(--gold);background:var(--card);text-decoration:none;color:var(--ink)}
 
 /* Poème de la semaine */
