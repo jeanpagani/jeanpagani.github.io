@@ -336,7 +336,7 @@
 // ── Pétales ──
 const petalsEl = document.getElementById('petals');
 const petalIcons = ['🌸','🌹','🌷','✿','❀','🌺'];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 0; i++) {
   const p = document.createElement('div');
   p.className = 'petal';
   p.textContent = petalIcons[Math.floor(Math.random() * petalIcons.length)];
@@ -399,5 +399,6 @@ audio.onended=()=>{isPlaying=false;playIcon.textContent='▶';endTimer=setTimeou
 
 
 </script>
+<script src="deco-volantes.js" data-deco="mimosa"></script>
 </body>
 </html>
